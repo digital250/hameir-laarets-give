@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+:root {
+  --navy-950: #071b2c;
+  --navy-900: #0b253b;
+  --navy-800: #113a57;
+  --gold-500: #d5a84f;
+  --gold-400: #e6c374;
+  --cream-50: #fffdf7;
+  --cream-100: #f7f1e5;
+  --cream-200: #eee3d1;
+  --ruby-600: #9a3348;
+  --teal-600: #2d756f;
+  --blue-600: #356e9b;
+  --plum-600: #6e4a76;
+  --ink: #10283a;
+  --muted: #60707a;
+  --line: rgba(11, 37, 59, .14);
+  --shadow-sm: 0 12px 30px rgba(7, 27, 44, .08);
+  --shadow-lg: 0 30px 80px rgba(7, 27, 44, .22);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--cream-50); color: var(--ink); font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+button, input, select { font: inherit; }
+button, a, select { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--gold-400); outline-offset: 3px; }
+.skip-link { position: fixed; left: 16px; top: -100px; z-index: 1000; padding: 12px 16px; color: white; background: var(--navy-950); }
+.skip-link:focus { top: 16px; }
+
+.fundraiser-strip { min-height: 42px; padding: 9px 24px; display: flex; align-items: center; justify-content: center; gap: 9px; background: var(--gold-400); color: var(--navy-950); font-size: 14px; text-align: center; }
+.status-check { width: 21px; height: 21px; flex: 0 0 21px; display: inline-grid; place-items: center; border-radius: 50%; background: var(--navy-900); color: white; font-size: 12px; font-style: normal; }
+
+.site-header { height: 88px; padding: 0 clamp(24px, 6vw, 96px); display: flex; align-items: center; justify-content: space-between; gap: 32px; background: rgba(255,253,247,.96); border-bottom: 1px solid var(--line); position: relative; z-index: 20; }
+.brand { display: flex; align-items: center; gap: 13px; min-width: max-content; }
+.brand-mark { width: 50px; height: 54px; position: relative; overflow: hidden; display: grid; place-items: center; border-radius: 25px 25px 8px 8px; background: var(--navy-900); color: var(--gold-400); font-family: Georgia, serif; font-size: 16px; font-weight: 800; letter-spacing: -.04em; }
+.brand-mark i { position: absolute; width: 1px; height: 17px; top: 3px; left: 50%; background: var(--gold-400); box-shadow: -8px 2px 0 -0.3px var(--gold-400), 8px 2px 0 -0.3px var(--gold-400); transform-origin: bottom; opacity: .75; }
+.brand-copy { display: grid; line-height: 1; }
+.brand-copy strong { font-family: Georgia, "Times New Roman", serif; color: var(--navy-900); font-size: 19px; letter-spacing: .04em; }
+.brand-copy small { margin-top: 7px; color: #74818a; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+nav { display: flex; align-items: center; gap: clamp(22px, 3vw, 42px); font-size: 13px; font-weight: 700; color: #40515d; }
+nav a { min-height: 44px; display: flex; align-items: center; position: relative; }
+nav a:after { content: ""; position: absolute; right: 100%; left: 0; bottom: 5px; height: 2px; background: var(--gold-500); transition: right .22s ease-out; }
+nav a:hover:after { right: 0; }
+
+.button { min-height: 50px; border: 0; border-radius: 3px; padding: 14px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 15px; font-weight: 800; transition: transform .2s ease-out, box-shadow .2s ease-out, background .2s ease-out; }
+.button:hover { transform: translateY(-2px); }
+.button:active { transform: translateY(0); }
+.button-gold { background: var(--gold-500); color: var(--navy-950); box-shadow: 0 10px 25px rgba(213,168,79,.2); }
+.button-gold:hover { background: var(--gold-400); box-shadow: 0 14px 30px rgba(213,168,79,.3); }
+.button-navy { background: var(--navy-900); color: white; }
+.button-ghost { border: 1px solid rgba(255,255,255,.38); color: white; background: transparent; }
+.button-ghost:hover { border-color: var(--gold-400); color: var(--gold-400); }
+
+.hero { position: relative; overflow: hidden; background: var(--navy-950); color: white; }
+.hero-pattern { position: absolute; inset: 0; opacity: .34; background: radial-gradient(circle at 14% 20%, rgba(213,168,79,.2), transparent 28%), linear-gradient(135deg, transparent 48%, rgba(255,255,255,.025) 49%, transparent 50%); background-size: auto, 36px 36px; }
+.hero-pattern:before, .hero-pattern:after { content: ""; position: absolute; border: 1px solid rgba(230,195,116,.2); border-radius: 50% 50% 0 0; }
+.hero-pattern:before { width: 420px; height: 560px; left: -180px; bottom: -310px; }
+.hero-pattern:after { width: 220px; height: 320px; right: -95px; top: 30px; }
+.hero-inner { width: min(1240px, calc(100% - 48px)); margin: 0 auto; padding: 72px 0 80px; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(360px, .72fr); gap: clamp(54px, 7vw, 100px); align-items: center; position: relative; z-index: 2; }
+.hero-story { max-width: 680px; }
+.campaign-kicker { display: flex; align-items: center; gap: 12px; color: #d6dee3; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.campaign-kicker span { padding: 7px 10px; background: var(--ruby-600); color: white; letter-spacing: .08em; }
+.campaign-kicker i { width: 36px; height: 1px; background: var(--gold-500); }
+.hero h1 { max-width: 700px; margin: 24px 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(56px, 6vw, 88px); font-weight: 500; line-height: .98; letter-spacing: -.045em; }
+.hero h1 em { color: var(--gold-400); font-style: italic; }
+.hero-lead { max-width: 610px; margin: 0; color: #c8d2d8; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.65; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.hero-promise { display: flex; align-items: center; gap: 15px; margin-top: 38px; padding-top: 27px; border-top: 1px solid rgba(255,255,255,.14); color: #afbec6; }
+.hero-promise p { margin: 0; font-size: 14px; line-height: 1.55; }
+.hero-promise strong { color: white; }
+.promise-seal { width: 48px; height: 52px; display: grid; place-items: center; border: 1px solid rgba(230,195,116,.52); border-radius: 24px 24px 5px 5px; color: var(--gold-400); font-family: Georgia, serif; font-size: 20px; }
+
+.donation-card { padding: 32px; background: var(--cream-50); color: var(--ink); box-shadow: var(--shadow-lg); border-top: 4px solid var(--gold-500); }
+.donation-card-head { margin-bottom: 23px; }
+.donation-step { color: var(--ruby-600); font-size: 10px; font-weight: 900; letter-spacing: .15em; }
+.donation-card h2 { margin: 8px 0 8px; font-family: Georgia, "Times New Roman", serif; color: var(--navy-900); font-size: 29px; font-weight: 600; line-height: 1.1; }
+.donation-card-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.field-label, .amount-fieldset legend { display: block; margin-bottom: 8px; color: #455761; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.select-wrap { height: 50px; display: flex; align-items: center; position: relative; border: 1px solid #cfd4d2; background: white; }
+.select-wrap select { width: 100%; height: 100%; appearance: none; border: 0; outline: 0; background: transparent; padding: 0 43px 0 14px; color: var(--navy-900); font-weight: 700; cursor: pointer; }
+.select-wrap > span { position: absolute; right: 15px; color: var(--gold-500); font-size: 20px; pointer-events: none; }
+.attribution-note { margin-top: 10px; padding: 9px 11px; display: flex; align-items: center; gap: 8px; background: #edf5f0; color: #28583f; font-size: 12px; font-weight: 700; }
+.attribution-note .status-check { width: 18px; height: 18px; flex-basis: 18px; background: #2f6a4c; font-size: 10px; }
+.frequency-toggle { margin: 17px 0; padding: 4px; display: grid; grid-template-columns: 1fr 1fr; background: #ebe7de; border-radius: 3px; }
+.frequency-toggle button { min-height: 44px; border: 0; background: transparent; color: #617079; font-weight: 700; }
+.frequency-toggle button.active { background: white; color: var(--navy-900); box-shadow: 0 4px 12px rgba(7,27,44,.08); }
+.amount-fieldset { margin: 0; padding: 0; border: 0; }
+.amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.amount-grid button { min-height: 50px; border: 1px solid #cfd4d2; background: white; color: var(--navy-900); font-size: 17px; font-weight: 900; }
+.amount-grid button:hover { border-color: var(--gold-500); }
+.amount-grid button.active { border-color: var(--navy-900); background: var(--navy-900); color: white; }
+.custom-amount { min-height: 50px; margin-top: 9px; padding: 0 13px; display: flex; align-items: center; border: 1px solid #cfd4d2; background: white; color: #68757c; font-size: 12px; }
+.custom-amount span { margin-right: auto; }
+.custom-amount b { color: var(--navy-900); }
+.custom-amount input { width: 86px; height: 48px; border: 0; outline: 0; background: transparent; color: var(--navy-900); font-size: 17px; font-weight: 900; text-align: right; }
+.impact-preview { margin: 13px 0; display: flex; gap: 8px; align-items: flex-start; color: #466052; font-size: 12px; line-height: 1.45; }
+.impact-preview > span { color: #2e7351; font-weight: 900; }
+.button-donate { width: 100%; background: var(--ruby-600); color: white; box-shadow: 0 12px 28px rgba(154,51,72,.22); }
+.button-donate:hover { background: #ad3b53; box-shadow: 0 16px 32px rgba(154,51,72,.3); }
+.integration-notice { margin-top: 12px; padding: 11px; background: #edf5f0; color: #28583f; font-size: 12px; line-height: 1.45; }
+.integration-notice strong { display: block; }
+.card-trust { margin-top: 17px; padding-top: 15px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid #e2ddd2; color: #65727a; font-size: 10px; text-align: center; }
+.card-trust span { display: grid; justify-items: center; gap: 5px; }
+.shield { width: 21px; height: 23px; display: grid; place-items: center; border: 1px solid #b7bcb9; border-radius: 10px 10px 5px 5px; color: #3e7259; font-style: normal; }
+
+.trust-ribbon { min-height: 98px; padding: 22px clamp(24px, 7vw, 110px); display: flex; align-items: center; justify-content: center; gap: clamp(28px, 6vw, 90px); background: var(--cream-100); border-bottom: 1px solid var(--line); }
+.trust-ribbon > div { display: grid; gap: 4px; text-align: center; }
+.trust-ribbon strong { color: var(--navy-900); font-family: Georgia, serif; font-size: 18px; }
+.trust-ribbon span { color: var(--muted); font-size: 11px; }
+.trust-ribbon > i { width: 1px; height: 42px; background: var(--line); }
+
+.mission-section, .campaigns-section { padding: 110px max(24px, calc((100vw - 1240px) / 2)); }
+.section-intro { max-width: 760px; }
+.section-kicker { color: var(--ruby-600); font-size: 10px; font-weight: 900; letter-spacing: .17em; }
+.section-intro h2, .impact-copy h2, .closing-section h2 { margin: 14px 0 20px; color: var(--navy-900); font-family: Georgia, "Times New Roman", serif; font-size: clamp(40px, 4.6vw, 66px); font-weight: 500; line-height: 1.05; letter-spacing: -.035em; }
+.section-intro > p, .campaign-heading > p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.75; }
+.mission-grid { margin-top: 52px; display: grid; grid-template-columns: 1.2fr .9fr .9fr; gap: 18px; }
+.mission-card { min-height: 280px; padding: 34px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.mission-card:after { content: ""; width: 190px; height: 230px; position: absolute; right: -60px; top: -110px; border: 1px solid currentColor; border-radius: 95px 95px 0 0; opacity: .13; }
+.mission-card > span { position: absolute; top: 30px; left: 32px; font-size: 11px; font-weight: 900; letter-spacing: .12em; opacity: .72; }
+.mission-card h3 { margin: 0 0 12px; font-family: Georgia, serif; font-size: 29px; font-weight: 500; }
+.mission-card p { margin: 0; max-width: 410px; font-size: 14px; line-height: 1.65; opacity: .78; }
+.dark-card { background: var(--navy-900); color: white; }.gold-card { background: var(--gold-400); color: var(--navy-950); }.light-card { background: var(--cream-200); color: var(--navy-900); }
+
+.campaigns-section { background: #f5efe4; }
+.campaign-heading { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .55fr); align-items: end; gap: 70px; }
+.campaign-heading > div { max-width: 760px; }
+.campaign-heading h2 { margin-bottom: 0; }
+.filters { margin: 42px 0 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button { min-height: 44px; padding: 10px 15px; border: 1px solid rgba(11,37,59,.2); border-radius: 999px; background: transparent; color: #53636d; font-size: 12px; font-weight: 800; }
+.filters button:hover { border-color: var(--navy-900); }
+.filters button.active { background: var(--navy-900); border-color: var(--navy-900); color: white; }
+.campaign-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.campaign-card { min-width: 0; background: var(--cream-50); border: 1px solid rgba(11,37,59,.09); transition: transform .22s ease-out, box-shadow .22s ease-out; }
+.campaign-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+.campaign-top { height: 150px; position: relative; overflow: hidden; color: white; background: var(--navy-800); }
+.campaign-top.navy { background: var(--navy-800); }.campaign-top.ruby { background: var(--ruby-600); }.campaign-top.teal { background: var(--teal-600); }.campaign-top.gold { background: #b98533; }.campaign-top.blue { background: var(--blue-600); }.campaign-top.plum { background: var(--plum-600); }
+.campaign-index { position: absolute; top: 17px; right: 18px; font-family: Georgia, serif; font-size: 13px; opacity: .68; }
+.campaign-category { position: absolute; top: 16px; left: 17px; font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.campaign-arch { width: 116px; height: 132px; position: absolute; left: calc(50% - 58px); bottom: -51px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.56); border-radius: 58px 58px 0 0; }
+.campaign-arch:before, .campaign-arch:after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.26); border-radius: 50% 50% 0 0; }
+.campaign-arch:before { width: 164px; height: 176px; bottom: -20px; }.campaign-arch:after { width: 210px; height: 220px; bottom: -42px; }
+.campaign-arch i { width: 8px; height: 8px; margin-top: -50px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 0 8px rgba(230,195,116,.14); }
+.campaign-body { padding: 25px; }
+.campaign-body small { color: var(--ruby-600); font-size: 10px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+.campaign-body h3 { min-height: 62px; margin: 8px 0 10px; color: var(--navy-900); font-family: Georgia, serif; font-size: 25px; font-weight: 500; line-height: 1.15; }
+.campaign-body p { min-height: 88px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.campaign-body button { width: 100%; min-height: 48px; margin-top: 20px; padding: 14px 0 0; display: flex; justify-content: space-between; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--navy-900); font-weight: 900; text-align: left; }
+.campaign-body button span { color: var(--ruby-600); font-size: 18px; }
+
+.impact-section { padding: 110px max(24px, calc((100vw - 1240px) / 2)); display: grid; grid-template-columns: .9fr 1.1fr; gap: 90px; background: var(--navy-900); color: white; }
+.light-kicker { color: var(--gold-400); }
+.impact-copy h2 { color: white; }
+.impact-copy p { max-width: 520px; margin: 0 0 30px; color: #bfcbd2; font-size: 17px; line-height: 1.75; }
+.impact-levels { border-top: 1px solid rgba(255,255,255,.17); }
+.impact-levels button { width: 100%; min-height: 94px; padding: 18px 6px; display: grid; grid-template-columns: 100px 1fr 25px; align-items: center; gap: 18px; border: 0; border-bottom: 1px solid rgba(255,255,255,.17); background: transparent; color: white; text-align: left; }
+.impact-levels button:hover { background: rgba(255,255,255,.04); }
+.impact-levels strong { color: var(--gold-400); font-family: Georgia, serif; font-size: 37px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.impact-levels span { color: #ccd5da; font-size: 14px; }
+.impact-levels i { color: var(--gold-400); font-size: 20px; font-style: normal; }
+
+.closing-section { padding: 92px max(24px, calc((100vw - 1240px) / 2)); display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 45px; background: var(--cream-200); }
+.closing-section h2 { max-width: 760px; margin-bottom: 12px; font-size: clamp(38px, 4.2vw, 60px); }
+.closing-section p { margin: 0; color: var(--muted); }
+.closing-seal { width: 96px; height: 110px; display: grid; place-items: center; border: 1px solid rgba(154,51,72,.35); border-radius: 48px 48px 8px 8px; color: var(--ruby-600); }
+.closing-seal span { font-family: Georgia, serif; font-size: 36px; }
+
+footer { padding: 55px max(24px, calc((100vw - 1240px) / 2)) 28px; background: var(--navy-950); color: #9fb0ba; }
+.footer-main { display: grid; grid-template-columns: .8fr 1fr .7fr; align-items: start; gap: 70px; }
+.footer-brand .brand-copy strong { color: white; }.footer-brand .brand-copy small { color: #8da0ac; }
+.footer-main > p { max-width: 510px; margin: 0; font-size: 13px; line-height: 1.75; }
+.footer-links { display: grid; gap: 12px; font-size: 13px; font-weight: 700; }
+.footer-links a:hover { color: var(--gold-400); }
+.footer-legal { margin-top: 38px; padding-top: 20px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid rgba(255,255,255,.12); font-size: 10px; }
+.mobile-donate-bar { display: none; }
+
+@media (max-width: 1020px) {
+  nav { display: none; }
+  .hero-inner { grid-template-columns: 1fr; max-width: 760px; }
+  .donation-card { max-width: 600px; }
+  .mission-grid { grid-template-columns: 1fr 1fr; }.mission-card:first-child { grid-column: 1 / -1; }
+  .campaign-grid { grid-template-columns: 1fr 1fr; }
+  .impact-section { gap: 50px; }
+  .closing-section { grid-template-columns: 90px 1fr; }.closing-section .button { grid-column: 2; justify-self: start; }
+}
+
+@media (max-width: 700px) {
+  body { padding-bottom: 74px; }
+  .fundraiser-strip { font-size: 12px; }
+  .site-header { height: 74px; padding: 0 18px; }
+  .brand-mark { width: 42px; height: 46px; border-radius: 21px 21px 7px 7px; font-size: 13px; }
+  .brand-copy strong { font-size: 15px; }.brand-copy small { font-size: 7px; }
+  .header-cta { display: none; }
+  .hero-inner { width: min(100% - 36px, 620px); padding: 52px 0 58px; gap: 42px; }
+  .campaign-kicker { align-items: flex-start; flex-wrap: wrap; font-size: 10px; }
+  .campaign-kicker i { display: none; }
+  .hero h1 { font-size: clamp(48px, 15vw, 66px); }
+  .hero-lead { font-size: 17px; line-height: 1.6; }
+  .hero-actions { display: grid; }.hero-actions .button { width: 100%; }
+  .hero-promise { align-items: flex-start; }
+  .donation-card { padding: 24px 18px; margin: 0 -4px; }
+  .amount-grid { grid-template-columns: 1fr 1fr; }
+  .card-trust { font-size: 9px; }
+  .trust-ribbon { padding: 26px 18px; display: grid; grid-template-columns: 1fr; gap: 18px; }.trust-ribbon > i { width: 60px; height: 1px; margin: 0 auto; }
+  .mission-section, .campaigns-section, .impact-section { padding: 74px 20px; }
+  .section-intro h2, .impact-copy h2 { font-size: 43px; }
+  .section-intro > p, .campaign-heading > p, .impact-copy p { font-size: 16px; }
+  .mission-grid { margin-top: 34px; grid-template-columns: 1fr; }.mission-card:first-child { grid-column: auto; }.mission-card { min-height: 235px; padding: 28px; }
+  .campaign-heading { grid-template-columns: 1fr; gap: 22px; }
+  .filters { margin: 30px 0 22px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 7px; scrollbar-width: none; }.filters::-webkit-scrollbar { display: none; }.filters button { flex: 0 0 auto; }
+  .campaign-grid { grid-template-columns: 1fr; }.campaign-body h3, .campaign-body p { min-height: 0; }
+  .impact-section { grid-template-columns: 1fr; gap: 40px; }
+  .impact-levels button { min-height: 86px; grid-template-columns: 82px 1fr 20px; gap: 10px; }.impact-levels strong { font-size: 31px; }
+  .closing-section { padding: 72px 20px; grid-template-columns: 1fr; gap: 26px; text-align: center; }.closing-seal { margin: 0 auto; }.closing-section .button { grid-column: auto; justify-self: stretch; }.closing-section h2 { font-size: 42px; }
+  footer { padding: 48px 20px 26px; }.footer-main { grid-template-columns: 1fr; gap: 28px; }.footer-legal { align-items: center; flex-direction: column; text-align: center; }
+  .mobile-donate-bar { height: 74px; padding: 10px 12px; position: fixed; z-index: 60; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(255,253,247,.97); border-top: 1px solid var(--line); box-shadow: 0 -10px 30px rgba(7,27,44,.12); }
+  .mobile-donate-bar > div { min-width: 0; display: grid; gap: 3px; }.mobile-donate-bar span { color: var(--muted); font-size: 9px; text-transform: uppercase; }.mobile-donate-bar strong { overflow: hidden; color: var(--navy-900); font-size: 12px; white-space: nowrap; text-overflow: ellipsis; }.mobile-donate-bar .button { min-height: 50px; flex: 0 0 auto; }
+}
+
+@media (max-width: 380px) {
+  .brand-copy small { display: none; }
+  .donation-card h2 { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *:before, *:after { transition: none !important; animation: none !important; }
+}
