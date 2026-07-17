@@ -17,13 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") || requestHeaders.get("host") || "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const image = `${protocol}://${host}/og.png`;
+  const image = `${protocol}://${host}/og-v3.png`;
 
   return {
     title,
     description,
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
-    openGraph: { title, description, locale: "en_US", type: "website", images: [{ url: image, width: 1728, height: 905, alt: "Hameir Laarets — Torah, Compassion, Community" }] },
+    openGraph: { title, description, locale: "en_US", type: "website", images: [{ url: image, width: 1729, height: 910, alt: "Hameir Laarets — Give where it becomes real" }] },
     twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }

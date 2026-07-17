@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
+    new Request(`http://localhost${pathname}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -22,6 +22,24 @@ async function render() {
     },
   );
 }
+
+test("server-renders the premium V2 donation experience", async () => {
+  const response = await render("/v2");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Care, with/);
+  assert.match(html, /absolute/);
+  assert.match(html, /id="v2-campaign-select"/);
+  assert.match(html, /View all 13 campaigns/);
+  assert.match(html, /<option value="mexico">Hameir Laarets — Mexico<\/option>/);
+  assert.match(html, /v2-community-hero\.png/);
+  assert.match(html, /recognized by the IRS as a 501\(c\)\(3\)/i);
+  assert.match(html, /EIN 84-5083012/);
+  assert.match(html, /Community &amp; Family/);
+  assert.equal((html.match(/<option value=/g) ?? []).length, 13);
+  await access(new URL("../public/images/v2-community-hero.png", import.meta.url));
+});
 
 test("server-renders the Hameir Laarets donation center", async () => {
   const response = await render();
