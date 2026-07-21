@@ -77,19 +77,16 @@ const causes: Cause[] = [
 ];
 
 const campaigns: Campaign[] = [
-  { id: "general", cause: "families", eyebrow: "Where needed most", title: "Give Where It Is Needed Most", description: "Let your gift meet the most urgent need with speed and flexibility.", image: "/images/v2-food-relief.png" },
-  { id: "emergency-lifeline", cause: "families", eyebrow: "Humanitarian aid", title: "Israel’s Emergency Lifeline", description: "Practical relief and stability for families facing a crisis.", image: "/images/v2-family-crisis.png" },
+  { id: "emergency-lifeline", cause: "families", eyebrow: "Humanitarian aid", title: "Hameir Laarets - Israel's Emergency Lifeline", description: "Practical relief and stability for families facing a crisis.", image: "/images/v2-family-crisis.png" },
   { id: "next-step", cause: "children", eyebrow: "Children & family", title: "The Next Step Initiative", description: "Therapeutic care and opportunity for children with special needs.", image: "/images/v2-child-therapy.png" },
+  { id: "tzedakah-box", cause: "families", eyebrow: "Everyday giving", title: "Tzedaka Box", description: "Turn a timeless mitzvah into consistent, practical support.", image: "/images/v2-global-community.png" },
+  { id: "birkat-parnassah", cause: "torah", eyebrow: "Torah & prayer", title: "Birkat Parnassah - Parashat HaMan", description: "Join a tradition of prayer, generosity, and support for stability.", image: "/images/v2-global-community.png" },
   { id: "hafatzat-hamayanot", cause: "torah", eyebrow: "Torah & prayer", title: "Hafatzat HaMayanot", description: "Bring Torah learning and Jewish connection to more communities.", image: "/images/v2-torah-prayer.png" },
-  { id: "southern-israel", cause: "community", eyebrow: "Jewish community", title: "Southern Israel Unity Center", description: "Build resilience and a thriving future throughout Israel’s south.", image: "/images/v2-southern-community.png" },
-  { id: "tzedakah-box", cause: "families", eyebrow: "Everyday giving", title: "Tzedakah Box", description: "Turn a timeless mitzvah into consistent, practical support.", image: "/images/v2-global-community.png" },
-  { id: "kaparot", cause: "food", eyebrow: "Seasonal giving", title: "Kaparot 2026", description: "Transform a sacred tradition into food, dignity, and hope.", image: "/images/kaparot-family-hero.png" },
-  { id: "purim-pesach", cause: "food", eyebrow: "Seasonal giving", title: "Purim Joy. Pesach Dignity.", description: "Help families celebrate with the warmth every Jewish home deserves.", image: "/images/v2-food-relief.png" },
-  { id: "matanot-laevyonim", cause: "food", eyebrow: "Seasonal giving", title: "Matanot La’evyonim", description: "Help families experience a joyful and dignified Purim.", image: "/images/v2-family-crisis.png" },
-  { id: "birkat-parnassah", cause: "torah", eyebrow: "Torah & prayer", title: "Birkat Parnassah", description: "Join a tradition of prayer, generosity, and support for stability.", image: "/images/v2-global-community.png" },
-  { id: "partners-prayer", cause: "torah", eyebrow: "Torah & prayer", title: "Partners in Prayer", description: "Carry prayer, spiritual connection, and hope around the world.", image: "/images/v2-torah-prayer.png" },
   { id: "birkat-habanim", cause: "children", eyebrow: "Children & family", title: "Birkat HaBanim", description: "Strengthen Jewish families and the next generation through prayer.", image: "/images/v2-child-therapy.png" },
-  { id: "mexico", cause: "community", eyebrow: "Global Jewish life", title: "Hameir Laarets — Mexico", description: "Expand Jewish identity and connection throughout Mexico.", image: "/images/v2-global-community.png" },
+  { id: "kaparot", cause: "food", eyebrow: "Seasonal giving", title: "Kaparot", description: "Transform a sacred tradition into food, dignity, and hope.", image: "/images/kaparot-family-hero.png" },
+  { id: "eighteen", cause: "families", eyebrow: "Accessible giving", title: "18$", description: "Make a meaningful gift that turns a small act into lasting impact.", image: "/images/v2-food-relief.png" },
+  { id: "southern-israel", cause: "community", eyebrow: "Jewish community", title: "Southern Israel Unity Center", description: "Build resilience and a thriving future throughout Israel’s south.", image: "/images/v2-southern-community.png" },
+  { id: "general", cause: "families", eyebrow: "Where needed most", title: "General Campaign", description: "Let your gift meet the most urgent need with speed and flexibility.", image: "/images/v2-food-relief.png" },
 ];
 
 const amounts = [36, 72, 180, 360];
@@ -263,7 +260,7 @@ export default function DonationExperienceV3() {
         <div className={styles.sectionLead}>
           <span>Explore all campaigns</span>
           <h2>Real needs. Real people.<br />Real impact.</h2>
-          <p>Choose one of our 13 active campaigns. Your fundraiser attribution stays with you, whichever campaign you select.</p>
+          <p>Choose one of our 10 active campaigns. Your fundraiser attribution stays with you, whichever campaign you select.</p>
         </div>
 
         <div className={styles.campaignGrid}>
@@ -283,7 +280,7 @@ export default function DonationExperienceV3() {
         </div>
 
         <button className={styles.allCampaigns} onClick={() => setExpanded((current) => !current)}>
-          {expanded ? "Show fewer campaigns" : "Explore all 13 campaigns"}<ArrowRight size={18} weight="bold" />
+          {expanded ? "Show fewer campaigns" : "Explore all 10 campaigns"}<ArrowRight size={18} weight="bold" />
         </button>
       </section>
 
