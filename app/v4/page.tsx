@@ -157,8 +157,8 @@ const HERO_MEDIA = {
   mp4: "/media/hameir-global-hero.mp4",
   videoReady: true,
 } as const;
-const HERO_REVEAL_TIME_SECONDS = 2.4;
-const HERO_REVEAL_DELAY_MS = 2200;
+const HERO_REVEAL_TIME_SECONDS = 3.8;
+const HERO_REVEAL_DELAY_MS = 5200;
 const SOLICITORS: Record<string, { name: string; defaultLocale: Locale }> = {
   "yehuda-dayan": { name: "Yehuda Dayan", defaultLocale: "en" },
   "shachar-shalom": { name: "Shachar Shalom", defaultLocale: "en" },
@@ -602,19 +602,15 @@ export default function DonationExperienceV4() {
           {HERO_MEDIA.videoReady && (
             <video
               autoPlay
+              loop
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
               poster={HERO_MEDIA.poster}
               onTimeUpdate={(event) => {
                 if (event.currentTarget.currentTime >= HERO_REVEAL_TIME_SECONDS) {
                   setHeroRevealed(true);
                 }
-              }}
-              onEnded={(event) => {
-                setHeroRevealed(true);
-                event.currentTarget.currentTime = 0;
-                void event.currentTarget.play();
               }}
               onError={() => setHeroRevealed(true)}
             >
@@ -646,11 +642,16 @@ export default function DonationExperienceV4() {
         <h2 className={styles.visuallyHidden} id="legacy-title">{t.legacyTitle} {t.legacyTitleAccent}</h2>
 
         <div className={styles.legacyEditorial}>
+          <div className={styles.rabbisTogether}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/rabbis-together-final.png"
+              alt="Rabbi Yoram Michael Abergel zt'l and Rabbi Yisrael Abergel together"
+              loading="lazy"
+            />
+          </div>
+
           <article className={styles.founderStory}>
-            <div className={styles.legacyImage}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/rabbi-yoram-cutout-v2.png" alt="Rabbi Yoram Michael Abergel zt'l, founder and spiritual visionary" loading="lazy" />
-            </div>
             <div className={styles.legacyCopy}>
               <small>{t.founderRole}</small>
               <h3>Rabbi Yoram Michael Abergel zt&apos;l</h3>
@@ -659,10 +660,6 @@ export default function DonationExperienceV4() {
           </article>
 
           <article className={styles.leaderStory}>
-            <div className={styles.legacyImage}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/rabbi-yisrael-cutout.png" alt="Rabbi Yisrael Abergel, continuing the vision today" loading="lazy" />
-            </div>
             <div className={styles.legacyCopy}>
               <small>{t.leaderRole}</small>
               <h3>Rabbi Yisrael Abergel shlit&apos;a</h3>
