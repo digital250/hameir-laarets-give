@@ -203,7 +203,7 @@ const COPY = {
     identityEyebrow: "Hameir Laarets",
     identityTitle: "Lighting Jewish Lives",
     identityTitleAccent: "Through Torah and Chesed",
-    identityBody: "Strengthening Jewish families in Israel and around the world through Torah, prayer, dignity, and acts of kindness.",
+    identityBody: "Your gift brings Torah, food, therapy, and dignity to Jewish families in Israel and around the world.",
     supportCurrent: "Support families this Elul",
     discover: "Discover Hameir Laarets",
     ourStory: "Our Story",
@@ -247,6 +247,8 @@ const COPY = {
     once: "One-time",
     monthly: "Monthly",
     chooseGift: "Choose your gift",
+    otherAmount: "Other amount",
+    giftDockLabel: "Your selected gift",
     giftImpact: "Connected to our wider impact",
     annualImpactContext: "Organization-wide annual impact",
     continueWith: "Continue with",
@@ -315,7 +317,7 @@ const COPY = {
     identityEyebrow: "Hameir Laarets",
     identityTitle: "Iluminando vidas judías",
     identityTitleAccent: "A través de Torá y Jesed",
-    identityBody: "Fortalecemos a familias judías en Israel y en todo el mundo mediante Torá, plegaria, dignidad y actos de bondad.",
+    identityBody: "Tu donativo lleva Torá, alimento, terapia y dignidad a familias judías en Israel y en todo el mundo.",
     supportCurrent: "Apoya a familias este Elul",
     discover: "Descubre Hameir Laarets",
     ourStory: "Nuestra historia",
@@ -359,6 +361,8 @@ const COPY = {
     once: "Una vez",
     monthly: "Mensual",
     chooseGift: "Elige tu donativo",
+    otherAmount: "Otro monto",
+    giftDockLabel: "Tu donativo seleccionado",
     giftImpact: "Conectado con nuestro impacto general",
     annualImpactContext: "Impacto anual de toda la organización",
     continueWith: "Continuar con",
@@ -459,6 +463,7 @@ export default function DonationExperienceV4() {
   const [urlReady, setUrlReady] = useState(false);
   const [campaignId, setCampaignId] = useState("kaparot");
   const [amount, setAmount] = useState(180);
+  const [customAmount, setCustomAmount] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("once");
   const [expanded, setExpanded] = useState(false);
   const [storyOpen, setStoryOpen] = useState(false);
@@ -642,6 +647,14 @@ export default function DonationExperienceV4() {
         </button>
       </header>
 
+      <button className={styles.mobileDonationDock} type="button" onClick={scrollToGift}>
+        <span>
+          <small>{t.giftDockLabel}</small>
+          <strong>{activeCampaignTitle}</strong>
+        </span>
+        <b>{t.give} ${amount} <ArrowRight size={18} weight="bold" aria-hidden="true" /></b>
+      </button>
+
       <section className={styles.globalHero} id="v4-main" aria-labelledby="global-hero-title">
         <div className={styles.heroMedia} aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -823,12 +836,36 @@ export default function DonationExperienceV4() {
                     key={gift}
                     className={amount === gift ? styles.selectedAmount : ""}
                     aria-pressed={amount === gift}
-                    onClick={() => setAmount(gift)}
+                    onClick={() => {
+                      setAmount(gift);
+                      setCustomAmount("");
+                    }}
                   >
                     ${gift}
                   </button>
                 ))}
               </div>
+              <label className={`${styles.customAmount} ${customAmount ? styles.customAmountSelected : ""}`}>
+                <span>{t.otherAmount}</span>
+                <div>
+                  <b aria-hidden="true">$</b>
+                  <input
+                    type="number"
+                    min="1"
+                    inputMode="decimal"
+                    value={customAmount}
+                    placeholder={t.otherAmount}
+                    aria-label={t.otherAmount}
+                    onChange={(event) => {
+                      const nextValue = event.target.value;
+                      setCustomAmount(nextValue);
+                      const parsed = Number(nextValue);
+                      if (Number.isFinite(parsed) && parsed >= 1) setAmount(parsed);
+                    }}
+                  />
+                  <small>USD</small>
+                </div>
+              </label>
               <p className={styles.amountImpact}>
                 <CheckCircle size={16} weight="fill" aria-hidden="true" />
                 <span><small>{t.giftImpact}</small>{activeCampaignImpact}</span>
