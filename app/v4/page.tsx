@@ -151,6 +151,28 @@ const campaigns: Campaign[] = [
 ];
 
 const amounts = [36, 72, 180, 360];
+const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
+  families: {
+    en: "14,500 families supported through Chesed last year",
+    es: "14,500 familias recibieron apoyo mediante Jesed el año pasado",
+  },
+  children: {
+    en: "76,000 people guided and strengthened last year",
+    es: "76,000 personas recibieron orientación y apoyo el año pasado",
+  },
+  food: {
+    en: "14,500 families supported through Chesed last year",
+    es: "14,500 familias recibieron apoyo mediante Jesed el año pasado",
+  },
+  community: {
+    en: "Jewish communities reached across 136 countries last year",
+    es: "Comunidades judías alcanzadas en 136 países el año pasado",
+  },
+  torah: {
+    en: "6.5M Torah publications distributed last year",
+    es: "6.5 millones de publicaciones de Torá distribuidas el año pasado",
+  },
+};
 const ELUL_CAMPAIGN_URL = "https://elul.hameirlaarets.org/";
 const HERO_MEDIA = {
   poster: "/media/hameir-global-hero-poster-clean.png",
@@ -225,6 +247,8 @@ const COPY = {
     once: "One-time",
     monthly: "Monthly",
     chooseGift: "Choose your gift",
+    giftImpact: "Connected to our wider impact",
+    annualImpactContext: "Organization-wide annual impact",
     continueWith: "Continue with",
     secure: "Secure checkout",
     deductible: "Tax-deductible",
@@ -335,6 +359,8 @@ const COPY = {
     once: "Una vez",
     monthly: "Mensual",
     chooseGift: "Elige tu donativo",
+    giftImpact: "Conectado con nuestro impacto general",
+    annualImpactContext: "Impacto anual de toda la organización",
     continueWith: "Continuar con",
     secure: "Pago seguro",
     deductible: "Deducible de impuestos",
@@ -534,6 +560,7 @@ export default function DonationExperienceV4() {
   );
   const displayedCampaigns = expanded ? campaignDisplayOrder : campaignDisplayOrder.slice(0, 6);
   const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
+  const activeCampaignImpact = IMPACT_BY_CAUSE[activeCampaign.cause][locale];
   const elulCampaignHref = useMemo(() => {
     const url = new URL(ELUL_CAMPAIGN_URL);
     const params = new URLSearchParams(trackingParams);
@@ -650,7 +677,7 @@ export default function DonationExperienceV4() {
           <img className={styles.heroLogo} src="/images/hameir-laarets-logo-new.png" alt="" />
           <span>{t.tagline}</span>
           <h1 id="global-hero-title">
-            {t.identityTitle}
+            <span className={styles.heroTitleLine}>{t.identityTitle}</span>
             <strong>{t.identityTitleAccent}</strong>
           </h1>
           <p>{t.identityBody}</p>
@@ -802,6 +829,10 @@ export default function DonationExperienceV4() {
                   </button>
                 ))}
               </div>
+              <p className={styles.amountImpact}>
+                <CheckCircle size={16} weight="fill" aria-hidden="true" />
+                <span><small>{t.giftImpact}</small>{activeCampaignImpact}</span>
+              </p>
             </div>
 
             <button
@@ -841,6 +872,13 @@ export default function DonationExperienceV4() {
                 <span>{locale === "es" ? campaign.eyebrowEs : campaign.eyebrow}</span>
                 <h3>{locale === "es" ? campaign.titleEs : campaign.title}</h3>
                 <p>{locale === "es" ? campaign.descriptionEs : campaign.description}</p>
+                <div className={styles.campaignImpact}>
+                  <CheckCircle size={18} weight="fill" aria-hidden="true" />
+                  <span>
+                    <small>{t.annualImpactContext}</small>
+                    {IMPACT_BY_CAUSE[campaign.cause][locale]}
+                  </span>
+                </div>
                 {campaign.id === "kaparot" ? (
                   <a href={elulCampaignHref}>
                     {t.viewKaparot} <ArrowRight size={18} weight="bold" />

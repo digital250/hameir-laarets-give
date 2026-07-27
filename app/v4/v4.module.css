@@ -267,6 +267,13 @@
   font: inherit;
 }
 
+.heroTitleLine,
+.heroContent h1 strong {
+  display: block;
+  opacity: 0;
+  transform: translateY(9px);
+}
+
 .heroContent p {
   max-width: 610px;
   margin: 0;
@@ -329,27 +336,35 @@
 }
 
 .heroContentVisible .heroLogo {
-  animation: heroFadeIn .55s cubic-bezier(.22, .78, .22, 1) both;
+  animation: heroDissolve .8s cubic-bezier(.22, .78, .22, 1) both;
 }
 
 .heroContentVisible > span {
-  animation: heroFadeIn .55s .05s cubic-bezier(.22, .78, .22, 1) both;
+  animation: heroDissolve .85s .12s cubic-bezier(.22, .78, .22, 1) both;
 }
 
 .heroContentVisible h1 {
-  animation: heroTitleIn .58s .08s cubic-bezier(.2, .72, .2, 1) both;
+  opacity: 1;
+}
+
+.heroContentVisible .heroTitleLine {
+  animation: heroDissolve 1.05s .28s cubic-bezier(.16, .72, .18, 1) both;
+}
+
+.heroContentVisible h1 strong {
+  animation: heroDissolve 1.15s .5s cubic-bezier(.16, .72, .18, 1) both;
 }
 
 .heroContentVisible p {
-  animation: heroFadeIn .6s .28s cubic-bezier(.22, .78, .22, 1) both;
+  animation: heroDissolve 1s .78s cubic-bezier(.22, .78, .22, 1) both;
 }
 
 .heroContentVisible .heroActions {
-  animation: heroFadeIn .6s .4s cubic-bezier(.22, .78, .22, 1) both;
+  animation: heroDissolve .9s 1.02s cubic-bezier(.22, .78, .22, 1) both;
 }
 
 .heroScrollCueVisible {
-  animation: heroCueIn .55s .48s ease both;
+  animation: heroCueIn .75s 1.14s ease both;
 }
 
 .identityIntro {
@@ -900,6 +915,35 @@
   color: white;
 }
 
+.amountImpact {
+  margin: 10px 2px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: #40515e;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.amountImpact > svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--gold);
+}
+
+.amountImpact > span {
+  display: grid;
+  gap: 1px;
+}
+
+.amountImpact small {
+  color: #88766d;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
 .continueButton {
   min-height: 58px;
   padding: 0 22px;
@@ -1405,10 +1449,42 @@
 
 .cardCopy p {
   max-width: 430px;
-  margin: 0 0 24px;
+  margin: 0 0 18px;
   color: rgba(255, 255, 255, .78);
   font-size: 14px;
   line-height: 1.55;
+}
+
+.campaignImpact {
+  max-width: 430px;
+  margin: 0 0 24px;
+  padding-top: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  border-top: 1px solid rgba(216, 182, 92, .35);
+  color: rgba(255, 255, 255, .9);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.campaignImpact > svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #d8b65c;
+}
+
+.campaignImpact span {
+  display: grid;
+  gap: 2px;
+}
+
+.campaignImpact small {
+  color: #d8b65c;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .cardCopy button,
@@ -1796,6 +1872,19 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroDissolve {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
   }
 }
 
@@ -2450,21 +2539,33 @@
   }
 
   .globalHero {
-    min-height: calc(100svh - 68px);
+    min-height: max(820px, calc(100svh - 68px));
+    place-items: stretch center;
+    background: linear-gradient(180deg, #041421 0%, #041421 28%, #061b2d 64%, #071827 100%);
+  }
+
+  .heroMedia {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    inset: 0 0 auto;
   }
 
   .heroMedia img,
   .heroMedia video {
-    object-position: 54% center;
+    object-fit: contain;
+    object-position: center;
+    background: #041421;
   }
 
   .heroScrim {
-    background: rgba(2, 13, 24, .57);
+    background: rgba(2, 13, 24, .16);
   }
 
   .heroContent {
     width: calc(100% - 36px);
-    padding: 48px 0 82px;
+    padding: calc(56.25vw + 38px) 0 82px;
+    align-content: start;
   }
 
   .heroLogo {
@@ -2481,9 +2582,9 @@
   .heroContent h1 {
     max-width: 360px;
     margin: 18px auto;
-    font-size: clamp(40px, 11vw, 46px);
+    font-size: clamp(38px, 10.6vw, 44px);
     letter-spacing: -.035em;
-    line-height: .94;
+    line-height: .96;
   }
 
   .heroContent p {
@@ -2660,7 +2761,7 @@
 
   .campaignCard,
   .campaignCard.featuredCard {
-    min-height: 430px;
+    min-height: 470px;
   }
 
   .modalBackdrop {
@@ -2733,6 +2834,8 @@
   .heroLogo,
   .heroContent > span,
   .heroContent h1,
+  .heroTitleLine,
+  .heroContent h1 strong,
   .heroContent p,
   .heroActions,
   .heroScrollCue {
