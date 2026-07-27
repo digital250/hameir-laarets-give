@@ -213,6 +213,10 @@
   object-position: center;
 }
 
+.heroVideoUnavailable {
+  display: none !important;
+}
+
 .heroScrim {
   z-index: 1;
   background: rgba(2, 13, 24, .48);
@@ -2459,8 +2463,8 @@
   }
 
   .heroContent {
-    width: calc(100% - 28px);
-    padding: 44px 0 84px;
+    width: calc(100% - 36px);
+    padding: 48px 0 82px;
   }
 
   .heroLogo {
@@ -2475,15 +2479,17 @@
   }
 
   .heroContent h1 {
-    margin: 15px 0;
-    font-size: 49px;
-    line-height: .88;
+    max-width: 360px;
+    margin: 18px auto;
+    font-size: clamp(40px, 11vw, 46px);
+    letter-spacing: -.035em;
+    line-height: .94;
   }
 
   .heroContent p {
-    max-width: 350px;
-    font-size: 14px;
-    line-height: 1.48;
+    max-width: 330px;
+    font-size: 13.5px;
+    line-height: 1.55;
   }
 
   .heroActions {

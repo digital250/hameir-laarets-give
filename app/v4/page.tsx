@@ -158,7 +158,6 @@ const HERO_MEDIA = {
   videoReady: true,
 } as const;
 const HERO_REVEAL_TIME_SECONDS = 3.8;
-const HERO_REVEAL_DELAY_MS = 5200;
 const SOLICITORS: Record<string, { name: string; defaultLocale: Locale }> = {
   "yehuda-dayan": { name: "Yehuda Dayan", defaultLocale: "en" },
   "shachar-shalom": { name: "Shachar Shalom", defaultLocale: "en" },
@@ -440,13 +439,34 @@ export default function DonationExperienceV4() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [heroRevealed, setHeroRevealed] = useState(!HERO_MEDIA.videoReady);
+  const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const t = COPY[locale];
 
   useEffect(() => {
     if (!HERO_MEDIA.videoReady) return;
-    const revealTimer = window.setTimeout(() => setHeroRevealed(true), HERO_REVEAL_DELAY_MS);
-    return () => window.clearTimeout(revealTimer);
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    let cancelled = false;
+    const showPosterFallback = () => {
+      if (cancelled) return;
+      setHeroVideoUnavailable(true);
+      setHeroRevealed(true);
+    };
+
+    const playAttempt = video.play();
+    playAttempt?.catch(showPosterFallback);
+
+    const playbackWatchdog = window.setTimeout(() => {
+      if (video.currentTime < 0.25) showPosterFallback();
+    }, 4500);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(playbackWatchdog);
+    };
   }, []);
 
   useEffect(() => {
@@ -601,10 +621,13 @@ export default function DonationExperienceV4() {
           <img src={HERO_MEDIA.poster} alt="" />
           {HERO_MEDIA.videoReady && (
             <video
+              ref={heroVideoRef}
+              className={heroVideoUnavailable ? styles.heroVideoUnavailable : undefined}
               autoPlay
               loop
               muted
               playsInline
+              disablePictureInPicture
               preload="auto"
               poster={HERO_MEDIA.poster}
               onTimeUpdate={(event) => {
@@ -612,7 +635,10 @@ export default function DonationExperienceV4() {
                   setHeroRevealed(true);
                 }
               }}
-              onError={() => setHeroRevealed(true)}
+              onError={() => {
+                setHeroVideoUnavailable(true);
+                setHeroRevealed(true);
+              }}
             >
               <source src={HERO_MEDIA.mp4} type="video/mp4" />
             </video>
