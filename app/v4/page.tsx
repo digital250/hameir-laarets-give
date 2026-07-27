@@ -179,8 +179,9 @@ const HERO_MEDIA = {
   mp4: "/media/hameir-global-hero-4k.mp4",
   videoReady: true,
 } as const;
-const HERO_REVEAL_TIME_SECONDS = 3.8;
-const MOBILE_HERO_REVEAL_DELAY_MS = 1650;
+const HERO_START_TIME_SECONDS = 0.9;
+const HERO_REVEAL_TIME_SECONDS = 5;
+const MOBILE_HERO_REVEAL_DELAY_MS = 2600;
 const SOLICITORS: Record<string, { name: string; defaultLocale: Locale }> = {
   "yehuda-dayan": { name: "Yehuda Dayan", defaultLocale: "en" },
   "shachar-shalom": { name: "Shachar Shalom", defaultLocale: "en" },
@@ -482,6 +483,8 @@ export default function DonationExperienceV4() {
   const [completed, setCompleted] = useState(false);
   const [heroRevealed, setHeroRevealed] = useState(!HERO_MEDIA.videoReady);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
+  const [heroVideoActive, setHeroVideoActive] = useState(false);
+  const [donationDockVisible, setDonationDockVisible] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileHeroRevealTimerRef = useRef<number | null>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
@@ -503,7 +506,7 @@ export default function DonationExperienceV4() {
     playAttempt?.catch(showPosterFallback);
 
     const playbackWatchdog = window.setTimeout(() => {
-      if (video.currentTime < 0.25) showPosterFallback();
+      if (video.paused || video.readyState < 2) showPosterFallback();
     }, 4500);
 
     return () => {
@@ -512,6 +515,31 @@ export default function DonationExperienceV4() {
       if (mobileHeroRevealTimerRef.current !== null) {
         window.clearTimeout(mobileHeroRevealTimerRef.current);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    let animationFrame = 0;
+    const updateDockVisibility = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(() => {
+        const hero = document.getElementById("v4-main");
+        const composer = document.getElementById("v4-give");
+        if (!hero || !composer) return;
+
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        const composerTop = composer.getBoundingClientRect().top;
+        setDonationDockVisible(heroBottom < 160 && composerTop > window.innerHeight - 90);
+      });
+    };
+
+    updateDockVisibility();
+    window.addEventListener("scroll", updateDockVisibility, { passive: true });
+    window.addEventListener("resize", updateDockVisibility);
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", updateDockVisibility);
+      window.removeEventListener("resize", updateDockVisibility);
     };
   }, []);
 
@@ -662,7 +690,13 @@ export default function DonationExperienceV4() {
         </button>
       </header>
 
-      <button className={styles.mobileDonationDock} type="button" onClick={scrollToGift}>
+      <button
+        className={`${styles.mobileDonationDock} ${donationDockVisible ? styles.mobileDonationDockVisible : ""}`}
+        type="button"
+        onClick={scrollToGift}
+        aria-hidden={!donationDockVisible}
+        tabIndex={donationDockVisible ? 0 : -1}
+      >
         <span>
           <small>{t.giftDockLabel}</small>
           <strong>{activeCampaignTitle}</strong>
@@ -677,15 +711,19 @@ export default function DonationExperienceV4() {
           {HERO_MEDIA.videoReady && (
             <video
               ref={heroVideoRef}
-              className={heroVideoUnavailable ? styles.heroVideoUnavailable : undefined}
+              className={`${heroVideoActive ? styles.heroVideoActive : ""} ${heroVideoUnavailable ? styles.heroVideoUnavailable : ""}`}
               autoPlay
-              loop
               muted
               playsInline
               disablePictureInPicture
               preload="auto"
               poster={HERO_MEDIA.poster}
+              onLoadedMetadata={(event) => {
+                event.currentTarget.currentTime = HERO_START_TIME_SECONDS;
+              }}
+              onCanPlay={() => setHeroVideoActive(true)}
               onPlaying={() => {
+                setHeroVideoActive(true);
                 if (!window.matchMedia("(max-width: 520px)").matches) return;
                 if (mobileHeroRevealTimerRef.current !== null) return;
                 mobileHeroRevealTimerRef.current = window.setTimeout(() => {
@@ -698,6 +736,13 @@ export default function DonationExperienceV4() {
                 if (event.currentTarget.currentTime >= HERO_REVEAL_TIME_SECONDS) {
                   setHeroRevealed(true);
                 }
+              }}
+              onEnded={(event) => {
+                event.currentTarget.currentTime = HERO_START_TIME_SECONDS;
+                event.currentTarget.play().catch(() => {
+                  setHeroVideoUnavailable(true);
+                  setHeroRevealed(true);
+                });
               }}
               onError={() => {
                 setHeroVideoUnavailable(true);
@@ -724,7 +769,12 @@ export default function DonationExperienceV4() {
             <a href="#v4-legacy">{t.discover}</a>
           </div>
         </div>
-        <a className={`${styles.heroScrollCue} ${heroRevealed ? styles.heroScrollCueVisible : ""}`} href="#v4-featured" aria-label={t.supportCurrent}>
+        <a
+          className={`${styles.heroScrollCue} ${heroRevealed ? styles.heroScrollCueVisible : ""}`}
+          href="#v4-featured"
+          aria-hidden="true"
+          tabIndex={-1}
+        >
           <ArrowDown size={18} weight="bold" />
         </a>
       </section>
@@ -796,7 +846,7 @@ export default function DonationExperienceV4() {
           <div className={styles.photoScrim} />
           <div className={styles.photoCopy}>
             <span>{t.featured}</span>
-            <h1>{t.elulTitle}<br />{t.elulTitleAccent}</h1>
+            <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
             <p>{t.elulPhotoBody}</p>
             <a href={elulCampaignHref}>
               {t.fullElul} <ArrowRight size={20} weight="bold" />
@@ -807,7 +857,7 @@ export default function DonationExperienceV4() {
         <div className={styles.storyPanel}>
           <Sparkle size={25} weight="light" aria-hidden="true" />
           <span>{t.featured}</span>
-          <h1>{t.elulTitle}<br />{t.elulTitleAccent}</h1>
+          <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
           <p>{t.elulBody}</p>
           <a className={styles.seasonalCta} href={elulCampaignHref}>
             {t.fulfill} <ArrowRight size={21} weight="bold" />

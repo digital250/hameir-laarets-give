@@ -199,7 +199,16 @@
   background: rgba(5, 24, 39, .95);
   color: white;
   backdrop-filter: blur(18px);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(100% + 34px));
+  transition: transform .3s ease, opacity .24s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.mobileDonationDockVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .mobileDonationDock::before {
@@ -216,7 +225,7 @@
   pointer-events: none;
 }
 
-.mobileDonationDock:hover {
+.mobileDonationDockVisible:hover {
   transform: translateY(-2px);
   border-color: #e2bd61;
   box-shadow: 0 22px 58px rgba(1, 13, 24, .42), inset 0 1px 0 rgba(255, 255, 255, .1);
@@ -305,12 +314,26 @@
   object-position: center;
 }
 
+.heroMedia img {
+  z-index: 0;
+}
+
+.heroMedia video {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.heroMedia .heroVideoActive {
+  opacity: 1;
+}
+
 .heroVideoUnavailable {
   display: none !important;
 }
 
 .heroScrim {
-  z-index: 1;
+  z-index: 2;
   background: rgba(2, 13, 24, .48);
 }
 
@@ -347,7 +370,7 @@
   font-size: clamp(64px, 5.8vw, 88px);
   font-weight: 500;
   letter-spacing: -.045em;
-  line-height: .86;
+  line-height: .98;
   text-wrap: balance;
   text-shadow: 0 3px 28px rgba(0, 0, 0, .45);
   opacity: 0;
@@ -355,6 +378,7 @@
 
 .heroContent h1 strong {
   display: block;
+  margin-top: .05em;
   color: #d8a84a;
   font: inherit;
 }
@@ -830,7 +854,7 @@
   color: var(--gold);
 }
 
-.storyPanel h1 {
+.storyPanel h2 {
   margin: 22px 0 28px;
   color: var(--burgundy-dark);
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -2409,7 +2433,7 @@
     font-size: 10px;
   }
 
-  .storyPanel h1 {
+  .storyPanel h2 {
     margin: 21px 0 25px;
     font-size: clamp(54px, 14vw, 70px);
     line-height: .9;
@@ -2780,7 +2804,11 @@
     margin: 18px auto;
     font-size: clamp(38px, 10.6vw, 44px);
     letter-spacing: -.035em;
-    line-height: .96;
+    line-height: 1.05;
+  }
+
+  .heroContent h1 strong {
+    margin-top: .08em;
   }
 
   .heroContent p {
@@ -2992,7 +3020,7 @@
     padding: 28px 18px 18px;
   }
 
-  .storyPanel h1 {
+  .storyPanel h2 {
     margin: 10px 0 12px;
     font-size: 44px;
     line-height: .93;

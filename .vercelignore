@@ -1,0 +1,10 @@
+.next/
+dist/
+tmp/
+output/
+audit-*/
+audit-*.jpg
+qa-*.jpg
+qa-*.png
+design-reference-*.png
+design-qa.md
