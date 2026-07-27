@@ -154,7 +154,7 @@ const amounts = [36, 72, 180, 360];
 const ELUL_CAMPAIGN_URL = "https://elul.hameirlaarets.org/";
 const HERO_MEDIA = {
   poster: "/media/hameir-global-hero-poster-clean.png",
-  mp4: "/media/hameir-global-hero.mp4",
+  mp4: "/media/hameir-global-hero-4k.mp4",
   videoReady: true,
 } as const;
 const HERO_REVEAL_TIME_SECONDS = 3.8;
