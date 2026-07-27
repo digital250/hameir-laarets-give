@@ -180,6 +180,7 @@ const HERO_MEDIA = {
   videoReady: true,
 } as const;
 const HERO_REVEAL_TIME_SECONDS = 3.8;
+const MOBILE_HERO_REVEAL_DELAY_MS = 1650;
 const SOLICITORS: Record<string, { name: string; defaultLocale: Locale }> = {
   "yehuda-dayan": { name: "Yehuda Dayan", defaultLocale: "en" },
   "shachar-shalom": { name: "Shachar Shalom", defaultLocale: "en" },
@@ -472,6 +473,7 @@ export default function DonationExperienceV4() {
   const [heroRevealed, setHeroRevealed] = useState(!HERO_MEDIA.videoReady);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const mobileHeroRevealTimerRef = useRef<number | null>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const t = COPY[locale];
 
@@ -497,6 +499,9 @@ export default function DonationExperienceV4() {
     return () => {
       cancelled = true;
       window.clearTimeout(playbackWatchdog);
+      if (mobileHeroRevealTimerRef.current !== null) {
+        window.clearTimeout(mobileHeroRevealTimerRef.current);
+      }
     };
   }, []);
 
@@ -670,7 +675,16 @@ export default function DonationExperienceV4() {
               disablePictureInPicture
               preload="auto"
               poster={HERO_MEDIA.poster}
+              onPlaying={() => {
+                if (!window.matchMedia("(max-width: 520px)").matches) return;
+                if (mobileHeroRevealTimerRef.current !== null) return;
+                mobileHeroRevealTimerRef.current = window.setTimeout(() => {
+                  setHeroRevealed(true);
+                  mobileHeroRevealTimerRef.current = null;
+                }, MOBILE_HERO_REVEAL_DELAY_MS);
+              }}
               onTimeUpdate={(event) => {
+                if (window.matchMedia("(max-width: 520px)").matches) return;
                 if (event.currentTarget.currentTime >= HERO_REVEAL_TIME_SECONDS) {
                   setHeroRevealed(true);
                 }
@@ -685,6 +699,7 @@ export default function DonationExperienceV4() {
           )}
           <span className={styles.heroScrim} />
         </div>
+        <span className={styles.mobileHeroAtmosphere} aria-hidden="true" />
         <div className={`${styles.heroContent} ${heroRevealed ? styles.heroContentVisible : ""}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className={styles.heroLogo} src="/images/hameir-laarets-logo-new.png" alt="" />
