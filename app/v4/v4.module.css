@@ -1888,6 +1888,28 @@
   }
 }
 
+@keyframes heroMobileFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroMobileCue {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 @keyframes heroCueIn {
   from {
     opacity: 0;
@@ -2608,6 +2630,44 @@
     width: 40px;
     height: 40px;
     bottom: 14px;
+  }
+
+  /*
+   * Mobile has a separate rhythm from desktop: the copy sits below the
+   * 16:9 film, so it should read as loaded immediately instead of waiting
+   * for the desktop video cue.
+   */
+  .heroLogo {
+    animation: heroMobileFade .45s .05s cubic-bezier(.22, .78, .22, 1) both !important;
+  }
+
+  .heroContent > span {
+    animation: heroMobileFade .45s .11s cubic-bezier(.22, .78, .22, 1) both !important;
+  }
+
+  .heroContent h1 {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .heroTitleLine {
+    animation: heroMobileFade .65s .18s cubic-bezier(.2, .72, .2, 1) both !important;
+  }
+
+  .heroContent h1 strong {
+    animation: heroMobileFade .7s .25s cubic-bezier(.2, .72, .2, 1) both !important;
+  }
+
+  .heroContent p {
+    animation: heroMobileFade .55s .36s cubic-bezier(.22, .78, .22, 1) both !important;
+  }
+
+  .heroActions {
+    animation: heroMobileFade .5s .46s cubic-bezier(.22, .78, .22, 1) both !important;
+  }
+
+  .heroScrollCue {
+    animation: heroMobileCue .45s .55s cubic-bezier(.22, .78, .22, 1) both !important;
   }
 
   .headerGive {
