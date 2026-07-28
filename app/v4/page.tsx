@@ -39,103 +39,70 @@ type Campaign = {
 
 const campaigns: Campaign[] = [
   {
-    id: "emergency-lifeline",
-    cause: "families",
-    eyebrow: "Emergency relief",
-    eyebrowEs: "Ayuda de emergencia",
-    title: "Israel’s Emergency Lifeline",
-    titleEs: "Ayuda vital para familias en Israel",
-    description: "Help families regain stability through timely, practical relief.",
-    descriptionEs: "Ayuda a las familias a recuperar estabilidad con apoyo práctico y oportuno.",
-    image: "/images/v2-family-crisis.png",
-  },
-  {
-    id: "next-step",
-    cause: "children",
-    eyebrow: "Children & family",
-    eyebrowEs: "Niños y familia",
-    title: "The Next Step Initiative",
-    titleEs: "Iniciativa El Próximo Paso",
-    description: "Help children with special needs access therapeutic care and greater opportunity.",
-    descriptionEs: "Ayuda a niños con necesidades especiales a recibir atención terapéutica y nuevas oportunidades.",
-    image: "/images/v2-child-therapy.png",
-  },
-  {
-    id: "tzedakah-box",
-    cause: "families",
-    eyebrow: "Everyday tzedakah",
-    eyebrowEs: "Tzedaká cotidiana",
-    title: "Tzedakah Box",
-    titleEs: "Caja de tzedaká",
-    description: "Turn a daily mitzvah into steady support for families who need it.",
-    descriptionEs: "Convierte una mitzvá diaria en apoyo constante para familias que lo necesitan.",
-    image: "/images/v2-global-community.png",
-  },
-  {
-    id: "birkat-parnassah",
-    cause: "torah",
-    eyebrow: "Torah & prayer",
-    eyebrowEs: "Torá y plegaria",
-    title: "Birkat Parnassah - Parashat HaMan",
-    titleEs: "Birkat Parnasá - Parashat HaMan",
-    description: "Join prayer and tzedakah in support of families seeking stability.",
-    descriptionEs: "Une la oración y la tzedaká para apoyar a familias que buscan estabilidad.",
-    image: "/images/v2-global-community.png",
-  },
-  {
-    id: "hafatzat-hamayanot",
-    cause: "torah",
-    eyebrow: "Torah & prayer",
-    eyebrowEs: "Torá y plegaria",
-    title: "Hafatzat HaMayanot",
-    titleEs: "Hafatzat HaMayanot",
-    description: "Help bring accessible Torah learning and Jewish connection to communities worldwide.",
-    descriptionEs: "Ayuda a llevar un estudio de Torá accesible y conexión judía a comunidades de todo el mundo.",
-    image: "/images/v2-torah-prayer.png",
-  },
-  {
-    id: "birkat-habanim",
-    cause: "children",
-    eyebrow: "Children & family",
-    eyebrowEs: "Niños y familia",
-    title: "Birkat HaBanim",
-    titleEs: "Birkat HaBanim",
-    description: "Strengthen the next generation through prayer and support for Jewish families.",
-    descriptionEs: "Fortalece a la próxima generación mediante la oración y el apoyo a familias judías.",
-    image: "/images/v2-child-therapy.png",
-  },
-  {
     id: "kaparot",
-    cause: "food",
+    cause: "families",
     eyebrow: "Our focus now · Elul",
     eyebrowEs: "Nuestro enfoque · Elul",
-    title: "Kaparot",
-    titleEs: "Kaparot",
-    description: "Turn Pidyon Kapparot into food, care, and dignity for families before the New Year.",
-    descriptionEs: "Convierte Pidyon Kaparot en alimentos, cuidado y dignidad para familias antes del Año Nuevo.",
+    title: "Pidyon Kapparot",
+    titleEs: "Pidyon Kaparot",
+    description: "Turn a sacred Elul tradition into food, care, and dignity for Jewish families.",
+    descriptionEs: "Convierte una tradición sagrada de Elul en alimentos, cuidado y dignidad para familias judías.",
     image: "/images/elul-volunteers-featured.jpg",
   },
   {
-    id: "eighteen",
-    cause: "families",
-    eyebrow: "A meaningful first gift",
-    eyebrowEs: "Un primer donativo significativo",
-    title: "$18",
-    titleEs: "$18",
-    description: "A small gift can become part of a much larger circle of care.",
-    descriptionEs: "Un pequeño donativo puede formar parte de una red de ayuda mucho más amplia.",
-    image: "/images/v2-food-relief.png",
+    id: "mesilot",
+    cause: "torah",
+    eyebrow: "Torah in every language",
+    eyebrowEs: "Torá en todos los idiomas",
+    title: "Mesilot LaNefesh",
+    titleEs: "Mesilot LaNefesh",
+    description: "Help print and send Torah booklets around the world, in the languages people can receive.",
+    descriptionEs: "Ayuda a imprimir y enviar folletos de Torá por todo el mundo, en los idiomas que las personas pueden recibir.",
+    image: "/images/mesilot.png",
   },
   {
-    id: "southern-israel",
-    cause: "community",
-    eyebrow: "Jewish community",
-    eyebrowEs: "Comunidad judía",
-    title: "Southern Israel Unity Center",
-    titleEs: "Centro de Unidad del Sur de Israel",
-    description: "Help communities in southern Israel grow stronger, more connected, and more resilient.",
-    descriptionEs: "Ayuda a las comunidades del sur de Israel a ser más fuertes, unidas y resilientes.",
-    image: "/images/v2-southern-community.png",
+    id: "torah-scholars",
+    cause: "torah",
+    eyebrow: "Support Torah learning",
+    eyebrowEs: "Apoya el estudio de Torá",
+    title: "Sustain a Kollel Scholar",
+    titleEs: "Sostén a un estudioso de Torá",
+    description: "Help dedicated Torah scholars learn throughout the year and keep a living tradition strong.",
+    descriptionEs: "Ayuda a estudiosos de Torá dedicados a aprender durante todo el año y mantener viva la tradición.",
+    image: "/images/kollel.png",
+  },
+  {
+    id: "horse-therapy",
+    cause: "children",
+    eyebrow: "Children’s healing",
+    eyebrowEs: "Sanación infantil",
+    title: "Therapy Through Horses",
+    titleEs: "Terapia con caballos",
+    description: "Help children in southern Israel access steady, compassionate therapeutic care.",
+    descriptionEs: "Ayuda a niños del sur de Israel a recibir atención terapéutica constante y compasiva.",
+    image: "/images/horse-therapy.png",
+  },
+  {
+    id: "hydrotherapy",
+    cause: "children",
+    eyebrow: "Children’s healing",
+    eyebrowEs: "Sanación infantil",
+    title: "Hydrotherapy & Care",
+    titleEs: "Hidroterapia y cuidado",
+    description: "Fund hydrotherapy and emotional support that help children recover, grow, and feel secure.",
+    descriptionEs: "Financia hidroterapia y apoyo emocional que ayudan a los niños a recuperarse, crecer y sentirse seguros.",
+    image: "/images/hydrotherapy.png",
+  },
+  {
+    id: "food-relief",
+    cause: "food",
+    eyebrow: "Dignity at the table",
+    eyebrowEs: "Dignidad en la mesa",
+    title: "Food Baskets for Families",
+    titleEs: "Canastas de alimentos para familias",
+    description: "Help volunteers pack nourishing food baskets for families who need practical support.",
+    descriptionEs: "Ayuda a voluntarios a preparar canastas nutritivas para familias que necesitan apoyo práctico.",
+    image: "/images/food-packing.png",
   },
   {
     id: "general",
@@ -144,7 +111,7 @@ const campaigns: Campaign[] = [
     eyebrowEs: "Donde más se necesita",
     title: "Where It's Needed Most",
     titleEs: "Donde más se necesita",
-    description: "Give Hameir Laarets the flexibility to respond where help is needed most.",
+    description: "Trust Hameir Laarets to direct your gift wherever the need is greatest.",
     descriptionEs: "Da a Hameir Laarets la flexibilidad de responder allí donde más se necesita.",
     image: "/images/v2-food-relief.png",
   },
@@ -208,6 +175,14 @@ const COPY = {
     identityBody: "Your gift helps bring Torah, food, therapeutic care, and dignified support to Jewish families in Israel and around the world.",
     supportCurrent: "Bring care to a family this Elul",
     discover: "See the mission behind the work",
+    quickEyebrow: "Give in the way that feels right",
+    quickTitle: "Choose a path. Choose an amount.",
+    quickBody: "Start with a focused gift, then review the full cause before you continue.",
+    quickFood: "Food & family relief",
+    quickTorah: "Torah & learning",
+    quickChildren: "Children’s care",
+    quickGeneral: "Where needed most",
+    quickChooseAmount: "Choose a gift",
     ourStory: "Our Story",
     founded: "Founded upon the vision of",
     continued: "Continued today by",
@@ -256,7 +231,7 @@ const COPY = {
     continueWith: "Continue with",
     secure: "Secure checkout",
     deductible: "Tax-deductible",
-    campaignsLink: "Explore all 10 ways to help",
+    campaignsLink: "Explore all 6 ways to help",
     campaignsEyebrow: "Choose your impact",
     campaignsTitle: "Choose how your gift brings light.",
     campaignsTitleAccent: "Every cause meets a real need.",
@@ -325,6 +300,14 @@ const COPY = {
     identityBody: "Tu donativo ayuda a brindar Torá, alimentos, atención terapéutica y apoyo digno a familias judías en Israel y en todo el mundo.",
     supportCurrent: "Lleva ayuda a una familia este Elul",
     discover: "Conoce la misión",
+    quickEyebrow: "Dona de la manera que sientas correcta",
+    quickTitle: "Elige un camino. Elige un monto.",
+    quickBody: "Comienza con un donativo enfocado y revisa la causa completa antes de continuar.",
+    quickFood: "Alimentos y familias",
+    quickTorah: "Torá y estudio",
+    quickChildren: "Cuidado infantil",
+    quickGeneral: "Donde más se necesita",
+    quickChooseAmount: "Elige un donativo",
     ourStory: "Nuestra historia",
     founded: "Fundada sobre la visión de",
     continued: "Continuada hoy por",
@@ -373,7 +356,7 @@ const COPY = {
     continueWith: "Continuar con",
     secure: "Pago seguro",
     deductible: "Deducible de impuestos",
-    campaignsLink: "Explora las 10 formas de ayudar",
+    campaignsLink: "Explora las 6 formas de ayudar",
     campaignsEyebrow: "Elige tu impacto",
     campaignsTitle: "Elige cómo tu donativo lleva luz.",
     campaignsTitleAccent: "Cada causa responde a una necesidad real.",
@@ -463,8 +446,7 @@ const passthroughParams = [
 ];
 const campaignDisplayOrder = [
   campaigns[6],
-  ...campaigns.slice(0, 6),
-  ...campaigns.slice(7),
+  ...campaigns.slice(1, 6),
 ];
 
 export default function DonationExperienceV4() {
@@ -481,7 +463,8 @@ export default function DonationExperienceV4() {
   const [storyOpen, setStoryOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [heroRevealed, setHeroRevealed] = useState(!HERO_MEDIA.videoReady);
+  const [heroRevealed, setHeroRevealed] = useState(false);
+  const [isMobileHero, setIsMobileHero] = useState(true);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
   const [heroVideoActive, setHeroVideoActive] = useState(false);
   const [donationDockVisible, setDonationDockVisible] = useState(false);
@@ -491,7 +474,19 @@ export default function DonationExperienceV4() {
   const t = COPY[locale];
 
   useEffect(() => {
-    if (!HERO_MEDIA.videoReady) return;
+    const media = window.matchMedia("(max-width: 520px)");
+    const syncHeroMode = () => {
+      const mobile = media.matches;
+      setIsMobileHero(mobile);
+      if (mobile) setHeroRevealed(true);
+    };
+    syncHeroMode();
+    media.addEventListener("change", syncHeroMode);
+    return () => media.removeEventListener("change", syncHeroMode);
+  }, []);
+
+  useEffect(() => {
+    if (!HERO_MEDIA.videoReady || isMobileHero) return;
     const video = heroVideoRef.current;
     if (!video) return;
 
@@ -516,7 +511,7 @@ export default function DonationExperienceV4() {
         window.clearTimeout(mobileHeroRevealTimerRef.current);
       }
     };
-  }, []);
+  }, [isMobileHero]);
 
   useEffect(() => {
     let animationFrame = 0;
@@ -603,7 +598,7 @@ export default function DonationExperienceV4() {
   }, [checkoutOpen, storyOpen]);
 
   const activeCampaign = useMemo(
-    () => campaigns.find((campaign) => campaign.id === campaignId) || campaigns[6],
+    () => campaigns.find((campaign) => campaign.id === campaignId) || campaigns[0],
     [campaignId],
   );
   const displayedCampaigns = expanded ? campaignDisplayOrder : campaignDisplayOrder.slice(0, 6);
@@ -651,6 +646,13 @@ export default function DonationExperienceV4() {
     setCompleted(false);
     setCheckoutOpen(true);
   };
+
+  const quickDonationOptions = [
+    { id: "food-relief", label: t.quickFood },
+    { id: "mesilot", label: t.quickTorah },
+    { id: "horse-therapy", label: t.quickChildren },
+    { id: "general", label: t.quickGeneral },
+  ];
 
   const submitGift = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -708,7 +710,7 @@ export default function DonationExperienceV4() {
         <div className={styles.heroMedia} aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={HERO_MEDIA.poster} alt="" />
-          {HERO_MEDIA.videoReady && (
+          {HERO_MEDIA.videoReady && !isMobileHero && (
             <video
               ref={heroVideoRef}
               className={`${heroVideoActive ? styles.heroVideoActive : ""} ${heroVideoUnavailable ? styles.heroVideoUnavailable : ""}`}
@@ -716,7 +718,7 @@ export default function DonationExperienceV4() {
               muted
               playsInline
               disablePictureInPicture
-              preload="auto"
+              preload="metadata"
               poster={HERO_MEDIA.poster}
               onLoadedMetadata={(event) => {
                 event.currentTarget.currentTime = HERO_START_TIME_SECONDS;
@@ -777,6 +779,44 @@ export default function DonationExperienceV4() {
         >
           <ArrowDown size={18} weight="bold" />
         </a>
+      </section>
+
+      <section className={styles.quickDonation} aria-labelledby="quick-donation-title">
+        <div className={styles.quickDonationIntro}>
+          <span>{t.quickEyebrow}</span>
+          <h2 id="quick-donation-title">{t.quickTitle}</h2>
+          <p>{t.quickBody}</p>
+        </div>
+        <div className={styles.quickDonationControls}>
+          <div className={styles.quickCauseList} role="group" aria-label={t.quickEyebrow}>
+            {quickDonationOptions.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                className={campaignId === option.id ? styles.quickCauseActive : ""}
+                aria-pressed={campaignId === option.id}
+                onClick={() => setCampaignId(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <span className={styles.quickAmountLabel}>{t.quickChooseAmount}</span>
+          <div className={styles.quickAmountList} role="group" aria-label={t.chooseAmountAria}>
+            {[36, 72, 180, 360].map((gift) => (
+              <button
+                key={gift}
+                type="button"
+                onClick={() => {
+                  setAmount(gift);
+                  window.setTimeout(scrollToGift, 0);
+                }}
+              >
+                ${gift}
+              </button>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className={styles.legacySection} id="v4-legacy" aria-labelledby="legacy-title">
@@ -976,9 +1016,24 @@ export default function DonationExperienceV4() {
 
         <div className={styles.campaignGrid}>
           {displayedCampaigns.map((campaign, index) => (
-            <article key={campaign.id} className={`${styles.campaignCard} ${index === 0 ? styles.featuredCard : ""}`}>
+            <article
+              key={campaign.id}
+              className={`${styles.campaignCard} ${index === 0 ? styles.featuredCard : ""} ${campaign.id === "mesilot" ? styles.productCard : ""}`}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={campaign.image} alt="" loading="lazy" />
+              {campaign.id === "mesilot" ? (
+                <div className={styles.mesilotStack} aria-label={locale === "es" ? campaign.titleEs : campaign.title}>
+                  <img src={campaign.image} alt="" loading="lazy" />
+                  <img src={campaign.image} alt="" loading="lazy" />
+                  <img src={campaign.image} alt={locale === "es" ? campaign.titleEs : campaign.title} loading="lazy" />
+                </div>
+              ) : (
+                <img
+                  src={campaign.image}
+                  alt={locale === "es" ? campaign.titleEs : campaign.title}
+                  loading="lazy"
+                />
+              )}
               <div className={styles.cardScrim} />
               <div className={styles.cardCopy}>
                 <span>{locale === "es" ? campaign.eyebrowEs : campaign.eyebrow}</span>

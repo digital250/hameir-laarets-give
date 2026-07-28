@@ -46,3 +46,9 @@ next-env.d.ts
 /design-reference-option-1.png
 /design-comparison-*.png
 /prototype-*.png
+/design-qa*.png
+/qa-*
+/audit-*
+/tmp/
+/output/
+/*.mp4
