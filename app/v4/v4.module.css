@@ -81,7 +81,7 @@
   padding: 0 clamp(24px, 5vw, 86px);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto auto;
   align-items: center;
   gap: 48px;
   position: relative;
@@ -168,6 +168,28 @@
 
 .nav a:hover {
   color: #e2bd61;
+}
+
+.mainSiteLink {
+  min-height: 42px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(216, 182, 92, .42);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, .88);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.mainSiteLink:hover {
+  border-color: var(--gold);
+  background: rgba(216, 182, 92, .1);
+  color: white;
 }
 
 .headerGive {
@@ -2457,7 +2479,7 @@
     min-height: 76px;
     padding: 0 20px;
     gap: 16px;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto auto auto;
     background: var(--midnight);
   }
 
@@ -3040,6 +3062,20 @@
     min-height: 68px;
     padding-inline: 13px;
     gap: 8px;
+  }
+
+  .brand > span {
+    display: none;
+  }
+
+  .mainSiteLink {
+    width: 42px;
+    min-height: 42px;
+    padding: 0;
+  }
+
+  .mainSiteLink span {
+    display: none;
   }
 
   .globalHero {

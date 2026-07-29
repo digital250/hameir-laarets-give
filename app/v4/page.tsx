@@ -11,6 +11,7 @@ import {
   GlobeHemisphereWest,
   HandHeart,
   Heart,
+  House,
   InstagramLogo,
   LinkSimpleHorizontal,
   LockKey,
@@ -61,8 +62,8 @@ const campaigns: Campaign[] = [
     cause: "families",
     eyebrow: "Our focus now · Elul",
     eyebrowEs: "Nuestro enfoque · Elul",
-    title: "Help a Family This Elul",
-    titleEs: "Ayuda a una familia este Elul",
+    title: "Prepare a Family for the New Year",
+    titleEs: "Prepara a una familia para el Año Nuevo",
     description: "Your Elul gift can bring food, care, and dignity to a Jewish family.",
     descriptionEs: "Tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
     image: "/images/elul-volunteers-hero-v3.jpg",
@@ -189,6 +190,7 @@ const COPY = {
     tagline: "Torah · Chesed · Community",
     ourWork: "Ways to help",
     whyTrust: "Why give here",
+    mainSite: "Main website",
     give: "Give",
     languageLabel: "Language",
     identityEyebrow: "Hameir Laarets",
@@ -237,7 +239,7 @@ const COPY = {
     elulTitle: "Prepare Your Heart",
     elulTitleAccent: "for the New Year",
     elulPhotoBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
-    elulBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
+    elulBody: "Elul is a time to prepare our hearts through acts of kindness and generosity. Your support helps Jewish families celebrate the New Year with dignity by providing food and essential assistance when they need it most.",
     fullElul: "Learn more",
     fulfill: "Give Pidyon Kapparot",
     readStory: "Why Kaparot matters",
@@ -316,6 +318,7 @@ const COPY = {
     tagline: "Torá · Jesed · Comunidad",
     ourWork: "Formas de ayudar",
     whyTrust: "Por qué donar aquí",
+    mainSite: "Sitio principal",
     give: "Donar",
     languageLabel: "Idioma",
     identityEyebrow: "Hameir Laarets",
@@ -364,7 +367,7 @@ const COPY = {
     elulTitle: "Prepara tu corazón",
     elulTitleAccent: "para el Año Nuevo",
     elulPhotoBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
-    elulBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
+    elulBody: "Elul es un tiempo para preparar nuestros corazones mediante actos de bondad y generosidad. Tu apoyo ayuda a familias judías a celebrar el Año Nuevo con dignidad, proporcionando alimentos y asistencia esencial cuando más lo necesitan.",
     fullElul: "Más información",
     fulfill: "Haz tu Pidyon Kaparot",
     readStory: "Conoce el significado de Kaparot",
@@ -708,6 +711,14 @@ export default function DonationExperienceV4() {
           <a href="#v4-campaigns">{t.ourWork}</a>
           <a href="#v4-trust">{t.whyTrust}</a>
         </nav>
+        <a
+          className={styles.mainSiteLink}
+          href="https://hameirlaarets.org/"
+          aria-label={t.mainSite}
+        >
+          <House size={17} weight="regular" aria-hidden="true" />
+          <span>{t.mainSite}</span>
+        </a>
         <div className={styles.languageSwitch} role="group" aria-label={t.languageLabel}>
           <button type="button" aria-pressed={locale === "en"} onClick={() => setLocale("en")}>EN</button>
           <button type="button" aria-pressed={locale === "es"} onClick={() => setLocale("es")}>ES</button>
@@ -792,7 +803,7 @@ export default function DonationExperienceV4() {
           </h1>
           <p>{t.identityBody}</p>
           <div className={styles.heroActions}>
-            <a href="#v4-featured">{t.supportCurrent} <ArrowDown size={18} weight="bold" /></a>
+            <a href="#v4-donation">{t.supportCurrent} <ArrowDown size={18} weight="bold" /></a>
             <a href="#v4-legacy">{t.discover}</a>
           </div>
         </div>
@@ -825,6 +836,7 @@ export default function DonationExperienceV4() {
           <Sparkle size={25} weight="light" aria-hidden="true" />
           <span>{t.featured}</span>
           <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
+          <p>{t.elulBody}</p>
         </div>
       </section>
 
