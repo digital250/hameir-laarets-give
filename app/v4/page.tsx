@@ -38,6 +38,7 @@ declare global {
   interface Window {
     Double?: {
       openCheckout: (options: DoubleCheckoutOptions) => Promise<void> | void;
+      closeCheckout?: () => Promise<void> | void;
     };
   }
 }
@@ -630,6 +631,27 @@ export default function DonationExperienceV4() {
     lastFocusedElement.current = document.activeElement as HTMLElement | null;
   };
 
+  const resetDoubleCheckout = () => new Promise<void>((resolve, reject) => {
+    window.Double?.closeCheckout?.();
+    document.querySelectorAll(".double-app").forEach((element) => element.remove());
+    document.querySelectorAll(`script[src="${DOUBLE_EMBED_URL}"]`).forEach((element) => element.remove());
+    delete window.Double;
+
+    const handleReady = () => {
+      resolve();
+    };
+    const script = document.createElement("script");
+    script.src = DOUBLE_EMBED_URL;
+    script.async = true;
+    script.referrerPolicy = "strict-origin-when-cross-origin";
+    script.addEventListener("error", () => {
+      document.removeEventListener("Double.ready", handleReady);
+      reject(new Error("Double checkout failed to reload."));
+    }, { once: true });
+    document.addEventListener("Double.ready", handleReady, { once: true });
+    document.head.appendChild(script);
+  });
+
   const openDoubleCheckout = (campaign: Campaign, useBannerSelection = false) => {
     const openDouble = () => {
       window.Double?.openCheckout({
@@ -642,6 +664,14 @@ export default function DonationExperienceV4() {
         ...(solicitor ? { solicitor } : {}),
       });
     };
+    if (!useBannerSelection) {
+      resetDoubleCheckout()
+        .then(openDouble)
+        .catch(() => {
+          if (window.Double?.openCheckout) openDouble();
+        });
+      return;
+    }
     if (window.Double?.openCheckout) {
       openDouble();
     } else {
