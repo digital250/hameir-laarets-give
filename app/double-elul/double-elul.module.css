@@ -1,0 +1,18 @@
+.page {
+  min-height: 100vh;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  background: transparent;
+}
+
+.page > div {
+  width: min(100%, 620px);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 8px 0;
+  }
+}

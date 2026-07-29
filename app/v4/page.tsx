@@ -622,7 +622,7 @@ export default function DonationExperienceV4() {
   const activeCampaign = campaigns[0];
   const displayedCampaigns = campaignDisplayOrder;
   const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
-  const activeCampaignImpact = IMPACT_BY_CAUSE[activeCampaign.cause][locale];
+  const elulEmbedSrc = `/double-elul?lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
@@ -744,7 +744,7 @@ export default function DonationExperienceV4() {
           <small>{t.giftDockLabel}</small>
           <strong>{activeCampaignTitle}</strong>
         </span>
-        <b>{t.give} ${amount.toLocaleString("en-US")} <ArrowRight size={18} weight="bold" aria-hidden="true" /></b>
+        <b>{t.give} <ArrowRight size={18} weight="bold" aria-hidden="true" /></b>
       </button>
 
       <section className={styles.globalHero} id="v4-main" aria-labelledby="global-hero-title">
@@ -903,87 +903,13 @@ export default function DonationExperienceV4() {
       </section>
 
       <section className={`${styles.seasonalHero} ${styles.donationSection}`} id="v4-donation">
-        <div className={styles.composerFrame} id="v4-give">
-          <section className={styles.composer} aria-label={t.buildDonation}>
-            <div className={styles.campaignIdentity}>
-              <span className={styles.campaignMark}><Heart size={25} weight="regular" /></span>
-              <div>
-                <small>{t.selectedCampaign}</small>
-                <strong>{activeCampaignTitle}</strong>
-              </div>
-            </div>
-
-            <div className={styles.frequency} role="group" aria-label={t.donationFrequency}>
-              <button
-                type="button"
-                className={frequency === "once" ? styles.selectedFrequency : ""}
-                aria-pressed={frequency === "once"}
-                onClick={() => setFrequency("once")}
-              >
-                {t.once}
-              </button>
-              <button
-                type="button"
-                className={frequency === "monthly" ? styles.selectedFrequency : ""}
-                aria-pressed={frequency === "monthly"}
-                onClick={() => setFrequency("monthly")}
-              >
-                {t.monthly}
-              </button>
-            </div>
-
-            <div className={styles.amountBlock}>
-              <span>{t.chooseGift}</span>
-              <div className={styles.amounts} role="group" aria-label={t.chooseAmountAria}>
-                {amounts.map((gift) => (
-                  <button
-                    type="button"
-                    key={gift}
-                    className={amount === gift ? styles.selectedAmount : ""}
-                    aria-pressed={amount === gift}
-                    onClick={() => {
-                      setAmount(gift);
-                      setCustomAmount("");
-                    }}
-                  >
-                    ${gift.toLocaleString("en-US")}
-                  </button>
-                ))}
-              </div>
-              <label className={`${styles.customAmount} ${customAmount ? styles.customAmountSelected : ""}`}>
-                <span>{t.otherAmount}</span>
-                <div>
-                  <b aria-hidden="true">$</b>
-                  <input
-                    type="number"
-                    min="1"
-                    inputMode="decimal"
-                    value={customAmount}
-                    placeholder={t.otherAmount}
-                    aria-label={t.otherAmount}
-                    onChange={(event) => {
-                      const nextValue = event.target.value;
-                      setCustomAmount(nextValue);
-                      const parsed = Number(nextValue);
-                      if (Number.isFinite(parsed) && parsed >= 1) setAmount(parsed);
-                    }}
-                  />
-                  <small>USD</small>
-                </div>
-              </label>
-              <p className={styles.amountImpact}>
-                <CheckCircle size={16} weight="fill" aria-hidden="true" />
-                <span><small>{t.giftImpact}</small>{activeCampaignImpact}</span>
-              </p>
-            </div>
-
-            <button
-              className={styles.continueButton}
-              onClick={continueDonation}
-            >
-              {t.continueWith} ${amount.toLocaleString("en-US")} <ArrowRight size={22} weight="bold" />
-            </button>
-          </section>
+        <div className={styles.doubleEmbedFrameShell} id="v4-give">
+          <iframe
+            className={styles.doubleEmbedFrame}
+            src={elulEmbedSrc}
+            title={locale === "es" ? "Formulario de donación de Elul" : "Elul donation form"}
+            loading="eager"
+          />
         </div>
 
         <div className={styles.trustLine} aria-label={t.securityInfo}>
