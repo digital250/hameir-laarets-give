@@ -652,6 +652,12 @@ footer > p { max-width: 520px; margin: 0; font-size: 12px; line-height: 1.8; }
 }
 .mobile-donate-bar { display: none; }
 
+/* Double's checkout stays enabled; only its unrelated floating launcher is hidden. */
+.launcher-frame,
+iframe[name="double-checkout-launcher"] {
+  display: none !important;
+}
+
 @media (max-width: 1180px) {
   .site-header { grid-template-columns: minmax(250px, 1fr) auto; }
   nav { display: none; }

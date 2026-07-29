@@ -25,8 +25,25 @@ type Frequency = "once" | "monthly";
 type CauseId = "families" | "children" | "food" | "community" | "torah";
 type Locale = "en" | "es";
 
+type DoubleCheckoutOptions = {
+  campaign: string;
+  amount?: number;
+  frequency?: string;
+  fundraiser?: string;
+  solicitor?: string;
+};
+
+declare global {
+  interface Window {
+    Double?: {
+      openCheckout: (options: DoubleCheckoutOptions) => Promise<void> | void;
+    };
+  }
+}
+
 type Campaign = {
   id: string;
+  doubleCampaign: string;
   cause: CauseId;
   eyebrow: string;
   eyebrowEs: string;
@@ -40,6 +57,7 @@ type Campaign = {
 const campaigns: Campaign[] = [
   {
     id: "kaparot",
+    doubleCampaign: "kaparotelul-2026",
     cause: "families",
     eyebrow: "Our focus now · Elul",
     eyebrowEs: "Nuestro enfoque · Elul",
@@ -51,17 +69,19 @@ const campaigns: Campaign[] = [
   },
   {
     id: "mesilot",
+    doubleCampaign: "mesilot",
     cause: "torah",
     eyebrow: "Torah in every language",
     eyebrowEs: "Torá en todos los idiomas",
-    title: "Mesilot LaNefesh",
-    titleEs: "Mesilot LaNefesh",
+    title: "Mesilot EL Ha'Nefesh",
+    titleEs: "Mesilot EL Ha'Nefesh",
     description: "Help print and send Torah booklets around the world, in the languages people can receive.",
     descriptionEs: "Ayuda a imprimir y enviar folletos de Torá por todo el mundo, en los idiomas que las personas pueden recibir.",
     image: "/images/mesilot.png",
   },
   {
     id: "torah-scholars",
+    doubleCampaign: "avraichim",
     cause: "torah",
     eyebrow: "Support Torah learning",
     eyebrowEs: "Apoya el estudio de Torá",
@@ -72,29 +92,20 @@ const campaigns: Campaign[] = [
     image: "/images/kollel.png",
   },
   {
-    id: "horse-therapy",
+    id: "next-step",
+    doubleCampaign: "the-next-step-initiative",
     cause: "children",
-    eyebrow: "Children’s healing",
-    eyebrowEs: "Sanación infantil",
-    title: "Therapy Through Horses",
-    titleEs: "Terapia con caballos",
-    description: "Help children in southern Israel access steady, compassionate therapeutic care.",
-    descriptionEs: "Ayuda a niños del sur de Israel a recibir atención terapéutica constante y compasiva.",
+    eyebrow: "The Next Step Initiative",
+    eyebrowEs: "The Next Step Initiative",
+    title: "The Next Step Initiative",
+    titleEs: "The Next Step Initiative",
+    description: "Help children in southern Israel access hydrotherapy, equine therapy, and compassionate emotional care.",
+    descriptionEs: "Ayuda a niños del sur de Israel a recibir hidroterapia, terapia con caballos y apoyo emocional compasivo.",
     image: "/images/horse-therapy.png",
   },
   {
-    id: "hydrotherapy",
-    cause: "children",
-    eyebrow: "Children’s healing",
-    eyebrowEs: "Sanación infantil",
-    title: "Hydrotherapy & Care",
-    titleEs: "Hidroterapia y cuidado",
-    description: "Fund hydrotherapy and emotional support that help children recover, grow, and feel secure.",
-    descriptionEs: "Financia hidroterapia y apoyo emocional que ayudan a los niños a recuperarse, crecer y sentirse seguros.",
-    image: "/images/hydrotherapy.png",
-  },
-  {
     id: "food-relief",
+    doubleCampaign: "food-packages",
     cause: "food",
     eyebrow: "Dignity at the table",
     eyebrowEs: "Dignidad en la mesa",
@@ -106,6 +117,7 @@ const campaigns: Campaign[] = [
   },
   {
     id: "general",
+    doubleCampaign: "donate",
     cause: "families",
     eyebrow: "Where needed most",
     eyebrowEs: "Donde más se necesita",
@@ -141,6 +153,7 @@ const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
   },
 };
 const ELUL_CAMPAIGN_URL = "https://elul.hameirlaarets.org/";
+const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
 const HERO_MEDIA = {
   poster: "/media/hameir-global-hero-poster-clean.png",
   mp4: "/media/hameir-global-hero-4k.mp4",
@@ -150,9 +163,18 @@ const HERO_START_TIME_SECONDS = 0.9;
 const HERO_REVEAL_TIME_SECONDS = 5;
 const MOBILE_HERO_REVEAL_DELAY_MS = 2600;
 const SOLICITORS: Record<string, { name: string; defaultLocale: Locale }> = {
+  "abigail-sagor": { name: "Abigail Sagor", defaultLocale: "en" },
+  "karine-blatman": { name: "Karine Blatman", defaultLocale: "en" },
   "yehuda-dayan": { name: "Yehuda Dayan", defaultLocale: "en" },
   "shachar-shalom": { name: "Shachar Shalom", defaultLocale: "en" },
   "elvira-rozillio": { name: "Elvira Rozillio", defaultLocale: "es" },
+};
+const SOLICITOR_PATHS: Record<string, string> = {
+  abi: "abigail-sagor",
+  karine: "karine-blatman",
+  yehuda: "yehuda-dayan",
+  shachar: "shachar-shalom",
+  elvira: "elvira-rozillio",
 };
 const COPY = {
   en: {
@@ -231,7 +253,7 @@ const COPY = {
     continueWith: "Continue with",
     secure: "Secure checkout",
     deductible: "Tax-deductible",
-    campaignsLink: "Explore all 6 ways to help",
+    campaignsLink: "See the ways to help",
     campaignsEyebrow: "Choose your impact",
     campaignsTitle: "Choose how your gift brings light.",
     campaignsTitleAccent: "Every cause meets a real need.",
@@ -356,7 +378,7 @@ const COPY = {
     continueWith: "Continuar con",
     secure: "Pago seguro",
     deductible: "Deducible de impuestos",
-    campaignsLink: "Explora las 6 formas de ayudar",
+    campaignsLink: "Explora las formas de ayudar",
     campaignsEyebrow: "Elige tu impacto",
     campaignsTitle: "Elige cómo tu donativo lleva luz.",
     campaignsTitleAccent: "Cada causa responde a una necesidad real.",
@@ -444,13 +466,14 @@ const passthroughParams = [
   "utm_content",
   "utm_term",
 ];
-const campaignDisplayOrder = [
-  campaigns[6],
-  ...campaigns.slice(1, 6),
-];
+const generalCampaign = campaigns.find((campaign) => campaign.id === "general");
+const campaignDisplayOrder = generalCampaign
+  ? [generalCampaign, ...campaigns.filter((campaign) => campaign.id !== "kaparot" && campaign.id !== "general")]
+  : campaigns.filter((campaign) => campaign.id !== "kaparot");
 
 export default function DonationExperienceV4() {
   const [fundraiser, setFundraiser] = useState("");
+  const [fundraiserSlug, setFundraiserSlug] = useState("");
   const [solicitor, setSolicitor] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
   const [trackingParams, setTrackingParams] = useState<Record<string, string>>({});
@@ -472,6 +495,15 @@ export default function DonationExperienceV4() {
   const mobileHeroRevealTimerRef = useRef<number | null>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const t = COPY[locale];
+
+  useEffect(() => {
+    if (document.querySelector(`script[src="${DOUBLE_EMBED_URL}"]`)) return;
+    const script = document.createElement("script");
+    script.src = DOUBLE_EMBED_URL;
+    script.async = true;
+    script.referrerPolicy = "strict-origin-when-cross-origin";
+    document.head.appendChild(script);
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 520px)");
@@ -541,12 +573,17 @@ export default function DonationExperienceV4() {
   useEffect(() => {
     const syncFromUrl = window.setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
-      const requestedSolicitor = params.get("solicitor") || "";
+      const pathCandidate = window.location.pathname.split("/").filter(Boolean)[0] || "";
+      const pathSolicitor = SOLICITOR_PATHS[pathCandidate] || (SOLICITORS[pathCandidate] ? pathCandidate : "");
+      const storedSolicitor = window.sessionStorage.getItem("hameir-solicitor") || "";
+      const requestedSolicitor = params.get("solicitor") || pathSolicitor || storedSolicitor;
       const solicitorProfile = SOLICITORS[requestedSolicitor];
       const requestedFundraiser = params.get("fundraiser") || params.get("ref") || params.get("collector") || "";
       const requestedLocale = params.get("lang");
 
+      if (requestedSolicitor) window.sessionStorage.setItem("hameir-solicitor", requestedSolicitor);
       setSolicitor(requestedSolicitor);
+      setFundraiserSlug(requestedFundraiser);
       setFundraiser(solicitorProfile?.name || requestedFundraiser || requestedSolicitor);
       setLocale(requestedLocale === "es" || requestedLocale === "en"
         ? requestedLocale
@@ -608,22 +645,11 @@ export default function DonationExperienceV4() {
     const url = new URL(ELUL_CAMPAIGN_URL);
     const params = new URLSearchParams(trackingParams);
     if (solicitor) params.set("solicitor", solicitor);
-    if (fundraiser) params.set("fundraiser", fundraiser);
+    if (fundraiserSlug) params.set("fundraiser", fundraiserSlug);
     params.set("lang", locale);
     url.hash = params.toString();
     return url.toString();
-  }, [fundraiser, locale, solicitor, trackingParams]);
-  const elulCheckoutHref = useMemo(() => {
-    const url = new URL(elulCampaignHref);
-    const params = new URLSearchParams(url.hash.slice(1));
-    params.set("campaign", "kaparot");
-    params.set("amount", String(amount));
-    params.set("frequency", frequency);
-    params.set("lang", locale);
-    url.hash = params.toString();
-    return url.toString();
-  }, [amount, elulCampaignHref, frequency, locale]);
-
+  }, [fundraiserSlug, locale, solicitor, trackingParams]);
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
@@ -638,21 +664,21 @@ export default function DonationExperienceV4() {
   };
 
   const continueDonation = () => {
-    if (activeCampaign.id === "kaparot") {
-      window.location.assign(elulCheckoutHref);
-      return;
+    const openDouble = () => {
+      window.Double?.openCheckout({
+        campaign: activeCampaign.doubleCampaign,
+        amount,
+        frequency,
+        ...(fundraiserSlug ? { fundraiser: fundraiserSlug } : {}),
+        ...(solicitor ? { solicitor } : {}),
+      });
+    };
+    if (window.Double?.openCheckout) {
+      openDouble();
+    } else {
+      document.addEventListener("Double.ready", openDouble, { once: true });
     }
-    rememberFocus();
-    setCompleted(false);
-    setCheckoutOpen(true);
   };
-
-  const quickDonationOptions = [
-    { id: "food-relief", label: t.quickFood },
-    { id: "mesilot", label: t.quickTorah },
-    { id: "horse-therapy", label: t.quickChildren },
-    { id: "general", label: t.quickGeneral },
-  ];
 
   const submitGift = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -781,41 +807,26 @@ export default function DonationExperienceV4() {
         </a>
       </section>
 
-      <section className={styles.quickDonation} aria-labelledby="quick-donation-title">
-        <div className={styles.quickDonationIntro}>
-          <span>{t.quickEyebrow}</span>
-          <h2 id="quick-donation-title">{t.quickTitle}</h2>
-          <p>{t.quickBody}</p>
+      <section className={`${styles.seasonalHero} ${styles.featuredTop}`} id="v4-featured" aria-labelledby="featured-title">
+        <div className={styles.photoPanel}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/elul-volunteers-featured.jpg" alt={t.volunteersAlt} />
+          <div className={styles.photoScrim} />
+          <div className={styles.photoCopy}>
+            <span>{t.featured}</span>
+            <h2 id="featured-title">{t.elulTitle}<br />{t.elulTitleAccent}</h2>
+            <p>{t.elulPhotoBody}</p>
+            <a href={elulCampaignHref}>
+              {t.fullElul} <ArrowRight size={20} weight="bold" />
+            </a>
+          </div>
         </div>
-        <div className={styles.quickDonationControls}>
-          <div className={styles.quickCauseList} role="group" aria-label={t.quickEyebrow}>
-            {quickDonationOptions.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                className={campaignId === option.id ? styles.quickCauseActive : ""}
-                aria-pressed={campaignId === option.id}
-                onClick={() => setCampaignId(option.id)}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-          <span className={styles.quickAmountLabel}>{t.quickChooseAmount}</span>
-          <div className={styles.quickAmountList} role="group" aria-label={t.chooseAmountAria}>
-            {[36, 72, 180, 360].map((gift) => (
-              <button
-                key={gift}
-                type="button"
-                onClick={() => {
-                  setAmount(gift);
-                  window.setTimeout(scrollToGift, 0);
-                }}
-              >
-                ${gift}
-              </button>
-            ))}
-          </div>
+
+        <div className={styles.storyPanel}>
+          <Sparkle size={25} weight="light" aria-hidden="true" />
+          <span>{t.featured}</span>
+          <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
+          <p>{t.elulBody}</p>
         </div>
       </section>
 
@@ -879,40 +890,7 @@ export default function DonationExperienceV4() {
         </div>
       </section>
 
-      <section className={styles.seasonalHero} id="v4-featured">
-        <div className={styles.photoPanel}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/elul-volunteers-featured.jpg" alt={t.volunteersAlt} />
-          <div className={styles.photoScrim} />
-          <div className={styles.photoCopy}>
-            <span>{t.featured}</span>
-            <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
-            <p>{t.elulPhotoBody}</p>
-            <a href={elulCampaignHref}>
-              {t.fullElul} <ArrowRight size={20} weight="bold" />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.storyPanel}>
-          <Sparkle size={25} weight="light" aria-hidden="true" />
-          <span>{t.featured}</span>
-          <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
-          <p>{t.elulBody}</p>
-          <a className={styles.seasonalCta} href={elulCampaignHref}>
-            {t.fulfill} <ArrowRight size={21} weight="bold" />
-          </a>
-          <button
-            className={styles.storyLink}
-            onClick={() => {
-              rememberFocus();
-              setStoryOpen(true);
-            }}
-          >
-            {t.readStory}
-          </button>
-        </div>
-
+      <section className={`${styles.seasonalHero} ${styles.donationSection}`} id="v4-donation">
         <div className={styles.composerFrame} id="v4-give">
           <section className={styles.composer} aria-label={t.buildDonation}>
             <div className={styles.campaignIdentity}>

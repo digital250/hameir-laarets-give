@@ -13,7 +13,18 @@
   background: var(--paper);
   color: var(--ink);
   font-family: "DM Sans", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
 }
+
+.page > .globalHero { order: 1; }
+.page > .featuredTop { order: 2; }
+.page > .donationSection { order: 3; }
+.page > .legacySection { order: 4; }
+.page > .impactSection { order: 5; }
+.page > .campaignSection { order: 6; }
+.page > .trustSection { order: 7; }
+.page > .footer { order: 8; }
 
 .page button,
 .page input {
@@ -851,6 +862,54 @@
   background-image: url("/images/elul-paper-texture.jpg");
   background-position: center top;
   background-size: cover;
+}
+
+.seasonalHero.featuredTop {
+  grid-template-rows: 600px;
+  border-radius: 58px 58px 0 0;
+  overflow: hidden;
+}
+
+.featuredTop .seasonalCta {
+  display: inline-flex;
+}
+
+.featuredTop .storyLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid rgba(111, 46, 58, .55);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--burgundy-dark);
+  font-size: 14px;
+}
+
+.featuredTop .storyLink:hover {
+  background: rgba(111, 46, 58, .08);
+}
+
+.seasonalHero.donationSection {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  padding-top: 30px;
+}
+
+.donationSection .composerFrame {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 42px;
+}
+
+.donationSection .trustLine {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.donationSection .exploreCampaigns {
+  grid-column: 1;
+  grid-row: 3;
 }
 
 .photoPanel {
