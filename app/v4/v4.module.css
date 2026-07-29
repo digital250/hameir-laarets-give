@@ -1932,38 +1932,29 @@
 }
 
 .cardActions {
+  width: min(410px, 100%);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px 24px;
+  gap: 10px;
   pointer-events: none;
 }
 
 .cardActions button,
 .cardActions a {
-  pointer-events: auto;
-}
-
-.campaignCard.productCard .cardActions {
-  width: min(410px, 100%);
-  display: grid;
-  gap: 10px;
-}
-
-.campaignCard.productCard .cardActions button,
-.campaignCard.productCard .cardActions a {
   min-height: 48px;
   padding: 0 18px;
   justify-content: space-between;
   border: 1px solid rgba(226, 189, 97, .78);
   border-radius: 999px;
+  pointer-events: auto;
 }
 
-.campaignCard.productCard .cardActions button {
+.cardActions button {
   background: var(--burgundy);
 }
 
-.campaignCard.productCard .cardActions a {
+.cardActions a {
   background: rgba(7, 27, 44, .78);
 }
 

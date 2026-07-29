@@ -153,6 +153,12 @@ const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
     es: "6.5 millones de publicaciones de Torá distribuidas el año pasado",
   },
 };
+const IMPACT_BY_CAMPAIGN: Partial<Record<string, Record<Locale, string>>> = {
+  "torah-scholars": {
+    en: "220 Avreichim across 5 kollelim",
+    es: "220 avrejim en 5 kollelim",
+  },
+};
 const ELUL_CAMPAIGN_URL = "https://elul.hameirlaarets.org/";
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
 const HERO_MEDIA = {
@@ -654,12 +660,14 @@ export default function DonationExperienceV4() {
     lastFocusedElement.current = document.activeElement as HTMLElement | null;
   };
 
-  const openDoubleCheckout = (campaign: Campaign) => {
+  const openDoubleCheckout = (campaign: Campaign, useBannerSelection = false) => {
     const openDouble = () => {
       window.Double?.openCheckout({
         campaign: campaign.doubleCampaign,
-        amount,
-        frequency: frequency === "once" ? "single" : "monthly",
+        ...(useBannerSelection ? {
+          amount,
+          frequency: frequency === "once" ? "single" : "monthly",
+        } : {}),
         ...(fundraiserSlug ? { fundraiser: fundraiserSlug } : {}),
         ...(solicitor ? { solicitor } : {}),
       });
@@ -676,7 +684,7 @@ export default function DonationExperienceV4() {
   };
 
   const continueDonation = () => {
-    openDoubleCheckout(activeCampaign);
+    openDoubleCheckout(activeCampaign, true);
   };
 
   const submitGift = (event: FormEvent<HTMLFormElement>) => {
@@ -1034,7 +1042,7 @@ export default function DonationExperienceV4() {
                   <CheckCircle size={18} weight="fill" aria-hidden="true" />
                   <span>
                     <small>{t.annualImpactContext}</small>
-                    {IMPACT_BY_CAUSE[campaign.cause][locale]}
+                    {(IMPACT_BY_CAMPAIGN[campaign.id] ?? IMPACT_BY_CAUSE[campaign.cause])[locale]}
                   </span>
                 </div>
                 {campaign.id === "kaparot" ? (
