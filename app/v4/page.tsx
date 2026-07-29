@@ -255,7 +255,6 @@ const COPY = {
     continueWith: "Continue with",
     secure: "Secure checkout",
     deductible: "Tax-deductible",
-    campaignsLink: "See the ways to help",
     campaignsEyebrow: "Choose your impact",
     campaignsTitle: "Choose how your gift brings light.",
     campaignsTitleAccent: "Every cause meets a real need.",
@@ -383,7 +382,6 @@ const COPY = {
     continueWith: "Continuar con",
     secure: "Pago seguro",
     deductible: "Deducible de impuestos",
-    campaignsLink: "Explora las formas de ayudar",
     campaignsEyebrow: "Elige tu impacto",
     campaignsTitle: "Elige cómo tu donativo lleva luz.",
     campaignsTitleAccent: "Cada causa responde a una necesidad real.",
@@ -990,9 +988,6 @@ export default function DonationExperienceV4() {
           <span><ShieldCheck size={18} /> 501(c)(3)</span>
         </div>
 
-        <a className={styles.exploreCampaigns} href="#v4-campaigns">
-          {t.campaignsLink} <ArrowDown size={18} weight="bold" />
-        </a>
       </section>
 
       <section className={styles.campaignSection} id="v4-campaigns">
