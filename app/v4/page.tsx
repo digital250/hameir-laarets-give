@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -159,7 +159,6 @@ const IMPACT_BY_CAMPAIGN: Partial<Record<string, Record<Locale, string>>> = {
     es: "220 avrejim en 5 kollelim",
   },
 };
-const ELUL_CAMPAIGN_URL = "https://elul.hameirlaarets.org/";
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
 const HERO_MEDIA = {
   poster: "/media/hameir-global-hero-poster-clean.png",
@@ -246,7 +245,7 @@ const COPY = {
     elulTitleAccent: "for the New Year",
     elulPhotoBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
     elulBody: "Elul is a time to prepare our hearts through acts of kindness and generosity. Your support helps Jewish families celebrate the New Year with dignity by providing food and essential assistance when they need it most.",
-    fullElul: "Learn more",
+    fullElul: "Donate now",
     fulfill: "Give Pidyon Kapparot",
     readStory: "Why Kaparot matters",
     selectedCampaign: "Your chosen cause",
@@ -373,7 +372,7 @@ const COPY = {
     elulTitleAccent: "para el Año Nuevo",
     elulPhotoBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
     elulBody: "Elul es un tiempo para preparar nuestros corazones mediante actos de bondad y generosidad. Tu apoyo ayuda a familias judías a celebrar el Año Nuevo con dignidad, proporcionando alimentos y asistencia esencial cuando más lo necesitan.",
-    fullElul: "Más información",
+    fullElul: "Donar ahora",
     fulfill: "Haz tu Pidyon Kaparot",
     readStory: "Conoce el significado de Kaparot",
     selectedCampaign: "La causa que elegiste",
@@ -465,18 +464,6 @@ const SOCIAL_LINKS = [
     icon: YoutubeLogo,
   },
 ];
-const passthroughParams = [
-  "solicitor",
-  "fundraiser",
-  "ref",
-  "collector",
-  "lang",
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_content",
-  "utm_term",
-];
 const generalCampaign = campaigns.find((campaign) => campaign.id === "general");
 const campaignDisplayOrder = generalCampaign
   ? [generalCampaign, ...campaigns.filter((campaign) => campaign.id !== "kaparot" && campaign.id !== "general")]
@@ -487,7 +474,6 @@ export default function DonationExperienceV4() {
   const [fundraiserSlug, setFundraiserSlug] = useState("");
   const [solicitor, setSolicitor] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
-  const [trackingParams, setTrackingParams] = useState<Record<string, string>>({});
   const [urlReady, setUrlReady] = useState(false);
   const [amount, setAmount] = useState(180);
   const [customAmount, setCustomAmount] = useState("");
@@ -597,11 +583,6 @@ export default function DonationExperienceV4() {
       setLocale(requestedLocale === "es" || requestedLocale === "en"
         ? requestedLocale
         : solicitorProfile?.defaultLocale || "en");
-      setTrackingParams(Object.fromEntries(
-        passthroughParams
-          .map((key) => [key, params.get(key) || ""] as const)
-          .filter(([, value]) => value),
-      ));
       setUrlReady(true);
     }, 0);
     return () => window.clearTimeout(syncFromUrl);
@@ -643,15 +624,6 @@ export default function DonationExperienceV4() {
   const displayedCampaigns = campaignDisplayOrder;
   const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
   const activeCampaignImpact = IMPACT_BY_CAUSE[activeCampaign.cause][locale];
-  const elulCampaignHref = useMemo(() => {
-    const url = new URL(ELUL_CAMPAIGN_URL);
-    const params = new URLSearchParams(trackingParams);
-    if (solicitor) params.set("solicitor", solicitor);
-    if (fundraiserSlug) params.set("fundraiser", fundraiserSlug);
-    params.set("lang", locale);
-    url.hash = params.toString();
-    return url.toString();
-  }, [fundraiserSlug, locale, solicitor, trackingParams]);
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
@@ -831,7 +803,7 @@ export default function DonationExperienceV4() {
             <span>{t.featured}</span>
             <h2 id="featured-title">{t.elulTitle}<br />{t.elulTitleAccent}</h2>
             <p>{t.elulPhotoBody}</p>
-            <a href={elulCampaignHref}>
+            <a href="#v4-donation">
               {t.fullElul} <ArrowRight size={20} weight="bold" />
             </a>
           </div>
@@ -1046,9 +1018,9 @@ export default function DonationExperienceV4() {
                   </span>
                 </div>
                 {campaign.id === "kaparot" ? (
-                  <a href={elulCampaignHref}>
+                  <button onClick={() => chooseCampaign(campaign)}>
                     {t.viewKaparot} <ArrowRight size={18} weight="bold" />
-                  </a>
+                  </button>
                 ) : (
                   <div className={styles.cardActions}>
                     <button onClick={() => chooseCampaign(campaign)}>
@@ -1151,7 +1123,7 @@ export default function DonationExperienceV4() {
             <p>{t.storyOne}</p>
             <p>{t.storyTwo}</p>
             <p>{t.storyThree}</p>
-            <a className={styles.modalPrimary} href={elulCampaignHref}>
+            <a className={styles.modalPrimary} href="#v4-donation" onClick={() => setStoryOpen(false)}>
               {t.fulfill} <ArrowRight size={19} weight="bold" />
             </a>
           </section>
