@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -17,19 +18,15 @@ import {
   LockKey,
   ShieldCheck,
   Sparkle,
-  X,
   YoutubeLogo,
 } from "@phosphor-icons/react";
 import styles from "./v4.module.css";
 
-type Frequency = "once" | "monthly";
 type CauseId = "families" | "children" | "food" | "community" | "torah";
 type Locale = "en" | "es";
 
 type DoubleCheckoutOptions = {
   campaign: string;
-  amount?: number;
-  frequency?: string;
   fundraiser?: string;
   solicitor?: string;
 };
@@ -131,7 +128,6 @@ const campaigns: Campaign[] = [
   },
 ];
 
-const amounts = [18, 36, 72, 180, 360, 1800];
 const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
   families: {
     en: "14,500 families supported through Chesed last year",
@@ -474,12 +470,6 @@ export default function DonationExperienceV4() {
   const [solicitor, setSolicitor] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
   const [urlReady, setUrlReady] = useState(false);
-  const [amount, setAmount] = useState(180);
-  const [customAmount, setCustomAmount] = useState("");
-  const [frequency, setFrequency] = useState<Frequency>("monthly");
-  const [storyOpen, setStoryOpen] = useState(false);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [completed, setCompleted] = useState(false);
   const [heroRevealed, setHeroRevealed] = useState(false);
   const [isMobileHero, setIsMobileHero] = useState(true);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
@@ -487,7 +477,6 @@ export default function DonationExperienceV4() {
   const [donationDockVisible, setDonationDockVisible] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileHeroRevealTimerRef = useRef<number | null>(null);
-  const lastFocusedElement = useRef<HTMLElement | null>(null);
   const t = COPY[locale];
 
   useEffect(() => {
@@ -596,39 +585,12 @@ export default function DonationExperienceV4() {
     window.history.replaceState({}, "", currentUrl);
   }, [locale, urlReady]);
 
-  useEffect(() => {
-    if (!checkoutOpen && !storyOpen) return;
-
-    const focusTimer = window.setTimeout(() => {
-      document.querySelector<HTMLElement>('[role="dialog"] button')?.focus();
-    }, 0);
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setCheckoutOpen(false);
-      setStoryOpen(false);
-    };
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.clearTimeout(focusTimer);
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-      lastFocusedElement.current?.focus();
-    };
-  }, [checkoutOpen, storyOpen]);
-
   const activeCampaign = campaigns[0];
   const displayedCampaigns = campaignDisplayOrder;
   const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
   const elulEmbedSrc = `/double-elul?lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
-  const rememberFocus = () => {
-    lastFocusedElement.current = document.activeElement as HTMLElement | null;
   };
 
   const resetDoubleCheckout = () => new Promise<void>((resolve, reject) => {
@@ -652,44 +614,23 @@ export default function DonationExperienceV4() {
     document.head.appendChild(script);
   });
 
-  const openDoubleCheckout = (campaign: Campaign, useBannerSelection = false) => {
+  const openDoubleCheckout = (campaign: Campaign) => {
     const openDouble = () => {
       window.Double?.openCheckout({
         campaign: campaign.doubleCampaign,
-        ...(useBannerSelection ? {
-          amount,
-          frequency: frequency === "once" ? "single" : "monthly",
-        } : {}),
         ...(fundraiserSlug ? { fundraiser: fundraiserSlug } : {}),
         ...(solicitor ? { solicitor } : {}),
       });
     };
-    if (!useBannerSelection) {
-      resetDoubleCheckout()
-        .then(openDouble)
-        .catch(() => {
-          if (window.Double?.openCheckout) openDouble();
-        });
-      return;
-    }
-    if (window.Double?.openCheckout) {
-      openDouble();
-    } else {
-      document.addEventListener("Double.ready", openDouble, { once: true });
-    }
+    resetDoubleCheckout()
+      .then(openDouble)
+      .catch(() => {
+        if (window.Double?.openCheckout) openDouble();
+      });
   };
 
   const chooseCampaign = (campaign: Campaign) => {
     openDoubleCheckout(campaign);
-  };
-
-  const continueDonation = () => {
-    openDoubleCheckout(activeCampaign, true);
-  };
-
-  const submitGift = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setCompleted(true);
   };
 
   return (
@@ -705,8 +646,7 @@ export default function DonationExperienceV4() {
 
       <header className={styles.header}>
         <a href="#v4-main" className={styles.brand} aria-label={t.homeLabel}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/hameir-laarets-logo-new.png" alt="" width="1024" height="1024" />
+          <Image src="/images/hameir-laarets-logo-new.png" alt="" width={1024} height={1024} priority />
           <span>
             <strong>HAMEIR LAARETS</strong>
             <small>{t.tagline}</small>
@@ -749,8 +689,7 @@ export default function DonationExperienceV4() {
 
       <section className={styles.globalHero} id="v4-main" aria-labelledby="global-hero-title">
         <div className={styles.heroMedia} aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={HERO_MEDIA.poster} alt="" />
+          <Image src={HERO_MEDIA.poster} alt="" fill priority sizes="100vw" />
           {HERO_MEDIA.videoReady && !isMobileHero && (
             <video
               ref={heroVideoRef}
@@ -799,8 +738,7 @@ export default function DonationExperienceV4() {
         </div>
         <span className={styles.mobileHeroAtmosphere} aria-hidden="true" />
         <div className={`${styles.heroContent} ${heroRevealed ? styles.heroContentVisible : ""}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.heroLogo} src="/images/hameir-laarets-logo-new.png" alt="" />
+          <Image className={styles.heroLogo} src="/images/hameir-laarets-logo-new.png" alt="" width={1024} height={1024} priority />
           <span>{t.tagline}</span>
           <h1 id="global-hero-title">
             <span className={styles.heroTitleLine}>{t.identityTitle}</span>
@@ -824,10 +762,14 @@ export default function DonationExperienceV4() {
 
       <section className={`${styles.seasonalHero} ${styles.featuredTop}`} id="v4-featured" aria-labelledby="featured-title">
         <div className={styles.photoPanel}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/elul-volunteers-hero-v3.jpg" alt={t.volunteersAlt} />
+          <Image
+            src="/images/elul-volunteers-hero-v3.jpg"
+            alt={t.volunteersAlt}
+            fill
+            sizes="(max-width: 520px) 100vw, 58vw"
+          />
           <div className={styles.photoScrim} />
-          <div className={styles.photoCopy}>
+          <div className={styles.photoCopy} aria-hidden="true">
             <span>{t.featured}</span>
             <h2 id="featured-title">{t.elulTitle}<br />{t.elulTitleAccent}</h2>
             <p>{t.elulPhotoBody}</p>
@@ -847,11 +789,12 @@ export default function DonationExperienceV4() {
 
         <div className={styles.legacyEditorial}>
           <div className={styles.rabbisTogether}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/rabbis-together-final.png"
               alt={t.rabbisAlt}
-              loading="lazy"
+              width={1596}
+              height={985}
+              sizes="(max-width: 760px) 82vw, 520px"
             />
           </div>
 
@@ -942,18 +885,18 @@ export default function DonationExperienceV4() {
                 onClick={() => chooseCampaign(campaign)}
                 aria-label={`${t.chooseCampaign}: ${locale === "es" ? campaign.titleEs : campaign.title}`}
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               {campaign.id === "mesilot" ? (
                 <div className={styles.mesilotStack} aria-label={locale === "es" ? campaign.titleEs : campaign.title}>
-                  <img src={campaign.image} alt="" loading="lazy" />
-                  <img src={campaign.image} alt="" loading="lazy" />
-                  <img src={campaign.image} alt={locale === "es" ? campaign.titleEs : campaign.title} loading="lazy" />
+                  <Image src={campaign.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
+                  <Image src={campaign.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
+                  <Image src={campaign.image} alt={locale === "es" ? campaign.titleEs : campaign.title} fill sizes="(max-width: 760px) 100vw, 50vw" />
                 </div>
               ) : (
-                <img
+                <Image
                   src={campaign.image}
                   alt={locale === "es" ? campaign.titleEs : campaign.title}
-                  loading="lazy"
+                  fill
+                  sizes={index === 0 ? "100vw" : "(max-width: 760px) 100vw, 50vw"}
                 />
               )}
               <div className={styles.cardScrim} />
@@ -1023,8 +966,7 @@ export default function DonationExperienceV4() {
 
       <footer className={styles.footer}>
         <div className={styles.footerBrand}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/hameir-laarets-logo-new.png" alt="" />
+          <Image src="/images/hameir-laarets-logo-new.png" alt="" width={1024} height={1024} />
           <div>
             <strong>HAMEIR LAARETS</strong>
             <span>{t.footerTagline}</span>
@@ -1057,76 +999,6 @@ export default function DonationExperienceV4() {
         </div>
       </footer>
 
-      {storyOpen && (
-        <div
-          className={styles.modalBackdrop}
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setStoryOpen(false);
-          }}
-        >
-          <section className={`${styles.modal} ${styles.storyModal}`} role="dialog" aria-modal="true" aria-labelledby="story-title">
-            <button className={styles.closeModal} onClick={() => setStoryOpen(false)} aria-label={t.closeStory}>
-              <X size={22} />
-            </button>
-            <span className={styles.modalEyebrow}>{t.storyEyebrow}</span>
-            <h2 id="story-title">{t.storyTitle}</h2>
-            <p>{t.storyOne}</p>
-            <p>{t.storyTwo}</p>
-            <p>{t.storyThree}</p>
-            <a className={styles.modalPrimary} href="#v4-donation" onClick={() => setStoryOpen(false)}>
-              {t.fulfill} <ArrowRight size={19} weight="bold" />
-            </a>
-          </section>
-        </div>
-      )}
-
-      {checkoutOpen && (
-        <div
-          className={styles.modalBackdrop}
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setCheckoutOpen(false);
-          }}
-        >
-          <section
-            className={styles.modal}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="checkout-title"
-            aria-describedby={!completed ? "checkout-security-note" : undefined}
-          >
-            <button className={styles.closeModal} onClick={() => setCheckoutOpen(false)} aria-label={t.closeCheckout}>
-              <X size={22} />
-            </button>
-            {!completed ? (
-              <>
-                <span className={styles.modalEyebrow}>{t.yourGift}</span>
-                <h2 id="checkout-title">{t.lastStep}</h2>
-                <div className={styles.giftSummary}>
-                  <div><span>{t.campaign}</span><strong>{activeCampaignTitle}</strong></div>
-                  <div><span>{t.gift}</span><strong>${amount} · {frequency === "monthly" ? t.monthly : t.once}</strong></div>
-                  {fundraiser && <div><span>{t.fundraiser}</span><strong>{fundraiser}</strong></div>}
-                </div>
-                <form className={styles.checkoutForm} onSubmit={submitGift}>
-                  <label>{t.fullName}<input required autoComplete="name" name="name" /></label>
-                  <label>{t.email}<input required type="email" autoComplete="email" name="email" /></label>
-                  <button type="submit">{t.securePayment} <ArrowRight size={19} weight="bold" /></button>
-                </form>
-                <p className={styles.modalNote} id="checkout-security-note"><LockKey size={15} /> {t.paymentNote}</p>
-              </>
-            ) : (
-              <div className={styles.successState}>
-                <CheckCircle size={50} weight="fill" />
-                <span>{t.ready}</span>
-                <h2 id="checkout-title">{t.takingShape}</h2>
-                <p>{t.handoff}</p>
-                <button onClick={() => setCheckoutOpen(false)}>{t.returnPage}</button>
-              </div>
-            )}
-          </section>
-        </div>
-      )}
     </main>
   );
 }
