@@ -255,6 +255,7 @@ const COPY = {
     continueWith: "Continue with",
     secure: "Secure checkout",
     deductible: "Tax-deductible",
+    campaignsLink: "See the ways to help",
     campaignsEyebrow: "Choose your impact",
     campaignsTitle: "Choose how your gift brings light.",
     campaignsTitleAccent: "Every cause meets a real need.",
@@ -263,7 +264,6 @@ const COPY = {
     chooseCampaign: "Donate to this cause",
     donateMesilot: "Donate to Mesilot",
     mesilotCommunity: "Bring Mesilot to your Community",
-    showFewer: "Show fewer ways to help",
     confidence: "Give with clarity",
     trustTitle: "Know where you’re giving.",
     trustTitleAccent: "Feel confident at every step.",
@@ -382,6 +382,7 @@ const COPY = {
     continueWith: "Continuar con",
     secure: "Pago seguro",
     deductible: "Deducible de impuestos",
+    campaignsLink: "Explora las formas de ayudar",
     campaignsEyebrow: "Elige tu impacto",
     campaignsTitle: "Elige cómo tu donativo lleva luz.",
     campaignsTitleAccent: "Cada causa responde a una necesidad real.",
@@ -390,7 +391,6 @@ const COPY = {
     chooseCampaign: "Donar a esta causa",
     donateMesilot: "Donar a Mesilot",
     mesilotCommunity: "Lleva Mesilot a tu comunidad",
-    showFewer: "Ver menos formas de ayudar",
     confidence: "Dona con claridad",
     trustTitle: "Conoce el destino de tu donativo.",
     trustTitleAccent: "Dona con confianza en cada paso.",
@@ -486,7 +486,6 @@ export default function DonationExperienceV4() {
   const [amount, setAmount] = useState(180);
   const [customAmount, setCustomAmount] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("once");
-  const [expanded, setExpanded] = useState(false);
   const [storyOpen, setStoryOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [completed, setCompleted] = useState(false);
@@ -635,7 +634,7 @@ export default function DonationExperienceV4() {
   }, [checkoutOpen, storyOpen]);
 
   const activeCampaign = campaigns[0];
-  const displayedCampaigns = expanded ? campaignDisplayOrder : campaignDisplayOrder.slice(0, 6);
+  const displayedCampaigns = campaignDisplayOrder;
   const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
   const activeCampaignImpact = IMPACT_BY_CAUSE[activeCampaign.cause][locale];
   const elulCampaignHref = useMemo(() => {
@@ -988,6 +987,9 @@ export default function DonationExperienceV4() {
           <span><ShieldCheck size={18} /> 501(c)(3)</span>
         </div>
 
+        <a className={styles.exploreCampaigns} href="#v4-campaigns">
+          {t.campaignsLink} <ArrowDown size={18} weight="bold" />
+        </a>
       </section>
 
       <section className={styles.campaignSection} id="v4-campaigns">
@@ -1062,10 +1064,6 @@ export default function DonationExperienceV4() {
           ))}
         </div>
 
-        <button className={styles.allCampaigns} onClick={() => setExpanded((current) => !current)}>
-          {expanded ? t.showFewer : t.campaignsLink}
-          <ArrowRight size={18} weight="bold" />
-        </button>
       </section>
 
       <section className={styles.trustSection} id="v4-trust">
