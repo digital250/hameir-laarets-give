@@ -245,7 +245,6 @@ const COPY = {
     elulTitleAccent: "for the New Year",
     elulPhotoBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
     elulBody: "Elul is a time to prepare our hearts through acts of kindness and generosity. Your support helps Jewish families celebrate the New Year with dignity by providing food and essential assistance when they need it most.",
-    fullElul: "Donate now",
     fulfill: "Give Pidyon Kapparot",
     readStory: "Why Kaparot matters",
     selectedCampaign: "Your chosen cause",
@@ -372,7 +371,6 @@ const COPY = {
     elulTitleAccent: "para el Año Nuevo",
     elulPhotoBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
     elulBody: "Elul es un tiempo para preparar nuestros corazones mediante actos de bondad y generosidad. Tu apoyo ayuda a familias judías a celebrar el Año Nuevo con dignidad, proporcionando alimentos y asistencia esencial cuando más lo necesitan.",
-    fullElul: "Donar ahora",
     fulfill: "Haz tu Pidyon Kaparot",
     readStory: "Conoce el significado de Kaparot",
     selectedCampaign: "La causa que elegiste",
@@ -477,7 +475,7 @@ export default function DonationExperienceV4() {
   const [urlReady, setUrlReady] = useState(false);
   const [amount, setAmount] = useState(180);
   const [customAmount, setCustomAmount] = useState("");
-  const [frequency, setFrequency] = useState<Frequency>("once");
+  const [frequency, setFrequency] = useState<Frequency>("monthly");
   const [storyOpen, setStoryOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [completed, setCompleted] = useState(false);
@@ -803,9 +801,6 @@ export default function DonationExperienceV4() {
             <span>{t.featured}</span>
             <h2 id="featured-title">{t.elulTitle}<br />{t.elulTitleAccent}</h2>
             <p>{t.elulPhotoBody}</p>
-            <a href="#v4-donation">
-              {t.fullElul} <ArrowRight size={20} weight="bold" />
-            </a>
           </div>
         </div>
 
