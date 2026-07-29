@@ -61,11 +61,11 @@ const campaigns: Campaign[] = [
     cause: "families",
     eyebrow: "Our focus now · Elul",
     eyebrowEs: "Nuestro enfoque · Elul",
-    title: "Pidyon Kapparot",
-    titleEs: "Pidyon Kaparot",
-    description: "Turn a sacred Elul tradition into food, care, and dignity for Jewish families.",
-    descriptionEs: "Convierte una tradición sagrada de Elul en alimentos, cuidado y dignidad para familias judías.",
-    image: "/images/elul-volunteers-featured.jpg",
+    title: "Help a Family This Elul",
+    titleEs: "Ayuda a una familia este Elul",
+    description: "Your Elul gift can bring food, care, and dignity to a Jewish family.",
+    descriptionEs: "Tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
+    image: "/images/elul-volunteers-hero-v3.jpg",
   },
   {
     id: "mesilot",
@@ -234,11 +234,11 @@ const COPY = {
     studentsLabel: "People guided & strengthened",
     officialSource: "Annual impact figures supplied by Hameir Laarets.",
     featured: "Elul 5786 · Our focus now",
-    elulTitle: "The Path to",
-    elulTitleAccent: "Shaarei Ha'rachamim",
-    elulPhotoBody: "Before the New Year, your Kaparot gift can bring food, care, and dignity to a Jewish family.",
-    elulBody: "Before the New Year, your Kaparot gift can bring food, care, and dignity to a Jewish family.",
-    fullElul: "Help a family this Elul",
+    elulTitle: "Prepare Your Heart",
+    elulTitleAccent: "for the New Year",
+    elulPhotoBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
+    elulBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
+    fullElul: "Learn more",
     fulfill: "Give Pidyon Kapparot",
     readStory: "Why Kaparot matters",
     selectedCampaign: "Your chosen cause",
@@ -299,7 +299,7 @@ const COPY = {
     handoff: "On the live site, your cause, amount, frequency, and fundraiser credit will continue to the organization’s secure payment provider.",
     returnPage: "Keep exploring",
     rabbisAlt: "Rabbi Yoram Michael Abergel zt’l and Rabbi Yisrael Abergel together",
-    volunteersAlt: "Volunteers preparing food packages for Jewish families before the New Year",
+    volunteersAlt: "A Hameir Laarets volunteer carrying a holiday food box for families in Israel",
     onlineNav: "Hameir Laarets online",
   },
   es: {
@@ -359,11 +359,11 @@ const COPY = {
     studentsLabel: "Personas orientadas y fortalecidas",
     officialSource: "Cifras anuales proporcionadas por Hameir Laarets.",
     featured: "Elul 5786 · Nuestro enfoque",
-    elulTitle: "El camino hacia",
-    elulTitleAccent: "Shaarei Ha'rachamim",
-    elulPhotoBody: "Antes del Año Nuevo, tu donativo de Kaparot puede llevar alimentos, cuidado y dignidad a una familia judía.",
-    elulBody: "Antes del Año Nuevo, tu donativo de Kaparot puede llevar alimentos, cuidado y dignidad a una familia judía.",
-    fullElul: "Ayuda a una familia este Elul",
+    elulTitle: "Prepara tu corazón",
+    elulTitleAccent: "para el Año Nuevo",
+    elulPhotoBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
+    elulBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
+    fullElul: "Más información",
     fulfill: "Haz tu Pidyon Kaparot",
     readStory: "Conoce el significado de Kaparot",
     selectedCampaign: "La causa que elegiste",
@@ -424,7 +424,7 @@ const COPY = {
     handoff: "En el sitio activo, tu causa, monto, frecuencia y crédito del promotor continuarán al proveedor de pagos seguro de la organización.",
     returnPage: "Seguir explorando",
     rabbisAlt: "El rabino Yoram Michael Abergel zt’l junto al rabino Yisrael Abergel",
-    volunteersAlt: "Voluntarios preparando paquetes de alimentos para familias judías antes del Año Nuevo",
+    volunteersAlt: "Un voluntario de Hameir Laarets llevando una caja de alimentos festivos para familias en Israel",
     onlineNav: "Hameir Laarets en línea",
   },
 } as const;
@@ -814,7 +814,7 @@ export default function DonationExperienceV4() {
       <section className={`${styles.seasonalHero} ${styles.featuredTop}`} id="v4-featured" aria-labelledby="featured-title">
         <div className={styles.photoPanel}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/elul-volunteers-featured.jpg" alt={t.volunteersAlt} />
+          <img src="/images/elul-volunteers-hero-v3.jpg" alt={t.volunteersAlt} />
           <div className={styles.photoScrim} />
           <div className={styles.photoCopy}>
             <span>{t.featured}</span>

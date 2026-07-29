@@ -1119,13 +1119,13 @@
 }
 
 .campaignIdentity strong {
-  overflow: hidden;
+  overflow: visible;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 34px;
+  font-size: 30px;
   font-weight: 500;
-  line-height: 1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: .95;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .frequency {
