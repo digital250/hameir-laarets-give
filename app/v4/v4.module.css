@@ -1893,6 +1893,13 @@
   font-size: 13px;
 }
 
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
 .allCampaigns {
   min-height: 56px;
   margin: 44px auto 0;

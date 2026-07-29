@@ -259,7 +259,9 @@ const COPY = {
     campaignsTitleAccent: "Every cause meets a real need.",
     campaignsBody: "Support the cause closest to your heart. If a fundraiser invited you, they’ll receive credit automatically—whichever cause you choose.",
     viewKaparot: "Give to Kaparot",
-    chooseCampaign: "Choose this cause",
+    chooseCampaign: "Donate to this cause",
+    donateMesilot: "Donate to Mesilot",
+    mesilotCommunity: "Bring Mesilot to your Community",
     showFewer: "Show fewer ways to help",
     confidence: "Give with clarity",
     trustTitle: "Know where you’re giving.",
@@ -384,7 +386,9 @@ const COPY = {
     campaignsTitleAccent: "Cada causa responde a una necesidad real.",
     campaignsBody: "Apoya la causa más cercana a tu corazón. Si un promotor te invitó, recibirá el crédito automáticamente, sin importar qué causa elijas.",
     viewKaparot: "Donar a Kaparot",
-    chooseCampaign: "Elegir esta causa",
+    chooseCampaign: "Donar a esta causa",
+    donateMesilot: "Donar a Mesilot",
+    mesilotCommunity: "Lleva Mesilot a tu comunidad",
     showFewer: "Ver menos formas de ayudar",
     confidence: "Dona con claridad",
     trustTitle: "Conoce el destino de tu donativo.",
@@ -478,7 +482,6 @@ export default function DonationExperienceV4() {
   const [locale, setLocale] = useState<Locale>("en");
   const [trackingParams, setTrackingParams] = useState<Record<string, string>>({});
   const [urlReady, setUrlReady] = useState(false);
-  const [campaignId, setCampaignId] = useState("kaparot");
   const [amount, setAmount] = useState(180);
   const [customAmount, setCustomAmount] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("once");
@@ -594,10 +597,6 @@ export default function DonationExperienceV4() {
           .filter(([, value]) => value),
       ));
       setUrlReady(true);
-      const requested = params.get("campaign");
-      if (campaigns.some((campaign) => campaign.id === requested)) {
-        setCampaignId(requested || "kaparot");
-      }
     }, 0);
     return () => window.clearTimeout(syncFromUrl);
   }, []);
@@ -634,10 +633,7 @@ export default function DonationExperienceV4() {
     };
   }, [checkoutOpen, storyOpen]);
 
-  const activeCampaign = useMemo(
-    () => campaigns.find((campaign) => campaign.id === campaignId) || campaigns[0],
-    [campaignId],
-  );
+  const activeCampaign = campaigns[0];
   const displayedCampaigns = expanded ? campaignDisplayOrder : campaignDisplayOrder.slice(0, 6);
   const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
   const activeCampaignImpact = IMPACT_BY_CAUSE[activeCampaign.cause][locale];
@@ -676,7 +672,6 @@ export default function DonationExperienceV4() {
   };
 
   const chooseCampaign = (campaign: Campaign) => {
-    setCampaignId(campaign.id);
     openDoubleCheckout(campaign);
   };
 
@@ -1033,9 +1028,22 @@ export default function DonationExperienceV4() {
                     {t.viewKaparot} <ArrowRight size={18} weight="bold" />
                   </a>
                 ) : (
-                  <button onClick={() => chooseCampaign(campaign)}>
-                    {t.chooseCampaign} <ArrowRight size={18} weight="bold" />
-                  </button>
+                  <div className={styles.cardActions}>
+                    <button onClick={() => chooseCampaign(campaign)}>
+                      {campaign.id === "mesilot" ? t.donateMesilot : t.chooseCampaign}
+                      <ArrowRight size={18} weight="bold" />
+                    </button>
+                    {campaign.id === "mesilot" && (
+                      <a
+                        href="https://mesilot-el-hanefesh.vercel.app/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t.mesilotCommunity}
+                        <ArrowRight size={18} weight="bold" />
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </article>
