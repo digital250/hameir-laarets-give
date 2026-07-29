@@ -658,15 +658,10 @@ export default function DonationExperienceV4() {
     lastFocusedElement.current = document.activeElement as HTMLElement | null;
   };
 
-  const chooseCampaign = (campaign: Campaign) => {
-    setCampaignId(campaign.id);
-    window.setTimeout(scrollToGift, 0);
-  };
-
-  const continueDonation = () => {
+  const openDoubleCheckout = (campaign: Campaign) => {
     const openDouble = () => {
       window.Double?.openCheckout({
-        campaign: activeCampaign.doubleCampaign,
+        campaign: campaign.doubleCampaign,
         amount,
         frequency,
         ...(fundraiserSlug ? { fundraiser: fundraiserSlug } : {}),
@@ -678,6 +673,15 @@ export default function DonationExperienceV4() {
     } else {
       document.addEventListener("Double.ready", openDouble, { once: true });
     }
+  };
+
+  const chooseCampaign = (campaign: Campaign) => {
+    setCampaignId(campaign.id);
+    openDoubleCheckout(campaign);
+  };
+
+  const continueDonation = () => {
+    openDoubleCheckout(activeCampaign);
   };
 
   const submitGift = (event: FormEvent<HTMLFormElement>) => {
