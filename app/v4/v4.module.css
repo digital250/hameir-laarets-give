@@ -1163,7 +1163,7 @@
 
 .amounts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -1729,6 +1729,21 @@
   background: #10283a;
 }
 
+.cardClickTarget {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cardClickTarget:focus-visible {
+  outline: 3px solid #e2bd61;
+  outline-offset: -6px;
+}
+
 .campaignCard.featuredCard {
   grid-column: 1 / -1;
   min-height: 500px;
@@ -1816,8 +1831,9 @@
   max-width: 540px;
   padding: 46px;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   inset: auto auto 0 0;
+  pointer-events: none;
 }
 
 .cardCopy > span {
@@ -1898,6 +1914,35 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 16px 24px;
+  pointer-events: none;
+}
+
+.cardActions button,
+.cardActions a {
+  pointer-events: auto;
+}
+
+.campaignCard.productCard .cardActions {
+  width: min(410px, 100%);
+  display: grid;
+  gap: 10px;
+}
+
+.campaignCard.productCard .cardActions button,
+.campaignCard.productCard .cardActions a {
+  min-height: 48px;
+  padding: 0 18px;
+  justify-content: space-between;
+  border: 1px solid rgba(226, 189, 97, .78);
+  border-radius: 999px;
+}
+
+.campaignCard.productCard .cardActions button {
+  background: var(--burgundy);
+}
+
+.campaignCard.productCard .cardActions a {
+  background: rgba(7, 27, 44, .78);
 }
 
 .allCampaigns {

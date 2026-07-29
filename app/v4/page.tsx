@@ -129,7 +129,7 @@ const campaigns: Campaign[] = [
   },
 ];
 
-const amounts = [36, 72, 180, 360];
+const amounts = [18, 36, 72, 180, 360, 1800];
 const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
   families: {
     en: "14,500 families supported through Chesed last year",
@@ -659,7 +659,7 @@ export default function DonationExperienceV4() {
       window.Double?.openCheckout({
         campaign: campaign.doubleCampaign,
         amount,
-        frequency,
+        frequency: frequency === "once" ? "single" : "monthly",
         ...(fundraiserSlug ? { fundraiser: fundraiserSlug } : {}),
         ...(solicitor ? { solicitor } : {}),
       });
@@ -728,7 +728,7 @@ export default function DonationExperienceV4() {
           <small>{t.giftDockLabel}</small>
           <strong>{activeCampaignTitle}</strong>
         </span>
-        <b>{t.give} ${amount} <ArrowRight size={18} weight="bold" aria-hidden="true" /></b>
+        <b>{t.give} ${amount.toLocaleString("en-US")} <ArrowRight size={18} weight="bold" aria-hidden="true" /></b>
       </button>
 
       <section className={styles.globalHero} id="v4-main" aria-labelledby="global-hero-title">
@@ -825,7 +825,6 @@ export default function DonationExperienceV4() {
           <Sparkle size={25} weight="light" aria-hidden="true" />
           <span>{t.featured}</span>
           <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
-          <p>{t.elulBody}</p>
         </div>
       </section>
 
@@ -933,7 +932,7 @@ export default function DonationExperienceV4() {
                       setCustomAmount("");
                     }}
                   >
-                    ${gift}
+                    ${gift.toLocaleString("en-US")}
                   </button>
                 ))}
               </div>
@@ -968,7 +967,7 @@ export default function DonationExperienceV4() {
               className={styles.continueButton}
               onClick={continueDonation}
             >
-              {t.continueWith} ${amount} <ArrowRight size={22} weight="bold" />
+              {t.continueWith} ${amount.toLocaleString("en-US")} <ArrowRight size={22} weight="bold" />
             </button>
           </section>
         </div>
@@ -997,6 +996,12 @@ export default function DonationExperienceV4() {
               key={campaign.id}
               className={`${styles.campaignCard} ${index === 0 ? styles.featuredCard : ""} ${campaign.id === "mesilot" ? styles.productCard : ""}`}
             >
+              <button
+                type="button"
+                className={styles.cardClickTarget}
+                onClick={() => chooseCampaign(campaign)}
+                aria-label={`${t.chooseCampaign}: ${locale === "es" ? campaign.titleEs : campaign.title}`}
+              />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               {campaign.id === "mesilot" ? (
                 <div className={styles.mesilotStack} aria-label={locale === "es" ? campaign.titleEs : campaign.title}>
