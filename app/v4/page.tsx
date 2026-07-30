@@ -256,6 +256,12 @@ const COPY = {
     continueWith: "Continue with",
     secure: "Secure checkout",
     deductible: "Tax-deductible",
+    donationConfidenceEyebrow: "Give with confidence",
+    donationConfidenceTitle: "Your gift joins a proven, worldwide mission.",
+    donationConfidenceFamilies: "14,500 families supported",
+    donationConfidenceCountries: "136 countries reached",
+    donationConfidenceSecure: "Secure checkout",
+    donationConfidenceTax: "Tax-deductible giving",
     campaignsLink: "See the ways to help",
     campaignsEyebrow: "Choose your impact",
     campaignsTitle: "Choose how your gift brings light.",
@@ -382,6 +388,12 @@ const COPY = {
     continueWith: "Continuar con",
     secure: "Pago seguro",
     deductible: "Deducible de impuestos",
+    donationConfidenceEyebrow: "Dona con confianza",
+    donationConfidenceTitle: "Tu donativo se suma a una misión comprobada en todo el mundo.",
+    donationConfidenceFamilies: "14,500 familias apoyadas",
+    donationConfidenceCountries: "136 países alcanzados",
+    donationConfidenceSecure: "Pago seguro",
+    donationConfidenceTax: "Donativo deducible de impuestos",
     campaignsLink: "Explora las formas de ayudar",
     campaignsEyebrow: "Elige tu impacto",
     campaignsTitle: "Elige cómo tu donativo lleva luz.",
@@ -846,6 +858,18 @@ export default function DonationExperienceV4() {
       </section>
 
       <section className={`${styles.seasonalHero} ${styles.donationSection}`} id="v4-donation">
+        <div className={styles.donationConfidence}>
+          <div>
+            <span>{t.donationConfidenceEyebrow}</span>
+            <h2>{t.donationConfidenceTitle}</h2>
+          </div>
+          <div className={styles.donationConfidencePoints}>
+            <p><CheckCircle size={18} weight="fill" aria-hidden="true" />{t.donationConfidenceFamilies}</p>
+            <p><GlobeHemisphereWest size={18} weight="fill" aria-hidden="true" />{t.donationConfidenceCountries}</p>
+            <p><LockKey size={18} weight="fill" aria-hidden="true" />{t.donationConfidenceSecure}</p>
+            <p><ShieldCheck size={18} weight="fill" aria-hidden="true" />{t.donationConfidenceTax}</p>
+          </div>
+        </div>
         <div className={styles.doubleEmbedFrameShell} id="v4-give">
           <iframe
             className={styles.doubleEmbedFrame}
