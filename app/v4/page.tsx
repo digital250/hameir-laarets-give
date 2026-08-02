@@ -23,7 +23,8 @@ import {
 import styles from "./v4.module.css";
 
 type CauseId = "families" | "children" | "food" | "community" | "torah";
-type Locale = "en" | "es";
+type Locale = "en" | "es" | "fr";
+type LocalizedText = Record<Locale, string>;
 
 type DoubleCheckoutOptions = {
   campaign: string;
@@ -44,12 +45,9 @@ type Campaign = {
   id: string;
   doubleCampaign: string;
   cause: CauseId;
-  eyebrow: string;
-  eyebrowEs: string;
-  title: string;
-  titleEs: string;
-  description: string;
-  descriptionEs: string;
+  eyebrow: LocalizedText;
+  title: LocalizedText;
+  description: LocalizedText;
   image: string;
 };
 
@@ -58,72 +56,126 @@ const campaigns: Campaign[] = [
     id: "kaparot",
     doubleCampaign: "kaparotelul-2026",
     cause: "families",
-    eyebrow: "Our focus now · Elul",
-    eyebrowEs: "Nuestro enfoque · Elul",
-    title: "Prepare a Family for the New Year",
-    titleEs: "Prepara a una familia para el Año Nuevo",
-    description: "Your Elul gift can bring food, care, and dignity to a Jewish family.",
-    descriptionEs: "Tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
+    eyebrow: {
+      en: "Our focus now · Elul",
+      es: "Nuestro enfoque · Elul",
+      fr: "Notre priorité actuelle · Eloul",
+    },
+    title: {
+      en: "Prepare a Family for the New Year",
+      es: "Prepara a una familia para el Año Nuevo",
+      fr: "Préparez une famille pour le Nouvel An",
+    },
+    description: {
+      en: "Your Elul gift can bring food, care, and dignity to a Jewish family.",
+      es: "Tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
+      fr: "Votre don d'Eloul peut apporter nourriture, soins et dignité à une famille juive.",
+    },
     image: "/images/elul-volunteers-hero-v3.jpg",
   },
   {
     id: "mesilot",
     doubleCampaign: "mesilot",
     cause: "torah",
-    eyebrow: "Torah in every language",
-    eyebrowEs: "Torá en todos los idiomas",
-    title: "Mesilot EL Ha'Nefesh",
-    titleEs: "Mesilot EL Ha'Nefesh",
-    description: "Help print and send Torah booklets around the world, in the languages people can receive.",
-    descriptionEs: "Ayuda a imprimir y enviar folletos de Torá por todo el mundo, en los idiomas que las personas pueden recibir.",
+    eyebrow: {
+      en: "Torah in every language",
+      es: "Torá en todos los idiomas",
+      fr: "La Torah dans toutes les langues",
+    },
+    title: {
+      en: "Mesilot EL Ha'Nefesh",
+      es: "Mesilot EL Ha'Nefesh",
+      fr: "Mesilot EL Ha'Nefesh",
+    },
+    description: {
+      en: "Help print and send Torah booklets around the world, in the languages people can receive.",
+      es: "Ayuda a imprimir y enviar folletos de Torá por todo el mundo, en los idiomas que las personas pueden recibir.",
+      fr: "Aidez à imprimer et à envoyer des livrets de Torah dans le monde entier, dans les langues que chacun peut comprendre.",
+    },
     image: "/images/mesilot.png",
   },
   {
     id: "torah-scholars",
     doubleCampaign: "avraichim",
     cause: "torah",
-    eyebrow: "Support Torah learning",
-    eyebrowEs: "Apoya el estudio de Torá",
-    title: "Sustain a Kollel Scholar",
-    titleEs: "Sostén a un estudioso de Torá",
-    description: "Help dedicated Torah scholars learn throughout the year and keep a living tradition strong.",
-    descriptionEs: "Ayuda a estudiosos de Torá dedicados a aprender durante todo el año y mantener viva la tradición.",
+    eyebrow: {
+      en: "Support Torah learning",
+      es: "Apoya el estudio de Torá",
+      fr: "Soutenez l'étude de la Torah",
+    },
+    title: {
+      en: "Sustain a Kollel Scholar",
+      es: "Sostén a un estudioso de Torá",
+      fr: "Soutenez un avrekh du Kollel",
+    },
+    description: {
+      en: "Help dedicated Torah scholars learn throughout the year and keep a living tradition strong.",
+      es: "Ayuda a estudiosos de Torá dedicados a aprender durante todo el año y mantener viva la tradición.",
+      fr: "Aidez des étudiants de la Torah dévoués à apprendre toute l'année et à faire vivre une tradition bien vivante.",
+    },
     image: "/images/kollel.png",
   },
   {
     id: "next-step",
     doubleCampaign: "the-next-step-initiative",
     cause: "children",
-    eyebrow: "The Next Step Initiative",
-    eyebrowEs: "The Next Step Initiative",
-    title: "The Next Step Initiative",
-    titleEs: "The Next Step Initiative",
-    description: "Help children in southern Israel access hydrotherapy, equine therapy, and compassionate emotional care.",
-    descriptionEs: "Ayuda a niños del sur de Israel a recibir hidroterapia, terapia con caballos y apoyo emocional compasivo.",
+    eyebrow: {
+      en: "The Next Step Initiative",
+      es: "The Next Step Initiative",
+      fr: "The Next Step Initiative",
+    },
+    title: {
+      en: "The Next Step Initiative",
+      es: "The Next Step Initiative",
+      fr: "The Next Step Initiative",
+    },
+    description: {
+      en: "Help children in southern Israel access hydrotherapy, equine therapy, and compassionate emotional care.",
+      es: "Ayuda a niños del sur de Israel a recibir hidroterapia, terapia con caballos y apoyo emocional compasivo.",
+      fr: "Aidez des enfants du sud d'Israël à accéder à l'hydrothérapie, à l'équithérapie et à un accompagnement émotionnel bienveillant.",
+    },
     image: "/images/horse-therapy.png",
   },
   {
     id: "food-relief",
     doubleCampaign: "food-packages",
     cause: "food",
-    eyebrow: "Dignity at the table",
-    eyebrowEs: "Dignidad en la mesa",
-    title: "Food Baskets for Families",
-    titleEs: "Canastas de alimentos para familias",
-    description: "Help volunteers pack nourishing food baskets for families who need practical support.",
-    descriptionEs: "Ayuda a voluntarios a preparar canastas nutritivas para familias que necesitan apoyo práctico.",
+    eyebrow: {
+      en: "Dignity at the table",
+      es: "Dignidad en la mesa",
+      fr: "La dignité à table",
+    },
+    title: {
+      en: "Food Baskets for Families",
+      es: "Canastas de alimentos para familias",
+      fr: "Paniers alimentaires pour les familles",
+    },
+    description: {
+      en: "Help volunteers pack nourishing food baskets for families who need practical support.",
+      es: "Ayuda a voluntarios a preparar canastas nutritivas para familias que necesitan apoyo práctico.",
+      fr: "Aidez des bénévoles à préparer des paniers alimentaires nourrissants pour des familles qui ont besoin d'un soutien concret.",
+    },
     image: "/images/food-packing.png",
   },
   {
     id: "general",
     doubleCampaign: "donate",
     cause: "families",
-    eyebrow: "Where needed most",
-    eyebrowEs: "Donde más se necesita",
-    title: "Where It's Needed Most",
-    titleEs: "Donde más se necesita",
-    description: "Trust Hameir Laarets to direct your gift wherever the need is greatest.",
-    descriptionEs: "Da a Hameir Laarets la flexibilidad de responder allí donde más se necesita.",
+    eyebrow: {
+      en: "Where needed most",
+      es: "Donde más se necesita",
+      fr: "Là où le besoin est le plus grand",
+    },
+    title: {
+      en: "Where It's Needed Most",
+      es: "Donde más se necesita",
+      fr: "Là où le besoin est le plus grand",
+    },
+    description: {
+      en: "Trust Hameir Laarets to direct your gift wherever the need is greatest.",
+      es: "Da a Hameir Laarets la flexibilidad de responder allí donde más se necesita.",
+      fr: "Faites confiance à Hameir Laarets pour diriger votre don là où le besoin est le plus grand.",
+    },
     image: "/images/v2-food-relief.png",
   },
 ];
@@ -132,28 +184,34 @@ const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
   families: {
     en: "14,500 families supported through Chesed last year",
     es: "14,500 familias recibieron apoyo mediante Jesed el año pasado",
+    fr: "14 500 familles soutenues grâce au Hessed l'an dernier",
   },
   children: {
     en: "76,000 people guided and strengthened last year",
     es: "76,000 personas recibieron orientación y apoyo el año pasado",
+    fr: "76 000 personnes accompagnées et soutenues l'an dernier",
   },
   food: {
     en: "14,500 families supported through Chesed last year",
     es: "14,500 familias recibieron apoyo mediante Jesed el año pasado",
+    fr: "14 500 familles soutenues grâce au Hessed l'an dernier",
   },
   community: {
     en: "Communities in 136 countries reached through Hameir Laarets’ work last year",
     es: "El trabajo de Hameir Laarets llegó a comunidades en 136 países el año pasado",
+    fr: "L'action de Hameir Laarets a touché des communautés dans 136 pays l'an dernier",
   },
   torah: {
     en: "6.5M Torah publications distributed last year",
     es: "6.5 millones de publicaciones de Torá distribuidas el año pasado",
+    fr: "6,5 millions de publications de Torah distribuées l'an dernier",
   },
 };
 const IMPACT_BY_CAMPAIGN: Partial<Record<string, Record<Locale, string>>> = {
   "torah-scholars": {
     en: "220 Avreichim across 5 kollelim",
     es: "220 avrejim en 5 kollelim",
+    fr: "220 avrekhim répartis dans 5 kollelim",
   },
 };
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
@@ -311,6 +369,8 @@ const COPY = {
     rabbisAlt: "Rabbi Yoram Michael Abergel zt’l and Rabbi Yisrael Abergel together",
     volunteersAlt: "A Hameir Laarets volunteer carrying a holiday food box for families in Israel",
     onlineNav: "Hameir Laarets online",
+    elulFormTitle: "Elul donation form",
+    officialInfoLabel: "Official information",
   },
   es: {
     skip: "Saltar al contenido principal",
@@ -443,30 +503,178 @@ const COPY = {
     rabbisAlt: "El rabino Yoram Michael Abergel zt’l junto al rabino Yisrael Abergel",
     volunteersAlt: "Un voluntario de Hameir Laarets llevando una caja de alimentos festivos para familias en Israel",
     onlineNav: "Hameir Laarets en línea",
+    elulFormTitle: "Formulario de donación de Elul",
+    officialInfoLabel: "Información oficial",
+  },
+  fr: {
+    skip: "Passer au contenu principal",
+    homeLabel: "Accueil du centre de dons Hameir Laarets",
+    mainNavigation: "Navigation principale",
+    buildDonation: "Composez votre don",
+    chooseAmountAria: "Choisissez le montant du don",
+    securityInfo: "Informations sur la sécurité du don",
+    creditedPrefix: "Vous donnez avec",
+    creditedSuffix: "Votre don leur sera automatiquement crédité.",
+    tagline: "Torah · Hessed · Communauté",
+    ourWork: "Comment aider",
+    whyTrust: "Pourquoi donner ici",
+    mainSite: "Site principal",
+    give: "Faire un don",
+    languageLabel: "Langue",
+    identityEyebrow: "Hameir Laarets",
+    identityTitle: "Illuminer des vies juives",
+    identityTitleAccent: "Par la Torah et le Hessed",
+    identityBody: "Votre don aide à apporter la Torah, de la nourriture, des soins thérapeutiques et un soutien digne aux familles juives en Israël et dans le monde entier.",
+    supportCurrent: "Apportez de l’aide à une famille en ce mois d’Eloul",
+    discover: "Découvrir la mission derrière notre action",
+    quickEyebrow: "Donnez comme il vous convient",
+    quickTitle: "Choisissez une cause. Choisissez un montant.",
+    quickBody: "Commencez par un don ciblé, puis consultez la cause complète avant de continuer.",
+    quickFood: "Aide alimentaire et familiale",
+    quickTorah: "Torah et étude",
+    quickChildren: "Soins aux enfants",
+    quickGeneral: "Là où le besoin est le plus grand",
+    quickChooseAmount: "Choisissez un don",
+    ourStory: "Notre histoire",
+    founded: "Fondée sur la vision de",
+    continued: "Poursuivie aujourd’hui par",
+    torah: "Torah",
+    torahBody: "Rendre la sagesse de la Torah accessible par les livres, l’étude et l’accompagnement.",
+    chesed: "Hessed",
+    chesedBody: "Soutenir les familles par l’aide alimentaire, les soins thérapeutiques et une assistance concrète.",
+    community: "Communauté",
+    communityBody: "Renforcer les liens juifs en Israël et au sein des communautés du monde entier.",
+    world: "À travers le monde",
+    worldBody: "Relier les Juifs d’Israël et du monde entier par la Torah et la bonté.",
+    legacyEyebrow: "Nos fondations",
+    legacyTitle: "Depuis Jérusalem, une lumière de Torah",
+    legacyTitleAccent: "se poursuit à travers le monde",
+    founderRole: "Fondateur",
+    founderBody: "Sa vision a uni l’étude de la Torah à des actes concrets de Hessed.",
+    leaderRole: "Poursuit la mission",
+    leaderBody: "Fait avancer la vision de son père par la foi, la responsabilité et l’action.",
+    pillarsEyebrow: "Une mission · Trois piliers vivants",
+    pillarsTitle: "La lumière devient action.",
+    impactEyebrow: "Notre impact",
+    impactTitle: "Une année de Torah.",
+    impactTitleAccent: "Une année de soutien.",
+    titlesLabel: "Pays touchés",
+    languagesLabel: "Publications de Torah distribuées",
+    basketsLabel: "Familles soutenues grâce au Hessed",
+    studentsLabel: "Personnes accompagnées et soutenues",
+    officialSource: "Chiffres d’impact annuels communiqués par Hameir Laarets.",
+    featured: "Eloul 5786 · Notre priorité actuelle",
+    elulTitle: "Préparez votre cœur",
+    elulTitleAccent: "pour le Nouvel An",
+    elulPhotoBody: "Avant le Nouvel An, votre don d’Eloul peut apporter nourriture, soins et dignité à une famille juive.",
+    elulBody: "Eloul est un temps pour préparer notre cœur par des actes de bonté et de générosité. Votre soutien aide les familles juives à célébrer le Nouvel An dans la dignité, en leur apportant nourriture et assistance essentielle au moment où elles en ont le plus besoin.",
+    fulfill: "Faire son Pidyon Kapparot",
+    readStory: "Pourquoi les Kapparot comptent",
+    selectedCampaign: "La cause choisie",
+    donationFrequency: "Comment souhaitez-vous donner ?",
+    once: "Ponctuel",
+    monthly: "Mensuel",
+    chooseGift: "Choisissez un montant",
+    otherAmount: "Autre montant",
+    giftDockLabel: "Votre don",
+    giftImpact: "Contribue à l’impact global de Hameir Laarets",
+    annualImpactContext: "Impact annuel global de l’organisation",
+    continueWith: "Continuer avec",
+    secure: "Paiement sécurisé",
+    deductible: "Déductible des impôts",
+    donationConfidenceEyebrow: "Donnez en toute confiance",
+    donationConfidenceTitle: "Votre don rejoint une mission mondiale éprouvée.",
+    donationConfidenceFamilies: "14 500 familles soutenues",
+    donationConfidenceCountries: "136 pays touchés",
+    donationConfidenceSecure: "Paiement sécurisé",
+    donationConfidenceTax: "Don déductible des impôts",
+    campaignsLink: "Voir les façons d’aider",
+    campaignsEyebrow: "Choisissez votre impact",
+    campaignsTitle: "Choisissez comment votre don apporte la lumière.",
+    campaignsTitleAccent: "Chaque cause répond à un besoin réel.",
+    campaignsBody: "Soutenez la cause qui vous tient le plus à cœur. Si une personne vous a invité à donner, elle recevra automatiquement le crédit de votre don, quelle que soit la cause choisie.",
+    viewKaparot: "Donner pour les Kapparot",
+    chooseCampaign: "Donner pour cette cause",
+    donateMesilot: "Donner pour Mesilot",
+    mesilotCommunity: "Apportez Mesilot à votre communauté",
+    confidence: "Donnez en toute clarté",
+    trustTitle: "Sachez où va votre don.",
+    trustTitleAccent: "Avancez en confiance à chaque étape.",
+    established: "Enregistrée et responsable",
+    establishedBody: "Hameir Laarets est une association à but non lucratif enregistrée aux États-Unis. Les dons sont déductibles des impôts en Israël et aux États-Unis.",
+    secureDesign: "Paiement sécurisé",
+    secureDesignBody: "Vous finaliserez votre don via le prestataire de paiement sécurisé de l’organisation.",
+    choiceClear: "Vos choix restent entre vos mains",
+    choiceClearBody: "Vérifiez la cause, le montant, la fréquence et le crédit du collecteur avant de continuer.",
+    footerTagline: "Torah · Compassion · Communauté",
+    stayConnected: "Restez connectés",
+    contactUs: "Nous contacter",
+    privacyPolicy: "Politique de confidentialité",
+    mailingAddress: "B.P. 345 · Netivot 8771301 · Israël",
+    nonprofit: "Hameir Laarets · Association enregistrée 501(c)(3) · EIN 84-5083012",
+    taxStatus: "Les dons sont déductibles des impôts en Israël et aux États-Unis.",
+    rights: "© 2026 Hameir Laarets. Tous droits réservés.",
+    closeStory: "Fermer le récit d’Eloul",
+    storyEyebrow: "Eloul · Tsedaka · Pidyon Kapparot",
+    storyTitle: "Eloul est un temps pour revenir à soi — et pour donner.",
+    storyOne: "Avant le Nouvel An, nous marquons une pause, nous réfléchissons, et nous portons nos espoirs et nos prières devant Hashem.",
+    storyTwo: "Le Pidyon Kapparot transforme ce retour intérieur en un acte concret de compassion. Par la tsedaka, la tradition devient nourriture, soins et dignité pour un autre foyer juif.",
+    storyThree: "Votre don aide Hameir Laarets à soutenir les familles qui se préparent pour les jours saints. Les noms transmis à l’organisation sont portés dans une tefila sincère.",
+    closeCheckout: "Fermer le paiement",
+    yourGift: "Votre don",
+    lastStep: "Vérifiez votre don.",
+    campaign: "Cause",
+    gift: "Don",
+    fundraiser: "Collecteur",
+    fullName: "Nom complet",
+    email: "Adresse e-mail",
+    securePayment: "Continuer en toute sécurité",
+    paymentNote: "Vous finaliserez le paiement en toute sécurité avec le prestataire de paiement de l’organisation.",
+    ready: "Sélection enregistrée",
+    takingShape: "Votre don est prêt à être finalisé.",
+    handoff: "Sur le site en ligne, votre cause, votre montant, votre fréquence et le crédit du collecteur seront transmis au prestataire de paiement sécurisé de l’organisation.",
+    returnPage: "Continuer à explorer",
+    rabbisAlt: "Le Rabbi Yoram Michael Abergel zt’l et le Rabbi Yisrael Abergel ensemble",
+    volunteersAlt: "Un bénévole de Hameir Laarets portant un colis alimentaire de fête pour des familles en Israël",
+    onlineNav: "Hameir Laarets en ligne",
+    elulFormTitle: "Formulaire de don d’Eloul",
+    officialInfoLabel: "Informations officielles",
   },
 } as const;
-const SOCIAL_LINKS = [
+const SOCIAL_LINKS: { label: LocalizedText; href: string; icon: typeof GlobeHemisphereWest }[] = [
   {
-    label: "Hameir Laarets website",
-    labelEs: "Sitio web de Hameir Laarets",
+    label: {
+      en: "Hameir Laarets website",
+      es: "Sitio web de Hameir Laarets",
+      fr: "Site web de Hameir Laarets",
+    },
     href: "https://hameirlaarets.org/",
     icon: GlobeHemisphereWest,
   },
   {
-    label: "Hameir Laarets on Instagram",
-    labelEs: "Hameir Laarets en Instagram",
+    label: {
+      en: "Hameir Laarets on Instagram",
+      es: "Hameir Laarets en Instagram",
+      fr: "Hameir Laarets sur Instagram",
+    },
     href: "https://www.instagram.com/hameirlaarets/",
     icon: InstagramLogo,
   },
   {
-    label: "Rabbi Yisrael Abergel on Facebook",
-    labelEs: "Rabino Yisrael Abergel en Facebook",
+    label: {
+      en: "Rabbi Yisrael Abergel on Facebook",
+      es: "Rabino Yisrael Abergel en Facebook",
+      fr: "Rabbi Yisrael Abergel sur Facebook",
+    },
     href: "https://www.facebook.com/haravisraelabergel/",
     icon: FacebookLogo,
   },
   {
-    label: "Hameir Laarets on YouTube",
-    labelEs: "Hameir Laarets en YouTube",
+    label: {
+      en: "Hameir Laarets on YouTube",
+      es: "Hameir Laarets en YouTube",
+      fr: "Hameir Laarets sur YouTube",
+    },
     href: "https://www.youtube.com/channel/UC2FAfGOU_D8jgT1E3p1KJog",
     icon: YoutubeLogo,
   },
@@ -580,7 +788,7 @@ export default function DonationExperienceV4() {
       setSolicitor(requestedSolicitor);
       setFundraiserSlug(requestedFundraiser);
       setFundraiser(solicitorProfile?.name || requestedFundraiser || requestedSolicitor);
-      setLocale(requestedLocale === "es" || requestedLocale === "en"
+      setLocale(requestedLocale === "es" || requestedLocale === "en" || requestedLocale === "fr"
         ? requestedLocale
         : solicitorProfile?.defaultLocale || "en");
       setUrlReady(true);
@@ -599,7 +807,7 @@ export default function DonationExperienceV4() {
 
   const activeCampaign = campaigns[0];
   const displayedCampaigns = campaignDisplayOrder;
-  const activeCampaignTitle = locale === "es" ? activeCampaign.titleEs : activeCampaign.title;
+  const activeCampaignTitle = activeCampaign.title[locale];
   const elulEmbedSrc = `/double-elul?lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -679,6 +887,7 @@ export default function DonationExperienceV4() {
         <div className={styles.languageSwitch} role="group" aria-label={t.languageLabel}>
           <button type="button" aria-pressed={locale === "en"} onClick={() => setLocale("en")}>EN</button>
           <button type="button" aria-pressed={locale === "es"} onClick={() => setLocale("es")}>ES</button>
+          <button type="button" aria-pressed={locale === "fr"} onClick={() => setLocale("fr")}>FR</button>
         </div>
         <button className={styles.headerGive} onClick={scrollToGift}>
           {t.give} <Heart size={18} weight="regular" aria-hidden="true" />
@@ -874,7 +1083,7 @@ export default function DonationExperienceV4() {
           <iframe
             className={styles.doubleEmbedFrame}
             src={elulEmbedSrc}
-            title={locale === "es" ? "Formulario de donación de Elul" : "Elul donation form"}
+            title={t.elulFormTitle}
             loading="eager"
           />
         </div>
@@ -907,27 +1116,27 @@ export default function DonationExperienceV4() {
                 type="button"
                 className={styles.cardClickTarget}
                 onClick={() => chooseCampaign(campaign)}
-                aria-label={`${t.chooseCampaign}: ${locale === "es" ? campaign.titleEs : campaign.title}`}
+                aria-label={`${t.chooseCampaign}: ${campaign.title[locale]}`}
               />
               {campaign.id === "mesilot" ? (
-                <div className={styles.mesilotStack} aria-label={locale === "es" ? campaign.titleEs : campaign.title}>
+                <div className={styles.mesilotStack} aria-label={campaign.title[locale]}>
                   <Image src={campaign.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
                   <Image src={campaign.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
-                  <Image src={campaign.image} alt={locale === "es" ? campaign.titleEs : campaign.title} fill sizes="(max-width: 760px) 100vw, 50vw" />
+                  <Image src={campaign.image} alt={campaign.title[locale]} fill sizes="(max-width: 760px) 100vw, 50vw" />
                 </div>
               ) : (
                 <Image
                   src={campaign.image}
-                  alt={locale === "es" ? campaign.titleEs : campaign.title}
+                  alt={campaign.title[locale]}
                   fill
                   sizes={index === 0 ? "100vw" : "(max-width: 760px) 100vw, 50vw"}
                 />
               )}
               <div className={styles.cardScrim} />
               <div className={styles.cardCopy}>
-                <span>{locale === "es" ? campaign.eyebrowEs : campaign.eyebrow}</span>
-                <h3>{locale === "es" ? campaign.titleEs : campaign.title}</h3>
-                <p>{locale === "es" ? campaign.descriptionEs : campaign.description}</p>
+                <span>{campaign.eyebrow[locale]}</span>
+                <h3>{campaign.title[locale]}</h3>
+                <p>{campaign.description[locale]}</p>
                 <div className={styles.campaignImpact}>
                   <CheckCircle size={18} weight="fill" aria-hidden="true" />
                   <span>
@@ -1000,10 +1209,10 @@ export default function DonationExperienceV4() {
         <div className={styles.footerConnect}>
           <small>{t.stayConnected}</small>
           <nav aria-label={t.onlineNav}>
-            {SOCIAL_LINKS.map(({ label, labelEs, href, icon: Icon }) => {
-              const localizedLabel = locale === "es" ? labelEs : label;
+            {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => {
+              const localizedLabel = label[locale];
               return (
-              <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={localizedLabel} title={localizedLabel}>
+              <a key={label.en} href={href} target="_blank" rel="noreferrer" aria-label={localizedLabel} title={localizedLabel}>
                 <Icon size={21} weight="regular" aria-hidden="true" />
               </a>
               );
@@ -1012,7 +1221,7 @@ export default function DonationExperienceV4() {
         </div>
 
         <div className={styles.footerLegal}>
-          <nav aria-label={locale === "es" ? "Información oficial" : "Official information"}>
+          <nav aria-label={t.officialInfoLabel}>
             <a href="https://hameirlaarets.org/contact-us/" target="_blank" rel="noreferrer">{t.contactUs}</a>
             <a href="https://hameirlaarets.org/privacy-policy/" target="_blank" rel="noreferrer">{t.privacyPolicy}</a>
           </nav>
