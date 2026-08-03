@@ -215,6 +215,7 @@ const IMPACT_BY_CAMPAIGN: Partial<Record<string, Record<Locale, string>>> = {
   },
 };
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
+const ELUL_LANDING_URL = "https://elul.hameirlaarets.org";
 const HERO_MEDIA = {
   poster: "/media/hameir-global-hero-poster-clean.png",
   mp4: "/media/hameir-global-hero-4k.mp4",
@@ -1112,12 +1113,22 @@ export default function DonationExperienceV4() {
               key={campaign.id}
               className={`${styles.campaignCard} ${index === 0 ? styles.featuredCard : ""} ${campaign.id === "mesilot" ? styles.productCard : ""}`}
             >
-              <button
-                type="button"
-                className={styles.cardClickTarget}
-                onClick={() => chooseCampaign(campaign)}
-                aria-label={`${t.chooseCampaign}: ${campaign.title[locale]}`}
-              />
+              {campaign.id === "kaparot" ? (
+                <a
+                  className={styles.cardClickTarget}
+                  href={ELUL_LANDING_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${t.viewKaparot}: ${campaign.title[locale]}`}
+                />
+              ) : (
+                <button
+                  type="button"
+                  className={styles.cardClickTarget}
+                  onClick={() => chooseCampaign(campaign)}
+                  aria-label={`${t.chooseCampaign}: ${campaign.title[locale]}`}
+                />
+              )}
               {campaign.id === "mesilot" ? (
                 <div className={styles.mesilotStack} aria-label={campaign.title[locale]}>
                   <Image src={campaign.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
@@ -1145,9 +1156,9 @@ export default function DonationExperienceV4() {
                   </span>
                 </div>
                 {campaign.id === "kaparot" ? (
-                  <button onClick={() => chooseCampaign(campaign)}>
+                  <a href={ELUL_LANDING_URL} target="_blank" rel="noreferrer">
                     {t.viewKaparot} <ArrowRight size={18} weight="bold" />
-                  </button>
+                  </a>
                 ) : (
                   <div className={styles.cardActions}>
                     <button onClick={() => chooseCampaign(campaign)}>
