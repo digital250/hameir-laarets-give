@@ -1,11 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./double-elul.module.css";
 
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
+const DEFAULT_CAMPAIGN = "kaparotelul-2026";
 
 export default function DoubleElulPage() {
+  const [campaign, setCampaign] = useState(DEFAULT_CAMPAIGN);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setCampaign(params.get("campaign") || DEFAULT_CAMPAIGN);
+  }, []);
+
   useEffect(() => {
     if (document.querySelector(`script[src="${DOUBLE_EMBED_URL}"]`)) return;
 
@@ -35,7 +43,7 @@ export default function DoubleElulPage() {
     <main className={styles.page}>
       <div
         className="double--donation-form-widget"
-        {...({ campaign: "kaparotelul-2026" } as Record<string, string>)}
+        {...({ campaign } as Record<string, string>)}
       />
     </main>
   );
