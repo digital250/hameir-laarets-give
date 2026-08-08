@@ -141,19 +141,19 @@ const campaigns: Campaign[] = [
     doubleCampaign: "food-packages",
     cause: "food",
     eyebrow: {
-      en: "Dignity at the table",
-      es: "Dignidad en la mesa",
-      fr: "La dignité à table",
+      en: "Elul 5786 · Our goal: 1,100 baskets",
+      es: "Elul 5786 · Nuestra meta: 1,100 canastas",
+      fr: "Eloul 5786 · Notre objectif : 1 100 paniers",
     },
     title: {
-      en: "Food Baskets for Families",
-      es: "Canastas de alimentos para familias",
-      fr: "Paniers alimentaires pour les familles",
+      en: "Food Baskets for Families in the South",
+      es: "Canastas de alimentos para familias del sur",
+      fr: "Paniers alimentaires pour les familles du Sud",
     },
     description: {
-      en: "Help volunteers pack nourishing food baskets for families who need practical support.",
-      es: "Ayuda a voluntarios a preparar canastas nutritivas para familias que necesitan apoyo práctico.",
-      fr: "Aidez des bénévoles à préparer des paniers alimentaires nourrissants pour des familles qui ont besoin d'un soutien concret.",
+      en: "Help us pack and deliver 1,100 festive food baskets to families in southern Israel before the holidays.",
+      es: "Ayúdanos a preparar y entregar 1,100 canastas de alimentos festivas a familias del sur de Israel antes de las festividades.",
+      fr: "Aidez-nous à préparer et à livrer 1 100 paniers alimentaires de fête à des familles du sud d'Israël avant les fêtes.",
     },
     image: "/images/food-packing.png",
   },
@@ -297,10 +297,11 @@ const COPY = {
     studentsLabel: "People guided & strengthened",
     officialSource: "Annual impact figures supplied by Hameir Laarets.",
     featured: "Elul 5786 · Our focus now",
-    elulTitle: "Prepare Your Heart",
-    elulTitleAccent: "for the New Year",
-    elulPhotoBody: "Before the New Year, your Elul gift can bring food, care, and dignity to a Jewish family.",
-    elulBody: "Elul is a time to prepare our hearts through acts of kindness and generosity. Your support helps Jewish families celebrate the New Year with dignity by providing food and essential assistance when they need it most.",
+    elulTitle: "1,100 Food Baskets",
+    elulTitleAccent: "for Families in the South",
+    elulPhotoBody: "Before the New Year, help us bring a festive food basket to 1,100 families in southern Israel who need it most.",
+    elulBody: "Elul is a time to prepare our hearts through acts of kindness and generosity. This year, our goal is to pack and deliver 1,100 food baskets to families in southern Israel before the holidays — so every home can celebrate the New Year with dignity.",
+    seasonalCta: "Give a Food Basket",
     fulfill: "Give Pidyon Kapparot",
     readStory: "Why Kaparot matters",
     selectedCampaign: "Your chosen cause",
@@ -431,10 +432,11 @@ const COPY = {
     studentsLabel: "Personas orientadas y fortalecidas",
     officialSource: "Cifras anuales proporcionadas por Hameir Laarets.",
     featured: "Elul 5786 · Nuestro enfoque",
-    elulTitle: "Prepara tu corazón",
-    elulTitleAccent: "para el Año Nuevo",
-    elulPhotoBody: "Antes del Año Nuevo, tu donativo de Elul puede llevar alimentos, cuidado y dignidad a una familia judía.",
-    elulBody: "Elul es un tiempo para preparar nuestros corazones mediante actos de bondad y generosidad. Tu apoyo ayuda a familias judías a celebrar el Año Nuevo con dignidad, proporcionando alimentos y asistencia esencial cuando más lo necesitan.",
+    elulTitle: "1,100 canastas de alimentos",
+    elulTitleAccent: "para familias del sur",
+    elulPhotoBody: "Antes del Año Nuevo, ayúdanos a llevar una canasta de alimentos festiva a 1,100 familias del sur de Israel que más lo necesitan.",
+    elulBody: "Elul es un tiempo para preparar nuestros corazones mediante actos de bondad y generosidad. Este año, nuestra meta es preparar y entregar 1,100 canastas de alimentos a familias del sur de Israel antes de las festividades, para que cada hogar pueda celebrar el Año Nuevo con dignidad.",
+    seasonalCta: "Dona una canasta de alimentos",
     fulfill: "Haz tu Pidyon Kaparot",
     readStory: "Conoce el significado de Kaparot",
     selectedCampaign: "La causa que elegiste",
@@ -565,10 +567,11 @@ const COPY = {
     studentsLabel: "Personnes accompagnées et soutenues",
     officialSource: "Chiffres d’impact annuels communiqués par Hameir Laarets.",
     featured: "Eloul 5786 · Notre priorité actuelle",
-    elulTitle: "Préparez votre cœur",
-    elulTitleAccent: "pour le Nouvel An",
-    elulPhotoBody: "Avant le Nouvel An, votre don d’Eloul peut apporter nourriture, soins et dignité à une famille juive.",
-    elulBody: "Eloul est un temps pour préparer notre cœur par des actes de bonté et de générosité. Votre soutien aide les familles juives à célébrer le Nouvel An dans la dignité, en leur apportant nourriture et assistance essentielle au moment où elles en ont le plus besoin.",
+    elulTitle: "1 100 paniers alimentaires",
+    elulTitleAccent: "pour des familles du Sud",
+    elulPhotoBody: "Avant le Nouvel An, aidez-nous à apporter un panier alimentaire de fête à 1 100 familles du sud d’Israël qui en ont le plus besoin.",
+    elulBody: "Eloul est un temps pour préparer notre cœur par des actes de bonté et de générosité. Cette année, notre objectif est de préparer et de livrer 1 100 paniers alimentaires à des familles du sud d’Israël avant les fêtes, afin que chaque foyer puisse célébrer le Nouvel An dans la dignité.",
+    seasonalCta: "Offrir un panier alimentaire",
     fulfill: "Faire son Pidyon Kapparot",
     readStory: "Pourquoi les Kapparot comptent",
     selectedCampaign: "La cause choisie",
@@ -684,6 +687,11 @@ const generalCampaign = campaigns.find((campaign) => campaign.id === "general");
 const campaignDisplayOrder = generalCampaign
   ? [generalCampaign, ...campaigns.filter((campaign) => campaign.id !== "kaparot" && campaign.id !== "general")]
   : campaigns.filter((campaign) => campaign.id !== "kaparot");
+
+// The campaign currently featured right under the hero and in the main donation form.
+// Update this single line each season to point at whichever campaign should lead the page.
+const SEASONAL_CAMPAIGN_ID = "food-relief";
+const seasonalCampaign = campaigns.find((campaign) => campaign.id === SEASONAL_CAMPAIGN_ID) ?? campaigns[0];
 
 export default function DonationExperienceV4() {
   const [fundraiser, setFundraiser] = useState("");
@@ -806,10 +814,10 @@ export default function DonationExperienceV4() {
     window.history.replaceState({}, "", currentUrl);
   }, [locale, urlReady]);
 
-  const activeCampaign = campaigns[0];
+  const activeCampaign = seasonalCampaign;
   const displayedCampaigns = campaignDisplayOrder;
   const activeCampaignTitle = activeCampaign.title[locale];
-  const elulEmbedSrc = `/double-elul?lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
+  const elulEmbedSrc = `/double-elul?campaign=${encodeURIComponent(seasonalCampaign.doubleCampaign)}&lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
@@ -985,7 +993,7 @@ export default function DonationExperienceV4() {
       <section className={`${styles.seasonalHero} ${styles.featuredTop}`} id="v4-featured" aria-labelledby="featured-title">
         <div className={styles.photoPanel}>
           <Image
-            src="/images/elul-volunteers-hero-v3.jpg"
+            src="/images/food-packing.png"
             alt={t.volunteersAlt}
             fill
             sizes="(max-width: 520px) 100vw, 58vw"
@@ -1003,6 +1011,9 @@ export default function DonationExperienceV4() {
           <span>{t.featured}</span>
           <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
           <p>{t.elulBody}</p>
+          <a href="#v4-give" className={styles.seasonalCtaButton}>
+            {t.seasonalCta} <ArrowRight size={18} weight="bold" />
+          </a>
         </div>
       </section>
 
