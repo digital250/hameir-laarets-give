@@ -13,6 +13,8 @@
   background: var(--paper);
   color: var(--ink);
   font-family: "DM Sans", Arial, sans-serif;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "pnum" 1;
   display: flex;
   flex-direction: column;
 }
@@ -1048,13 +1050,16 @@
   text-transform: uppercase;
 }
 
-.photoCopy h1 {
+.photoCopy h1,
+.photoCopy h2 {
   margin: 18px 0 22px;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(58px, 4.8vw, 76px);
   font-weight: 500;
   letter-spacing: -.045em;
   line-height: .92;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "pnum" 1;
 }
 
 .photoCopy p {
@@ -1113,6 +1118,8 @@
   font-weight: 500;
   letter-spacing: -.045em;
   line-height: .9;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "pnum" 1;
 }
 
 .storyPanel p {

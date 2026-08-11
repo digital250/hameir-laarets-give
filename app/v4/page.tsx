@@ -221,7 +221,7 @@ const HERO_MEDIA = {
   mp4: "/media/hameir-global-hero-4k.mp4",
   videoReady: true,
 } as const;
-const HERO_START_TIME_SECONDS = 0.9;
+const HERO_START_TIME_SECONDS = 2.9;
 const HERO_REVEAL_TIME_SECONDS = 5;
 const MOBILE_HERO_REVEAL_DELAY_MS = 2600;
 const SOLICITORS: Record<string, { name: string; defaultLocale: Locale }> = {
@@ -300,7 +300,7 @@ const COPY = {
     elulTitle: "1,100 Food Baskets",
     elulTitleAccent: "for Families in the South",
     elulPhotoBody: "Before the New Year, help us bring a festive food basket to 1,100 families in southern Israel who need it most.",
-    elulBody: "Elul is a time to prepare our hearts through acts of kindness and generosity. This year, our goal is to pack and deliver 1,100 food baskets to families in southern Israel before the holidays — so every home can celebrate the New Year with dignity.",
+    elulBody: "Elul is a time to prepare our hearts through kindness and generosity. Our goal this year: 1,100 food baskets for families in southern Israel before the holidays, so every home can celebrate with dignity.",
     seasonalCta: "Give a Food Basket",
     fulfill: "Give Pidyon Kapparot",
     readStory: "Why Kaparot matters",
@@ -326,7 +326,7 @@ const COPY = {
     campaignsEyebrow: "Choose your impact",
     campaignsTitle: "Choose how your gift brings light.",
     campaignsTitleAccent: "Every cause meets a real need.",
-    campaignsBody: "Support the cause closest to your heart. If a fundraiser invited you, they’ll receive credit automatically—whichever cause you choose.",
+    campaignsBody: "Support the cause closest to your heart. If a fundraiser invited you, they’ll be credited automatically.",
     viewKaparot: "Give to Kaparot",
     chooseCampaign: "Donate to this cause",
     donateMesilot: "Donate to Mesilot",
@@ -350,7 +350,7 @@ const COPY = {
     rights: "© 2026 Hameir Laarets. All rights reserved.",
     closeStory: "Close Elul story",
     storyEyebrow: "Elul · Tzedakah · Pidyon Kapparot",
-    storyTitle: "Elul is a time to return—and to give.",
+    storyTitle: "Elul is a time to return and to give.",
     storyOne: "Before the New Year, we pause, reflect, and bring our hopes and prayers before Hashem.",
     storyTwo: "Pidyon Kapparot turns that inward return into an outward act of compassion. Through tzedakah, tradition becomes food, care, and dignity for another Jewish home.",
     storyThree: "Your gift helps Hameir Laarets support families preparing for the holy days. Names shared with the organization are carried in heartfelt tefillah.",
@@ -435,7 +435,7 @@ const COPY = {
     elulTitle: "1,100 canastas de alimentos",
     elulTitleAccent: "para familias del sur",
     elulPhotoBody: "Antes del Año Nuevo, ayúdanos a llevar una canasta de alimentos festiva a 1,100 familias del sur de Israel que más lo necesitan.",
-    elulBody: "Elul es un tiempo para preparar nuestros corazones mediante actos de bondad y generosidad. Este año, nuestra meta es preparar y entregar 1,100 canastas de alimentos a familias del sur de Israel antes de las festividades, para que cada hogar pueda celebrar el Año Nuevo con dignidad.",
+    elulBody: "Elul es un tiempo para preparar el corazón con actos de bondad y generosidad. Nuestra meta este año: 1,100 canastas de alimentos para familias del sur de Israel antes de las festividades, para que cada hogar celebre con dignidad.",
     seasonalCta: "Dona una canasta de alimentos",
     fulfill: "Haz tu Pidyon Kaparot",
     readStory: "Conoce el significado de Kaparot",
@@ -461,7 +461,7 @@ const COPY = {
     campaignsEyebrow: "Elige tu impacto",
     campaignsTitle: "Elige cómo tu donativo lleva luz.",
     campaignsTitleAccent: "Cada causa responde a una necesidad real.",
-    campaignsBody: "Apoya la causa más cercana a tu corazón. Si un promotor te invitó, recibirá el crédito automáticamente, sin importar qué causa elijas.",
+    campaignsBody: "Apoya la causa más cercana a tu corazón. Si un promotor te invitó, recibirá el crédito automáticamente.",
     viewKaparot: "Donar a Kaparot",
     chooseCampaign: "Donar a esta causa",
     donateMesilot: "Donar a Mesilot",
@@ -570,7 +570,7 @@ const COPY = {
     elulTitle: "1 100 paniers alimentaires",
     elulTitleAccent: "pour des familles du Sud",
     elulPhotoBody: "Avant le Nouvel An, aidez-nous à apporter un panier alimentaire de fête à 1 100 familles du sud d’Israël qui en ont le plus besoin.",
-    elulBody: "Eloul est un temps pour préparer notre cœur par des actes de bonté et de générosité. Cette année, notre objectif est de préparer et de livrer 1 100 paniers alimentaires à des familles du sud d’Israël avant les fêtes, afin que chaque foyer puisse célébrer le Nouvel An dans la dignité.",
+    elulBody: "Eloul est un temps pour préparer son cœur par la bonté et la générosité. Notre objectif cette année : 1 100 paniers alimentaires pour des familles du sud d’Israël avant les fêtes, pour que chaque foyer célèbre dans la dignité.",
     seasonalCta: "Offrir un panier alimentaire",
     fulfill: "Faire son Pidyon Kapparot",
     readStory: "Pourquoi les Kapparot comptent",
@@ -596,7 +596,7 @@ const COPY = {
     campaignsEyebrow: "Choisissez votre impact",
     campaignsTitle: "Choisissez comment votre don apporte la lumière.",
     campaignsTitleAccent: "Chaque cause répond à un besoin réel.",
-    campaignsBody: "Soutenez la cause qui vous tient le plus à cœur. Si une personne vous a invité à donner, elle recevra automatiquement le crédit de votre don, quelle que soit la cause choisie.",
+    campaignsBody: "Soutenez la cause qui vous tient le plus à cœur. Si une personne vous a invité à donner, elle recevra automatiquement le crédit de votre don.",
     viewKaparot: "Donner pour les Kapparot",
     chooseCampaign: "Donner pour cette cause",
     donateMesilot: "Donner pour Mesilot",
@@ -620,7 +620,7 @@ const COPY = {
     rights: "© 2026 Hameir Laarets. Tous droits réservés.",
     closeStory: "Fermer le récit d’Eloul",
     storyEyebrow: "Eloul · Tsedaka · Pidyon Kapparot",
-    storyTitle: "Eloul est un temps pour revenir à soi — et pour donner.",
+    storyTitle: "Eloul est un temps pour revenir à soi et pour donner.",
     storyOne: "Avant le Nouvel An, nous marquons une pause, nous réfléchissons, et nous portons nos espoirs et nos prières devant Hashem.",
     storyTwo: "Le Pidyon Kapparot transforme ce retour intérieur en un acte concret de compassion. Par la tsedaka, la tradition devient nourriture, soins et dignité pour un autre foyer juif.",
     storyThree: "Votre don aide Hameir Laarets à soutenir les familles qui se préparent pour les jours saints. Les noms transmis à l’organisation sont portés dans une tefila sincère.",
@@ -703,7 +703,6 @@ export default function DonationExperienceV4() {
   const [isMobileHero, setIsMobileHero] = useState(true);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
   const [heroVideoActive, setHeroVideoActive] = useState(false);
-  const [donationDockVisible, setDonationDockVisible] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileHeroRevealTimerRef = useRef<number | null>(null);
   const t = COPY[locale];
@@ -758,31 +757,6 @@ export default function DonationExperienceV4() {
   }, [isMobileHero]);
 
   useEffect(() => {
-    let animationFrame = 0;
-    const updateDockVisibility = () => {
-      window.cancelAnimationFrame(animationFrame);
-      animationFrame = window.requestAnimationFrame(() => {
-        const hero = document.getElementById("v4-main");
-        const composer = document.getElementById("v4-give");
-        if (!hero || !composer) return;
-
-        const heroBottom = hero.getBoundingClientRect().bottom;
-        const composerTop = composer.getBoundingClientRect().top;
-        setDonationDockVisible(heroBottom < 160 && composerTop > window.innerHeight - 90);
-      });
-    };
-
-    updateDockVisibility();
-    window.addEventListener("scroll", updateDockVisibility, { passive: true });
-    window.addEventListener("resize", updateDockVisibility);
-    return () => {
-      window.cancelAnimationFrame(animationFrame);
-      window.removeEventListener("scroll", updateDockVisibility);
-      window.removeEventListener("resize", updateDockVisibility);
-    };
-  }, []);
-
-  useEffect(() => {
     const syncFromUrl = window.setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       const pathCandidate = window.location.pathname.split("/").filter(Boolean)[0] || "";
@@ -814,9 +788,7 @@ export default function DonationExperienceV4() {
     window.history.replaceState({}, "", currentUrl);
   }, [locale, urlReady]);
 
-  const activeCampaign = seasonalCampaign;
   const displayedCampaigns = campaignDisplayOrder;
-  const activeCampaignTitle = activeCampaign.title[locale];
   const elulEmbedSrc = `/double-elul?campaign=${encodeURIComponent(seasonalCampaign.doubleCampaign)}&lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -902,20 +874,6 @@ export default function DonationExperienceV4() {
           {t.give} <Heart size={18} weight="regular" aria-hidden="true" />
         </button>
       </header>
-
-      <button
-        className={`${styles.mobileDonationDock} ${donationDockVisible ? styles.mobileDonationDockVisible : ""}`}
-        type="button"
-        onClick={scrollToGift}
-        aria-hidden={!donationDockVisible}
-        tabIndex={donationDockVisible ? 0 : -1}
-      >
-        <span>
-          <small>{t.giftDockLabel}</small>
-          <strong>{activeCampaignTitle}</strong>
-        </span>
-        <b>{t.give} <ArrowRight size={18} weight="bold" aria-hidden="true" /></b>
-      </button>
 
       <section className={styles.globalHero} id="v4-main" aria-labelledby="global-hero-title">
         <div className={styles.heroMedia} aria-hidden="true">
