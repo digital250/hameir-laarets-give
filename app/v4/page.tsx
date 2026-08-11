@@ -182,9 +182,9 @@ const campaigns: Campaign[] = [
 
 const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
   families: {
-    en: "14,500 families supported through Chesed last year",
-    es: "14,500 familias recibieron apoyo mediante Jesed el año pasado",
-    fr: "14 500 familles soutenues grâce au Hessed l'an dernier",
+    en: "14,500 food baskets distributed through Chesed last year",
+    es: "14,500 canastas de alimentos entregadas mediante Jesed el año pasado",
+    fr: "14 500 paniers alimentaires distribués grâce au Hessed l'an dernier",
   },
   children: {
     en: "76,000 people guided and strengthened last year",
@@ -192,9 +192,9 @@ const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
     fr: "76 000 personnes accompagnées et soutenues l'an dernier",
   },
   food: {
-    en: "14,500 families supported through Chesed last year",
-    es: "14,500 familias recibieron apoyo mediante Jesed el año pasado",
-    fr: "14 500 familles soutenues grâce au Hessed l'an dernier",
+    en: "14,500 food baskets distributed through Chesed last year",
+    es: "14,500 canastas de alimentos entregadas mediante Jesed el año pasado",
+    fr: "14 500 paniers alimentaires distribués grâce au Hessed l'an dernier",
   },
   community: {
     en: "Communities in 136 countries reached through Hameir Laarets’ work last year",
@@ -274,7 +274,7 @@ const COPY = {
     torah: "Torah",
     torahBody: "Making Torah wisdom accessible through books, learning, and guidance.",
     chesed: "Chesed",
-    chesedBody: "Standing with families through food, therapeutic care, and practical assistance.",
+    chesedBody: "Standing with families through food, therapeutic care, and practical assistance, including hundreds of orphans, widows, and young couples every year.",
     community: "Community",
     communityBody: "Strengthening Jewish connection across Israel and communities worldwide.",
     world: "Around the world",
@@ -284,6 +284,7 @@ const COPY = {
     legacyTitleAccent: "Continues Across the World",
     founderRole: "Founder",
     founderBody: "His vision united Torah learning with practical acts of Chesed.",
+    founderQuote: "The whole world was created only for the sake of kindness.",
     leaderRole: "Continuing the mission",
     leaderBody: "Advancing his father’s vision through faith, responsibility, and action.",
     pillarsEyebrow: "One mission · Three living pillars",
@@ -293,7 +294,7 @@ const COPY = {
     impactTitleAccent: "A year of care.",
     titlesLabel: "Countries reached",
     languagesLabel: "Torah publications distributed",
-    basketsLabel: "Families supported through Chesed",
+    basketsLabel: "Food baskets distributed through Chesed",
     studentsLabel: "People guided & strengthened",
     officialSource: "Annual impact figures supplied by Hameir Laarets.",
     featured: "Elul 5786 · Our focus now",
@@ -318,7 +319,7 @@ const COPY = {
     deductible: "Tax-deductible",
     donationConfidenceEyebrow: "Give with confidence",
     donationConfidenceTitle: "Your gift joins a proven, worldwide mission.",
-    donationConfidenceFamilies: "14,500 families supported",
+    donationConfidenceFamilies: "14,500 food baskets delivered",
     donationConfidenceCountries: "136 countries reached",
     donationConfidenceSecure: "Secure checkout",
     donationConfidenceTax: "Tax-deductible giving",
@@ -409,7 +410,7 @@ const COPY = {
     torah: "Torá",
     torahBody: "Hacemos accesible la sabiduría de la Torá mediante libros, estudio y orientación.",
     chesed: "Jesed",
-    chesedBody: "Acompañamos a familias con alimentos, atención terapéutica y ayuda práctica.",
+    chesedBody: "Acompañamos a familias con alimentos, atención terapéutica y ayuda práctica, incluyendo a cientos de huérfanos, viudas y parejas jóvenes cada año.",
     community: "Comunidad",
     communityBody: "Fortalecemos la conexión judía en Israel y en comunidades de todo el mundo.",
     world: "En todo el mundo",
@@ -419,6 +420,7 @@ const COPY = {
     legacyTitleAccent: "continúa por todo el mundo",
     founderRole: "Fundador",
     founderBody: "Su visión unió el estudio de la Torá con actos concretos de Jesed.",
+    founderQuote: "El mundo entero fue creado únicamente por el mérito del Jesed.",
     leaderRole: "Continuando la misión",
     leaderBody: "Continúa la visión de su padre con fe, responsabilidad y acción.",
     pillarsEyebrow: "Una misión · Tres pilares vivos",
@@ -428,7 +430,7 @@ const COPY = {
     impactTitleAccent: "Un año de ayuda.",
     titlesLabel: "Países alcanzados",
     languagesLabel: "Publicaciones de Torá distribuidas",
-    basketsLabel: "Familias apoyadas mediante Jesed",
+    basketsLabel: "Canastas de alimentos entregadas mediante Jesed",
     studentsLabel: "Personas orientadas y fortalecidas",
     officialSource: "Cifras anuales proporcionadas por Hameir Laarets.",
     featured: "Elul 5786 · Nuestro enfoque",
@@ -453,7 +455,7 @@ const COPY = {
     deductible: "Deducible de impuestos",
     donationConfidenceEyebrow: "Dona con confianza",
     donationConfidenceTitle: "Tu donativo se suma a una misión comprobada en todo el mundo.",
-    donationConfidenceFamilies: "14,500 familias apoyadas",
+    donationConfidenceFamilies: "14,500 canastas de alimentos entregadas",
     donationConfidenceCountries: "136 países alcanzados",
     donationConfidenceSecure: "Pago seguro",
     donationConfidenceTax: "Donativo deducible de impuestos",
@@ -544,7 +546,7 @@ const COPY = {
     torah: "Torah",
     torahBody: "Rendre la sagesse de la Torah accessible par les livres, l’étude et l’accompagnement.",
     chesed: "Hessed",
-    chesedBody: "Soutenir les familles par l’aide alimentaire, les soins thérapeutiques et une assistance concrète.",
+    chesedBody: "Soutenir les familles par l’aide alimentaire, les soins thérapeutiques et une assistance concrète, y compris des centaines d’orphelins, de veuves et de jeunes couples chaque année.",
     community: "Communauté",
     communityBody: "Renforcer les liens juifs en Israël et au sein des communautés du monde entier.",
     world: "À travers le monde",
@@ -554,6 +556,7 @@ const COPY = {
     legacyTitleAccent: "se poursuit à travers le monde",
     founderRole: "Fondateur",
     founderBody: "Sa vision a uni l’étude de la Torah à des actes concrets de Hessed.",
+    founderQuote: "Le monde entier n’a été créé que pour le mérite du Hessed.",
     leaderRole: "Poursuit la mission",
     leaderBody: "Fait avancer la vision de son père par la foi, la responsabilité et l’action.",
     pillarsEyebrow: "Une mission · Trois piliers vivants",
@@ -563,7 +566,7 @@ const COPY = {
     impactTitleAccent: "Une année de soutien.",
     titlesLabel: "Pays touchés",
     languagesLabel: "Publications de Torah distribuées",
-    basketsLabel: "Familles soutenues grâce au Hessed",
+    basketsLabel: "Paniers alimentaires distribués grâce au Hessed",
     studentsLabel: "Personnes accompagnées et soutenues",
     officialSource: "Chiffres d’impact annuels communiqués par Hameir Laarets.",
     featured: "Eloul 5786 · Notre priorité actuelle",
@@ -588,7 +591,7 @@ const COPY = {
     deductible: "Déductible des impôts",
     donationConfidenceEyebrow: "Donnez en toute confiance",
     donationConfidenceTitle: "Votre don rejoint une mission mondiale éprouvée.",
-    donationConfidenceFamilies: "14 500 familles soutenues",
+    donationConfidenceFamilies: "14 500 paniers alimentaires distribués",
     donationConfidenceCountries: "136 pays touchés",
     donationConfidenceSecure: "Paiement sécurisé",
     donationConfidenceTax: "Don déductible des impôts",
@@ -994,6 +997,7 @@ export default function DonationExperienceV4() {
               <small>{t.founderRole}</small>
               <h3>Rabbi Yoram Michael Abergel zt&apos;l</h3>
               <p>{t.founderBody}</p>
+              <p className={styles.legacyQuote}>“{t.founderQuote}”</p>
             </div>
           </article>
 

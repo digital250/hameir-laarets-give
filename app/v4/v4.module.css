@@ -950,7 +950,7 @@
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(28px, 2.5vw, 38px);
   font-weight: 500;
-  line-height: .96;
+  line-height: 1.18;
 }
 
 .donationConfidencePoints {
@@ -1634,6 +1634,16 @@
   color: #4b5963;
   font-size: 11px;
   line-height: 1.5;
+}
+
+.legacyQuote {
+  max-width: 240px;
+  margin: 10px auto 0 !important;
+  color: var(--burgundy) !important;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px !important;
+  font-style: italic;
+  line-height: 1.35 !important;
 }
 
 
