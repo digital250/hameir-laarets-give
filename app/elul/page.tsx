@@ -791,6 +791,7 @@ export default function ElulDonationExperience() {
       </section>
 
       <section className={styles.namesSection} aria-labelledby="names-title">
+       <div className={styles.namesInner}>
         <div className={styles.namesCopy}>
           <span>{t.namesEyebrow}</span>
           <h2 id="names-title" className={styles.visuallyHidden}>{t.namesEyebrow}</h2>
@@ -809,6 +810,7 @@ export default function ElulDonationExperience() {
             height={528}
           />
         </div>
+       </div>
       </section>
 
       <section className={styles.legacySection} id="v4-legacy" aria-labelledby="legacy-title">
@@ -901,13 +903,14 @@ export default function ElulDonationExperience() {
           <span><ShieldCheck size={18} /> 501(c)(3)</span>
         </div>
 
-        <a className={styles.exploreCampaigns} href="#bank-wire">
-          {t.bankWireToggle} <ArrowDown size={16} weight="bold" />
-        </a>
-
-        <a className={styles.exploreCampaigns} href="#v4-campaigns">
-          {t.campaignsLink} <ArrowDown size={18} weight="bold" />
-        </a>
+        <div className={styles.donationLinks}>
+          <a className={styles.exploreCampaigns} href="#bank-wire">
+            {t.bankWireToggle} <ArrowDown size={16} weight="bold" />
+          </a>
+          <a className={styles.exploreCampaigns} href="#v4-campaigns">
+            {t.campaignsLink} <ArrowDown size={18} weight="bold" />
+          </a>
+        </div>
       </section>
 
       <section className={styles.campaignSection} id="v4-campaigns">
