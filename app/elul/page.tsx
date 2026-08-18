@@ -169,6 +169,11 @@ const COPY = {
     identityBody: "Before Rosh Hashanah, help us pack and deliver a High Holiday food basket to every one of them, bringing dignity to their table for the New Year.",
     supportCurrent: "Give a High Holiday Food Basket",
     discover: "See the mission behind the work",
+    namesEyebrow: "Your Names, Carried in Tefillah",
+    namesBody: "This Rosh Hashanah, the names entrusted to us will be carried in a special tefillah at the Kotel.",
+    namesInscribed: "May you and your loved ones be",
+    namesBookOfLifePhrase: "written in the book of life",
+    namesPortraitAlt: "Rabbi Yisrael Abergel shlit’a",
     torah: "Torah",
     torahBody: "Making Torah wisdom accessible through books, learning, and guidance.",
     chesed: "Chesed",
@@ -231,6 +236,15 @@ const COPY = {
     onlineNav: "Hameir Laarets online",
     elulFormTitle: "Elul donation form",
     officialInfoLabel: "Official information",
+    bankWireToggle: "Bank wire details",
+    bankWireBeneficiary: "Beneficiary",
+    bankWireBank: "Bank",
+    bankWireAccount: "Account number",
+    bankWireRouting: "Routing number",
+    bankWireAddress: "Beneficiary address",
+    bankWireEin: "EIN",
+    bankWireCopy: "Copy bank details",
+    bankWireCopied: "Copied ✓",
   },
   es: {
     skip: "Saltar al contenido principal",
@@ -252,6 +266,11 @@ const COPY = {
     identityBody: "Antes de Rosh Hashaná, ayúdanos a preparar y entregar una canasta de alimentos de Altas Fiestas a cada familia que la necesita, llevando dignidad a su mesa para el Año Nuevo.",
     supportCurrent: "Dona una canasta de Altas Fiestas",
     discover: "Conoce la misión",
+    namesEyebrow: "Tu nombre, llevado en tefilá",
+    namesBody: "Esta Rosh Hashaná, los nombres que se nos confíen serán llevados en una tefilá especial en el Kotel.",
+    namesInscribed: "Que tú y tus seres queridos sean",
+    namesBookOfLifePhrase: "inscritos en el libro de la vida",
+    namesPortraitAlt: "Rabino Yisrael Abergel shlit’a",
     torah: "Torá",
     torahBody: "Hacemos accesible la sabiduría de la Torá mediante libros, estudio y orientación.",
     chesed: "Jesed",
@@ -314,6 +333,15 @@ const COPY = {
     onlineNav: "Hameir Laarets en línea",
     elulFormTitle: "Formulario de donación de Elul",
     officialInfoLabel: "Información oficial",
+    bankWireToggle: "Datos para transferencia bancaria",
+    bankWireBeneficiary: "Beneficiario",
+    bankWireBank: "Banco",
+    bankWireAccount: "Número de cuenta",
+    bankWireRouting: "Número de ruta (routing)",
+    bankWireAddress: "Dirección del beneficiario",
+    bankWireEin: "EIN",
+    bankWireCopy: "Copiar datos bancarios",
+    bankWireCopied: "Copiado ✓",
   },
   fr: {
     skip: "Passer au contenu principal",
@@ -335,6 +363,11 @@ const COPY = {
     identityBody: "Avant Roch Hachana, aidez-nous à préparer et à livrer un panier alimentaire des Grandes Fêtes à chaque famille qui en a besoin, pour apporter la dignité à leur table pour le Nouvel An.",
     supportCurrent: "Offrir un panier des Grandes Fêtes",
     discover: "Découvrir la mission derrière notre action",
+    namesEyebrow: "Vos noms, portés dans la tefila",
+    namesBody: "Ce Roch Hachana, les noms qui nous seront confiés seront portés dans une tefila spéciale au Kotel.",
+    namesInscribed: "Que vous et vos proches soyez",
+    namesBookOfLifePhrase: "inscrits dans le livre de la vie",
+    namesPortraitAlt: "Rabbin Yisrael Abergel chlita",
     torah: "Torah",
     torahBody: "Rendre la sagesse de la Torah accessible par les livres, l’étude et l’accompagnement.",
     chesed: "Hessed",
@@ -397,6 +430,15 @@ const COPY = {
     onlineNav: "Hameir Laarets en ligne",
     elulFormTitle: "Formulaire de don d’Eloul",
     officialInfoLabel: "Informations officielles",
+    bankWireToggle: "Coordonnées de virement bancaire",
+    bankWireBeneficiary: "Bénéficiaire",
+    bankWireBank: "Banque",
+    bankWireAccount: "Numéro de compte",
+    bankWireRouting: "Numéro de routage",
+    bankWireAddress: "Adresse du bénéficiaire",
+    bankWireEin: "EIN",
+    bankWireCopy: "Copier les coordonnées",
+    bankWireCopied: "Copié ✓",
   },
 } as const;
 const SOCIAL_LINKS: { label: LocalizedText; href: string; icon: typeof GlobeHemisphereWest }[] = [
@@ -455,6 +497,7 @@ export default function ElulDonationExperience() {
   const [isMobileHero, setIsMobileHero] = useState(true);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
   const [heroVideoActive, setHeroVideoActive] = useState(false);
+  const [bankDetailsCopied, setBankDetailsCopied] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileHeroRevealTimerRef = useRef<number | null>(null);
   const t = COPY[locale];
@@ -544,6 +587,24 @@ export default function ElulDonationExperience() {
   const elulEmbedSrc = `/double-elul?campaign=${encodeURIComponent(seasonalCampaign.doubleCampaign)}&lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  const bankWireText = [
+    "American Friends of Hameir Laarets Inc.",
+    "Beacon Bank",
+    "Account number: 5111002571",
+    "Routing number: 211371489",
+    "American Friends of Hameir Laarets Inc.",
+    "111 North Central Avenue, Ste 425",
+    "Hartsdale, NY 10530",
+    "EIN 84-5083012",
+  ].join("\n");
+
+  const copyBankDetails = () => {
+    navigator.clipboard?.writeText(bankWireText).then(() => {
+      setBankDetailsCopied(true);
+      window.setTimeout(() => setBankDetailsCopied(false), 2500);
+    });
   };
 
   const resetDoubleCheckout = () => new Promise<void>((resolve, reject) => {
@@ -729,6 +790,27 @@ export default function ElulDonationExperience() {
         </div>
       </section>
 
+      <section className={styles.namesSection} aria-labelledby="names-title">
+        <div className={styles.namesCopy}>
+          <span>{t.namesEyebrow}</span>
+          <h2 id="names-title" className={styles.visuallyHidden}>{t.namesEyebrow}</h2>
+          <span className={styles.namesDivider} aria-hidden="true" />
+          <p>{t.namesBody}</p>
+          <div className={styles.namesBookOfLife}>
+            <span>{t.namesInscribed}</span>
+            <strong>{t.namesBookOfLifePhrase}</strong>
+          </div>
+        </div>
+        <div className={styles.namesPortrait}>
+          <Image
+            src="/images/rabbi-yisrael-cutout.png"
+            alt={t.namesPortraitAlt}
+            width={352}
+            height={528}
+          />
+        </div>
+      </section>
+
       <section className={styles.legacySection} id="v4-legacy" aria-labelledby="legacy-title">
         <h2 className={styles.visuallyHidden} id="legacy-title">{t.legacyTitle} {t.legacyTitleAccent}</h2>
 
@@ -818,6 +900,10 @@ export default function ElulDonationExperience() {
           <span><CheckCircle size={17} /> {t.deductible}</span><i />
           <span><ShieldCheck size={18} /> 501(c)(3)</span>
         </div>
+
+        <a className={styles.exploreCampaigns} href="#bank-wire">
+          {t.bankWireToggle} <ArrowDown size={16} weight="bold" />
+        </a>
 
         <a className={styles.exploreCampaigns} href="#v4-campaigns">
           {t.campaignsLink} <ArrowDown size={18} weight="bold" />
@@ -911,7 +997,7 @@ export default function ElulDonationExperience() {
               const localizedLabel = label[locale];
               return (
               <a key={label.en} href={href} target="_blank" rel="noreferrer" aria-label={localizedLabel} title={localizedLabel}>
-                <Icon size={21} weight="regular" aria-hidden="true" />
+                <Icon size={26} weight="regular" aria-hidden="true" />
               </a>
               );
             })}
@@ -923,9 +1009,17 @@ export default function ElulDonationExperience() {
             <a href="https://hameirlaarets.org/contact-us/" target="_blank" rel="noreferrer">{t.contactUs}</a>
             <a href="https://hameirlaarets.org/privacy-policy/" target="_blank" rel="noreferrer">{t.privacyPolicy}</a>
           </nav>
+          <small className={styles.footerRegistered}><ShieldCheck size={14} weight="fill" aria-hidden="true" /> {t.nonprofit}</small>
           <small>{t.mailingAddress}</small>
-          <small>{t.nonprofit}</small>
           <small>{t.taxStatus}</small>
+          <div className={styles.footerBankWire} id="bank-wire">
+            <small>{t.bankWireToggle}</small>
+            <small>{t.bankWireBeneficiary}: American Friends of Hameir Laarets Inc. · {t.bankWireBank}: Beacon Bank · {t.bankWireAccount}: 5111002571 · {t.bankWireRouting}: 211371489</small>
+            <small>{t.bankWireAddress}: American Friends of Hameir Laarets Inc., 111 North Central Avenue, Ste 425, Hartsdale, NY 10530 · {t.bankWireEin}: 84-5083012</small>
+            <button type="button" className={styles.bankWireCopyButton} onClick={copyBankDetails}>
+              {bankDetailsCopied ? t.bankWireCopied : t.bankWireCopy}
+            </button>
+          </div>
           <small>{t.rights}</small>
         </div>
       </footer>

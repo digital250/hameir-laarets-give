@@ -20,13 +20,14 @@
 }
 
 .page > .globalHero { order: 1; }
-.page > .featuredTop { order: 2; }
-.page > .donationSection { order: 3; }
-.page > .legacySection { order: 4; }
-.page > .impactSection { order: 5; }
-.page > .campaignSection { order: 6; }
-.page > .trustSection { order: 7; }
-.page > .footer { order: 8; }
+.page > .namesSection { order: 2; }
+.page > .featuredTop { order: 3; }
+.page > .donationSection { order: 4; }
+.page > .legacySection { order: 5; }
+.page > .impactSection { order: 6; }
+.page > .campaignSection { order: 7; }
+.page > .trustSection { order: 8; }
+.page > .footer { order: 9; }
 
 .page button,
 .page input {
@@ -408,6 +409,8 @@
   line-height: .98;
   text-wrap: balance;
   text-shadow: 0 3px 28px rgba(0, 0, 0, .45);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "pnum" 1;
   opacity: 0;
 }
 
@@ -1488,6 +1491,188 @@
   border: 0;
 }
 
+.namesSection {
+  width: 100%;
+  padding: 72px clamp(24px, 6vw, 104px);
+  display: grid;
+  grid-template-columns: 1fr clamp(190px, 18vw, 250px);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  background: var(--paper);
+}
+
+.namesPortrait {
+  align-self: center;
+  position: relative;
+}
+
+.namesPortrait::before {
+  content: "";
+  width: 132%;
+  height: 132%;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(214, 173, 72, .22) 0%, rgba(214, 173, 72, 0) 72%);
+}
+
+.namesPortrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+.namesCopy {
+  max-width: 640px;
+}
+
+.namesCopy > span {
+  display: block;
+  color: var(--burgundy);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.namesDivider {
+  width: 46px;
+  height: 1px;
+  margin: 16px 0;
+  position: relative;
+  background: rgba(187, 145, 32, .55);
+}
+
+.namesDivider::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--gold);
+}
+
+.namesCopy p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.namesBookOfLife {
+  margin: 26px 0 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.namesBookOfLife span {
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.namesBookOfLife strong {
+  color: var(--gold);
+  font-size: clamp(28px, 3vw, 38px);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+@media (max-width: 720px) {
+  .namesSection {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 56px 24px;
+  }
+  .namesCopy p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .namesDivider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .namesBookOfLife {
+    justify-content: center;
+  }
+}
+
+.footerRegistered {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  color: rgba(255, 255, 255, .78) !important;
+}
+
+.footerRegistered svg {
+  flex: 0 0 auto;
+  color: #d8b65c;
+}
+
+.footerBankWire {
+  margin-top: 6px;
+  padding-top: 10px;
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+.footerBankWire small:first-child {
+  color: rgba(255, 255, 255, .72);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.bankWireCopyButton {
+  width: fit-content;
+  margin-top: 4px;
+  margin-left: auto;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  color: white;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.bankWireCopyButton:hover {
+  border-color: rgba(216, 182, 92, .7);
+  background: rgba(216, 182, 92, .12);
+}
+
+@media (max-width: 900px) {
+  .bankWireCopyButton {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .footerRegistered {
+    justify-content: center;
+  }
+}
+
 .legacySection {
   width: min(1380px, calc(100% - 36px));
   min-height: 326px;
@@ -2211,11 +2396,11 @@
 }
 
 .footerConnect a {
-  width: 46px;
-  height: 46px;
+  width: 54px;
+  height: 54px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, .24);
+  border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 50%;
   color: white;
   transition: transform .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
