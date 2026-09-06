@@ -917,7 +917,6 @@ export default function ElulDonationExperience() {
         <div className={styles.sectionLead}>
           <span>{t.campaignsEyebrow}</span>
           <h2>{t.campaignsTitle}<br />{t.campaignsTitleAccent}</h2>
-          <p>{t.campaignsBody}</p>
         </div>
 
         <div className={styles.campaignGrid}>
