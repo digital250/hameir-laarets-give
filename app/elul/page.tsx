@@ -81,12 +81,12 @@ const campaigns: Campaign[] = [
     cause: "families",
     eyebrow: {
       en: "Before Yom Kippur · Pidyon Kaparot",
-      es: "Antes de Yom Kipur · Pidyon Kaparot",
+      es: "Antes de Yom Kipur · Pidión Kaparot",
       fr: "Avant Yom Kippour · Pidyon Kapparot",
     },
     title: {
       en: "Fulfill Your Family’s Pidyon Kapparot",
-      es: "Cumple el Pidyon Kapparot de tu familia",
+      es: "Cumple el Pidión Kapparot de tu familia",
       fr: "Accomplissez le Pidyon Kapparot de votre famille",
     },
     description: {
