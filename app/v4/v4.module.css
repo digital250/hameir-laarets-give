@@ -1046,6 +1046,19 @@
   background: transparent;
 }
 
+/* The Kaparot flow opens Double as a browser-level checkout, not inside an iframe. */
+.donationSection .doubleEmbedFrameShell {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.donationSection .doubleEmbedFrameShell .seasonalCtaButton {
+  margin: 0;
+}
+
 .photoPanel {
   min-width: 0;
   overflow: hidden;

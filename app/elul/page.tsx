@@ -170,9 +170,9 @@ const COPY = {
     supportCurrent: "Fulfill Your Family Pidyon",
     discover: "See the mission behind the work",
     namesEyebrow: "Your Names, Carried in Tefillah",
-    namesBody: "This Rosh Hashanah, the names entrusted to us will be carried in a special tefillah at the Kotel.",
-    namesInscribed: "May you and your loved ones be",
-    namesBookOfLifePhrase: "written in the book of life",
+    namesBody: "Before Yom Kippur, the names entrusted to us will be carried in a special tefillah at the Kotel.",
+    namesInscribed: "May this act of tzedakah bring",
+    namesBookOfLifePhrase: "merit and blessing to your family",
     namesPortraitAlt: "Rabbi Yisrael Abergel shlit’a",
     torah: "Torah",
     torahBody: "Making Torah wisdom accessible through books, learning, and guidance.",
@@ -267,9 +267,9 @@ const COPY = {
     supportCurrent: "Cumple el Pidión familiar",
     discover: "Conoce la misión",
     namesEyebrow: "Tu nombre, llevado en tefilá",
-    namesBody: "Esta Rosh Hashaná, los nombres que se nos confíen serán llevados en una tefilá especial en el Kotel.",
-    namesInscribed: "Que tú y tus seres queridos sean",
-    namesBookOfLifePhrase: "inscritos en el libro de la vida",
+    namesBody: "Antes de Yom Kipur, los nombres que se nos confíen serán llevados en una tefilá especial en el Kotel.",
+    namesInscribed: "Que este acto de tzedaká traiga",
+    namesBookOfLifePhrase: "mérito y bendición a tu familia",
     namesPortraitAlt: "Rabino Yisrael Abergel shlit’a",
     torah: "Torá",
     torahBody: "Hacemos accesible la sabiduría de la Torá mediante libros, estudio y orientación.",
@@ -364,9 +364,9 @@ const COPY = {
     supportCurrent: "Accomplir le Pidyon familial",
     discover: "Découvrir la mission derrière notre action",
     namesEyebrow: "Vos noms, portés dans la tefila",
-    namesBody: "Ce Roch Hachana, les noms qui nous seront confiés seront portés dans une tefila spéciale au Kotel.",
-    namesInscribed: "Que vous et vos proches soyez",
-    namesBookOfLifePhrase: "inscrits dans le livre de la vie",
+    namesBody: "Avant Yom Kippour, les noms qui nous seront confiés seront portés dans une tefila spéciale au Kotel.",
+    namesInscribed: "Que cet acte de tsedaka apporte",
+    namesBookOfLifePhrase: "mérite et bénédiction à votre famille",
     namesPortraitAlt: "Rabbin Yisrael Abergel chlita",
     torah: "Torah",
     torahBody: "Rendre la sagesse de la Torah accessible par les livres, l’étude et l’accompagnement.",
@@ -480,8 +480,8 @@ const SOCIAL_LINKS: { label: LocalizedText; href: string; icon: typeof GlobeHemi
   },
 ];
 
-// This month, the grid below the donation form shows Kaparot only.
-const campaignDisplayOrder = campaigns.filter((campaign) => campaign.id === "food-relief");
+// Kaparot leads the page; the ongoing food-support campaign remains available below.
+const campaignDisplayOrder = [...campaigns].sort((a, b) => Number(b.id === "kaparot") - Number(a.id === "kaparot"));
 
 // The campaign featured in the hero, the story section, and the main donation form.
 const SEASONAL_CAMPAIGN_ID = "kaparot";
@@ -584,7 +584,6 @@ export default function ElulDonationExperience() {
   }, [locale, urlReady]);
 
   const displayedCampaigns = campaignDisplayOrder;
-  const elulEmbedSrc = `/double-elul?campaign=${encodeURIComponent(seasonalCampaign.doubleCampaign)}&lang=${locale}${solicitor ? `&solicitor=${encodeURIComponent(solicitor)}` : ""}${fundraiserSlug ? `&fundraiser=${encodeURIComponent(fundraiserSlug)}` : ""}`;
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
@@ -747,9 +746,9 @@ export default function ElulDonationExperience() {
           </h1>
           <p>{t.identityBody}</p>
           <div className={styles.heroActions}>
-            <a href="#v4-give">
+            <button type="button" onClick={() => openDoubleCheckout(seasonalCampaign)}>
               {t.supportCurrent} <ArrowRight size={18} weight="bold" />
-            </a>
+            </button>
             <a href="#v4-legacy">{t.discover}</a>
           </div>
         </div>
@@ -784,9 +783,9 @@ export default function ElulDonationExperience() {
           <span>{t.featured}</span>
           <h2>{t.elulTitle}<br />{t.elulTitleAccent}</h2>
           <p>{t.elulBody}</p>
-          <a href="#v4-give" className={styles.seasonalCtaButton}>
+          <button type="button" className={styles.seasonalCtaButton} onClick={() => openDoubleCheckout(seasonalCampaign)}>
             {t.seasonalCta} <ArrowRight size={18} weight="bold" />
-          </a>
+          </button>
         </div>
       </section>
 
@@ -889,12 +888,9 @@ export default function ElulDonationExperience() {
           </div>
         </div>
         <div className={styles.doubleEmbedFrameShell} id="v4-give">
-          <iframe
-            className={styles.doubleEmbedFrame}
-            src={elulEmbedSrc}
-            title={t.elulFormTitle}
-            loading="eager"
-          />
+          <button type="button" className={styles.seasonalCtaButton} onClick={() => openDoubleCheckout(seasonalCampaign)}>
+            {t.supportCurrent} <ArrowRight size={18} weight="bold" />
+          </button>
         </div>
 
         <div className={styles.trustLine} aria-label={t.securityInfo}>
