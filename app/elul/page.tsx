@@ -266,7 +266,7 @@ const COPY = {
     identityBody: "Un Pidión Familiar de $180 une la reflexión personal con la tzedaká y el jesed para familias del sur de Israel.",
     supportCurrent: "Cumple el Pidión familiar",
     discover: "Conoce la misión",
-    namesEyebrow: "Tu nombre, llevado en tefilá",
+    namesEyebrow: "Tus nombres, llevados en tefilá",
     namesBody: "Antes de Yom Kipur, los nombres que se nos confíen serán llevados en una tefilá especial en el Kotel.",
     namesInscribed: "Que este acto de tzedaká traiga",
     namesBookOfLifePhrase: "mérito y bendición a tu familia",
@@ -306,9 +306,9 @@ const COPY = {
     donationConfidenceTax: "Donativo deducible de impuestos",
     campaignsLink: "Explora otras formas de ayudar",
     campaignsEyebrow: "Más formas de apoyar",
-    campaignsTitle: "Dona mediante Pidyon Kaparot.",
-    campaignsTitleAccent: "Una tradición de tzedaká antes del Año Nuevo.",
-    campaignsBody: "Si un promotor te invitó, recibirá el crédito automáticamente, sin importar qué causa elijas.",
+    campaignsTitle: "Cumple tu Pidión Kaparot.",
+    campaignsTitleAccent: "Un acto de tzedaká antes de Yom Kipur.",
+    campaignsBody: "Si un recaudador te invitó, recibirá el crédito automáticamente.",
     viewKaparot: "Donar a Kaparot",
     chooseCampaign: "Donar a esta causa",
     confidence: "Dona con claridad",
@@ -331,7 +331,7 @@ const COPY = {
     rabbisAlt: "El rabino Yoram Michael Abergel zt’l junto al rabino Yisrael Abergel",
     volunteersAlt: "Un voluntario de Hameir Laarets llevando una caja de alimentos festivos para familias en Israel",
     onlineNav: "Hameir Laarets en línea",
-    elulFormTitle: "Formulario de donación de Elul",
+    elulFormTitle: "Formulario de donación de Kaparot",
     officialInfoLabel: "Información oficial",
     bankWireToggle: "Datos para transferencia bancaria",
     bankWireBeneficiary: "Beneficiario",
@@ -583,7 +583,8 @@ export default function ElulDonationExperience() {
     window.history.replaceState({}, "", currentUrl);
   }, [locale, urlReady]);
 
-  const displayedCampaigns = campaignDisplayOrder;
+  // Keep the Kaparot choice visible while the Food Baskets campaign is paused from this hub.
+  const displayedCampaigns = campaignDisplayOrder.filter((campaign) => campaign.id === SEASONAL_CAMPAIGN_ID);
   const scrollToGift = () => {
     document.getElementById("v4-give")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
