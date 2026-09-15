@@ -865,7 +865,6 @@ export default function ElulDonationExperience() {
         <div className={styles.impactLead}>
           <span>{t.impactEyebrow}</span>
           <h2 id="impact-title">{t.impactTitle}<strong>{t.impactTitleAccent}</strong></h2>
-          <p className={styles.impactSourceNote}>{t.officialSource}</p>
         </div>
         <div className={styles.impactGrid}>
           <article><strong>136</strong><span>{t.titlesLabel}</span></article>
