@@ -127,9 +127,9 @@ const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
 };
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
 const HERO_MEDIA = {
-  poster: "/media/hameir-global-hero-poster-clean.png",
-  mp4: "/media/hameir-global-hero-4k.mp4",
-  videoReady: true,
+  poster: "/images/kapparot-yom-kippur-hero-v1.png",
+  mp4: "",
+  videoReady: false,
 } as const;
 const HERO_START_TIME_SECONDS = 2.9;
 const HERO_REVEAL_TIME_SECONDS = 5;
