@@ -364,16 +364,6 @@
   opacity: 1;
 }
 
-.heroMedia .heroJerusalemScene {
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 1.1s ease;
-}
-
-.heroMedia .heroJerusalemSceneVisible {
-  opacity: 1;
-}
-
 .heroVideoUnavailable {
   display: none !important;
 }

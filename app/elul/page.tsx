@@ -127,9 +127,9 @@ const IMPACT_BY_CAUSE: Record<CauseId, Record<Locale, string>> = {
 };
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
 const HERO_MEDIA = {
-  poster: "/media/hameir-global-hero-poster-clean.png",
-  mp4: "/media/hameir-global-hero-4k.mp4",
-  videoReady: true,
+  poster: "/images/jerusalem-world-hero-v1.png",
+  mp4: "",
+  videoReady: false,
 } as const;
 const HERO_START_TIME_SECONDS = 2.9;
 const HERO_REVEAL_TIME_SECONDS = 5;
@@ -493,7 +493,7 @@ export default function ElulDonationExperience() {
   const [solicitor, setSolicitor] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
   const [urlReady, setUrlReady] = useState(false);
-  const [heroRevealed, setHeroRevealed] = useState(false);
+  const [heroRevealed, setHeroRevealed] = useState(!HERO_MEDIA.videoReady);
   const [isMobileHero, setIsMobileHero] = useState(true);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
   const [heroVideoActive, setHeroVideoActive] = useState(false);
@@ -691,13 +691,6 @@ export default function ElulDonationExperience() {
       <section className={styles.globalHero} id="v4-main" aria-labelledby="global-hero-title">
         <div className={styles.heroMedia} aria-hidden="true">
           <Image src={HERO_MEDIA.poster} alt="" fill priority sizes="100vw" />
-          <Image
-            className={`${styles.heroJerusalemScene} ${heroRevealed ? styles.heroJerusalemSceneVisible : ""}`}
-            src="/images/jerusalem-world-hero-v1.png"
-            alt=""
-            fill
-            sizes="100vw"
-          />
           {HERO_MEDIA.videoReady && !isMobileHero && (
             <video
               ref={heroVideoRef}
