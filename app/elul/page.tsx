@@ -592,7 +592,7 @@ export default function ElulDonationExperience() {
   const bankWireText = [
     "American Friends of Hameir Laarets Inc.",
     "Beacon Bank",
-    "Account number: 5111002571",
+    "Account number: 9010058209",
     "Routing number: 211371489",
     "American Friends of Hameir Laarets Inc.",
     "111 North Central Avenue, Ste 425",
@@ -1012,7 +1012,7 @@ export default function ElulDonationExperience() {
           <small>{t.taxStatus}</small>
           <div className={styles.footerBankWire} id="bank-wire">
             <small>{t.bankWireToggle}</small>
-            <small>{t.bankWireBeneficiary}: American Friends of Hameir Laarets Inc. · {t.bankWireBank}: Beacon Bank · {t.bankWireAccount}: 5111002571 · {t.bankWireRouting}: 211371489</small>
+            <small>{t.bankWireBeneficiary}: American Friends of Hameir Laarets Inc. · {t.bankWireBank}: Beacon Bank · {t.bankWireAccount}: 9010058209 · {t.bankWireRouting}: 211371489</small>
             <small>{t.bankWireAddress}: American Friends of Hameir Laarets Inc., 111 North Central Avenue, Ste 425, Hartsdale, NY 10530 · {t.bankWireEin}: 84-5083012</small>
             <button type="button" className={styles.bankWireCopyButton} onClick={copyBankDetails}>
               {bankDetailsCopied ? t.bankWireCopied : t.bankWireCopy}
