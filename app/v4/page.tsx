@@ -141,9 +141,9 @@ const campaigns: Campaign[] = [
     doubleCampaign: "food-packages",
     cause: "food",
     eyebrow: {
-      en: "Elul 5786 · Our goal: 1,100 baskets",
-      es: "Elul 5786 · Nuestra meta: 1,100 canastas",
-      fr: "Eloul 5786 · Notre objectif : 1 100 paniers",
+      en: "Year-round food assistance",
+      es: "Ayuda alimentaria durante todo el año",
+      fr: "Aide alimentaire toute l’année",
     },
     title: {
       en: "Food Baskets for Families in the South",
@@ -151,9 +151,9 @@ const campaigns: Campaign[] = [
       fr: "Paniers alimentaires pour les familles du Sud",
     },
     description: {
-      en: "Help us pack and deliver 1,100 festive food baskets to families in southern Israel before the holidays.",
-      es: "Ayúdanos a preparar y entregar 1,100 canastas de alimentos festivas a familias del sur de Israel antes de las festividades.",
-      fr: "Aidez-nous à préparer et à livrer 1 100 paniers alimentaires de fête à des familles du sud d'Israël avant les fêtes.",
+      en: "Help provide food and essential support to families in southern Israel throughout the year.",
+      es: "Ayuda a proporcionar alimentos y apoyo esencial a familias del sur de Israel durante todo el año.",
+      fr: "Aidez à fournir des denrées alimentaires et un soutien essentiel aux familles du sud d’Israël tout au long de l’année.",
     },
     image: "/images/food-packing.png",
   },
@@ -217,9 +217,9 @@ const IMPACT_BY_CAMPAIGN: Partial<Record<string, Record<Locale, string>>> = {
 const DOUBLE_EMBED_URL = "https://embed.double.giving/652a15b0-2417-11f0-80b5-ed6216307745";
 const ELUL_LANDING_URL = "https://elul.hameirlaarets.org";
 const HERO_MEDIA = {
-  poster: "/media/hameir-global-hero-poster-clean.png",
-  mp4: "/media/hameir-global-hero-4k.mp4",
-  videoReady: true,
+  poster: "/images/jerusalem-world-hero-v1.png",
+  mp4: "",
+  videoReady: false,
 } as const;
 const HERO_START_TIME_SECONDS = 2.9;
 const HERO_REVEAL_TIME_SECONDS = 5;
@@ -258,7 +258,7 @@ const COPY = {
     identityTitle: "Light Jewish Lives",
     identityTitleAccent: "Through Torah and Chesed",
     identityBody: "Your gift helps bring Torah, food, therapeutic care, and dignified support to Jewish families in Israel and around the world.",
-    supportCurrent: "Bring care to a family this Elul",
+    supportCurrent: "Choose where your gift helps",
     discover: "See the mission behind the work",
     quickEyebrow: "Give in the way that feels right",
     quickTitle: "Choose a path. Choose an amount.",
@@ -297,14 +297,14 @@ const COPY = {
     basketsLabel: "Food baskets distributed through Chesed",
     studentsLabel: "People guided & strengthened",
     officialSource: "Annual impact figures supplied by Hameir Laarets.",
-    featured: "Elul 5786 · Our focus now",
-    elulTitle: "1,100 Food Baskets",
-    elulTitleAccent: "for Families in the South",
-    elulPhotoBody: "Before the New Year, help us bring a festive food basket to 1,100 families in southern Israel who need it most.",
-    elulBody: "Elul is a time to prepare our hearts through kindness and generosity. Our goal this year: 1,100 food baskets for families in southern Israel before the holidays, so every home can celebrate with dignity.",
-    seasonalCta: "Give a Food Basket",
-    fulfill: "Give Pidyon Kapparot",
-    readStory: "Why Kaparot matters",
+    featured: "Give where it matters most",
+    elulTitle: "A gift that brings",
+    elulTitleAccent: "light where it is needed",
+    elulPhotoBody: "Your generosity supports Torah, food assistance, therapeutic care, and families in Israel throughout the year.",
+    elulBody: "Every gift helps Hameir Laarets respond with practical care, dignity, and Jewish connection — wherever the need is greatest.",
+    seasonalCta: "Explore the causes",
+    fulfill: "Give today",
+    readStory: "See the impact",
     selectedCampaign: "Your chosen cause",
     donationFrequency: "How would you like to give?",
     once: "One-time",
@@ -349,12 +349,12 @@ const COPY = {
     nonprofit: "Hameir Laarets · Registered 501(c)(3) · EIN 84-5083012",
     taxStatus: "Donations are tax-deductible in Israel and the USA.",
     rights: "© 2026 Hameir Laarets. All rights reserved.",
-    closeStory: "Close Elul story",
-    storyEyebrow: "Elul · Tzedakah · Pidyon Kapparot",
-    storyTitle: "Elul is a time to return and to give.",
-    storyOne: "Before the New Year, we pause, reflect, and bring our hopes and prayers before Hashem.",
-    storyTwo: "Pidyon Kapparot turns that inward return into an outward act of compassion. Through tzedakah, tradition becomes food, care, and dignity for another Jewish home.",
-    storyThree: "Your gift helps Hameir Laarets support families preparing for the holy days. Names shared with the organization are carried in heartfelt tefillah.",
+    closeStory: "Close story",
+    storyEyebrow: "Torah · Chesed · Community",
+    storyTitle: "A year of meaningful support.",
+    storyOne: "Hameir Laarets brings Torah and practical care to Jewish families in Israel and around the world.",
+    storyTwo: "Through tzedakah, your gift becomes food, therapeutic care, learning, and dignity for another Jewish home.",
+    storyThree: "Choose the cause closest to your heart, or let Hameir Laarets direct your gift where it is needed most.",
     closeCheckout: "Close checkout",
     yourGift: "Your gift",
     lastStep: "Review your gift.",
@@ -372,7 +372,7 @@ const COPY = {
     rabbisAlt: "Rabbi Yoram Michael Abergel zt’l and Rabbi Yisrael Abergel together",
     volunteersAlt: "A Hameir Laarets volunteer carrying a holiday food box for families in Israel",
     onlineNav: "Hameir Laarets online",
-    elulFormTitle: "Elul donation form",
+    elulFormTitle: "Donation form",
     officialInfoLabel: "Official information",
   },
   es: {
@@ -394,7 +394,7 @@ const COPY = {
     identityTitle: "Ilumina vidas judías",
     identityTitleAccent: "con Torá y Jesed",
     identityBody: "Tu donativo ayuda a brindar Torá, alimentos, atención terapéutica y apoyo digno a familias judías en Israel y en todo el mundo.",
-    supportCurrent: "Lleva ayuda a una familia este Elul",
+    supportCurrent: "Elige dónde ayuda tu donativo",
     discover: "Conoce la misión",
     quickEyebrow: "Dona de la manera que sientas correcta",
     quickTitle: "Elige un camino. Elige un monto.",
@@ -433,14 +433,14 @@ const COPY = {
     basketsLabel: "Canastas de alimentos entregadas mediante Jesed",
     studentsLabel: "Personas orientadas y fortalecidas",
     officialSource: "Cifras anuales proporcionadas por Hameir Laarets.",
-    featured: "Elul 5786 · Nuestro enfoque",
-    elulTitle: "1,100 canastas de alimentos",
-    elulTitleAccent: "para familias del sur",
-    elulPhotoBody: "Antes del Año Nuevo, ayúdanos a llevar una canasta de alimentos festiva a 1,100 familias del sur de Israel que más lo necesitan.",
-    elulBody: "Elul es un tiempo para preparar el corazón con actos de bondad y generosidad. Nuestra meta este año: 1,100 canastas de alimentos para familias del sur de Israel antes de las festividades, para que cada hogar celebre con dignidad.",
-    seasonalCta: "Dona una canasta de alimentos",
-    fulfill: "Haz tu Pidyon Kaparot",
-    readStory: "Conoce el significado de Kaparot",
+    featured: "Da donde más importa",
+    elulTitle: "Un donativo que lleva",
+    elulTitleAccent: "luz donde más se necesita",
+    elulPhotoBody: "Tu generosidad apoya Torá, ayuda alimentaria, atención terapéutica y a familias en Israel durante todo el año.",
+    elulBody: "Cada donativo ayuda a Hameir Laarets a responder con ayuda práctica, dignidad y conexión judía donde la necesidad es mayor.",
+    seasonalCta: "Explora las causas",
+    fulfill: "Dona hoy",
+    readStory: "Conoce el impacto",
     selectedCampaign: "La causa que elegiste",
     donationFrequency: "¿Cómo deseas donar?",
     once: "Una vez",
@@ -485,12 +485,12 @@ const COPY = {
     nonprofit: "Hameir Laarets · Organización 501(c)(3) · EIN 84-5083012",
     taxStatus: "Los donativos son deducibles de impuestos en Israel y Estados Unidos.",
     rights: "© 2026 Hameir Laarets. Todos los derechos reservados.",
-    closeStory: "Cerrar la historia de Elul",
-    storyEyebrow: "Elul · Tzedaká · Pidyon Kaparot",
-    storyTitle: "Elul es tiempo de volver y de dar.",
-    storyOne: "Antes del Año Nuevo, hacemos una pausa, reflexionamos y presentamos nuestras esperanzas y oraciones ante Hashem.",
-    storyTwo: "Pidyon Kaparot convierte ese retorno interior en un acto de compasión. Mediante la tzedaká, la tradición se transforma en alimentos, cuidado y dignidad para otro hogar judío.",
-    storyThree: "Tu donativo ayuda a Hameir Laarets a apoyar a familias que se preparan para los días sagrados. Los nombres compartidos con la organización son incluidos en una tefilá sincera.",
+    closeStory: "Cerrar historia",
+    storyEyebrow: "Torá · Jesed · Comunidad",
+    storyTitle: "Un año de apoyo significativo.",
+    storyOne: "Hameir Laarets brinda Torá y ayuda práctica a familias judías en Israel y en todo el mundo.",
+    storyTwo: "Mediante la tzedaká, tu donativo se convierte en alimentos, atención terapéutica, estudio y dignidad para otro hogar judío.",
+    storyThree: "Elige la causa más cercana a tu corazón o permite que Hameir Laarets dirija tu donativo donde más se necesita.",
     closeCheckout: "Cerrar el proceso de donación",
     yourGift: "Tu donativo",
     lastStep: "Revisa tu donativo.",
@@ -508,7 +508,7 @@ const COPY = {
     rabbisAlt: "El rabino Yoram Michael Abergel zt’l junto al rabino Yisrael Abergel",
     volunteersAlt: "Un voluntario de Hameir Laarets llevando una caja de alimentos festivos para familias en Israel",
     onlineNav: "Hameir Laarets en línea",
-    elulFormTitle: "Formulario de donación de Elul",
+    elulFormTitle: "Formulario de donación",
     officialInfoLabel: "Información oficial",
   },
   fr: {
@@ -530,7 +530,7 @@ const COPY = {
     identityTitle: "Illuminer des vies juives",
     identityTitleAccent: "Par la Torah et le Hessed",
     identityBody: "Votre don aide à apporter la Torah, de la nourriture, des soins thérapeutiques et un soutien digne aux familles juives en Israël et dans le monde entier.",
-    supportCurrent: "Apportez de l’aide à une famille en ce mois d’Eloul",
+    supportCurrent: "Choisissez où votre don aide",
     discover: "Découvrir la mission derrière notre action",
     quickEyebrow: "Donnez comme il vous convient",
     quickTitle: "Choisissez une cause. Choisissez un montant.",
@@ -569,14 +569,14 @@ const COPY = {
     basketsLabel: "Paniers alimentaires distribués grâce au Hessed",
     studentsLabel: "Personnes accompagnées et soutenues",
     officialSource: "Chiffres d’impact annuels communiqués par Hameir Laarets.",
-    featured: "Eloul 5786 · Notre priorité actuelle",
-    elulTitle: "1 100 paniers alimentaires",
-    elulTitleAccent: "pour des familles du Sud",
-    elulPhotoBody: "Avant le Nouvel An, aidez-nous à apporter un panier alimentaire de fête à 1 100 familles du sud d’Israël qui en ont le plus besoin.",
-    elulBody: "Eloul est un temps pour préparer son cœur par la bonté et la générosité. Notre objectif cette année : 1 100 paniers alimentaires pour des familles du sud d’Israël avant les fêtes, pour que chaque foyer célèbre dans la dignité.",
-    seasonalCta: "Offrir un panier alimentaire",
-    fulfill: "Faire son Pidyon Kapparot",
-    readStory: "Pourquoi les Kapparot comptent",
+    featured: "Donnez là où c’est le plus utile",
+    elulTitle: "Un don qui apporte",
+    elulTitleAccent: "de la lumière là où elle est nécessaire",
+    elulPhotoBody: "Votre générosité soutient la Torah, l’aide alimentaire, les soins thérapeutiques et les familles en Israël toute l’année.",
+    elulBody: "Chaque don aide Hameir Laarets à répondre avec un soutien concret, de la dignité et du lien juif là où le besoin est le plus grand.",
+    seasonalCta: "Découvrir les causes",
+    fulfill: "Donnez aujourd’hui",
+    readStory: "Voir l’impact",
     selectedCampaign: "La cause choisie",
     donationFrequency: "Comment souhaitez-vous donner ?",
     once: "Ponctuel",
@@ -621,12 +621,12 @@ const COPY = {
     nonprofit: "Hameir Laarets · Association enregistrée 501(c)(3) · EIN 84-5083012",
     taxStatus: "Les dons sont déductibles des impôts en Israël et aux États-Unis.",
     rights: "© 2026 Hameir Laarets. Tous droits réservés.",
-    closeStory: "Fermer le récit d’Eloul",
-    storyEyebrow: "Eloul · Tsedaka · Pidyon Kapparot",
-    storyTitle: "Eloul est un temps pour revenir à soi et pour donner.",
-    storyOne: "Avant le Nouvel An, nous marquons une pause, nous réfléchissons, et nous portons nos espoirs et nos prières devant Hashem.",
-    storyTwo: "Le Pidyon Kapparot transforme ce retour intérieur en un acte concret de compassion. Par la tsedaka, la tradition devient nourriture, soins et dignité pour un autre foyer juif.",
-    storyThree: "Votre don aide Hameir Laarets à soutenir les familles qui se préparent pour les jours saints. Les noms transmis à l’organisation sont portés dans une tefila sincère.",
+    closeStory: "Fermer l’histoire",
+    storyEyebrow: "Torah · Hessed · Communauté",
+    storyTitle: "Une année de soutien qui compte.",
+    storyOne: "Hameir Laarets apporte la Torah et une aide concrète aux familles juives en Israël et dans le monde.",
+    storyTwo: "Grâce à la tsedaka, votre don devient nourriture, soins thérapeutiques, étude et dignité pour un autre foyer juif.",
+    storyThree: "Choisissez la cause qui vous tient le plus à cœur, ou laissez Hameir Laarets orienter votre don là où le besoin est le plus grand.",
     closeCheckout: "Fermer le paiement",
     yourGift: "Votre don",
     lastStep: "Vérifiez votre don.",
@@ -644,7 +644,7 @@ const COPY = {
     rabbisAlt: "Le Rabbi Yoram Michael Abergel zt’l et le Rabbi Yisrael Abergel ensemble",
     volunteersAlt: "Un bénévole de Hameir Laarets portant un colis alimentaire de fête pour des familles en Israël",
     onlineNav: "Hameir Laarets en ligne",
-    elulFormTitle: "Formulaire de don d’Eloul",
+    elulFormTitle: "Formulaire de don",
     officialInfoLabel: "Informations officielles",
   },
 } as const;
@@ -693,7 +693,7 @@ const campaignDisplayOrder = generalCampaign
 
 // The campaign currently featured right under the hero and in the main donation form.
 // Update this single line each season to point at whichever campaign should lead the page.
-const SEASONAL_CAMPAIGN_ID = "food-relief";
+const SEASONAL_CAMPAIGN_ID = "general";
 const seasonalCampaign = campaigns.find((campaign) => campaign.id === SEASONAL_CAMPAIGN_ID) ?? campaigns[0];
 
 export default function DonationExperienceV4() {
@@ -702,7 +702,7 @@ export default function DonationExperienceV4() {
   const [solicitor, setSolicitor] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
   const [urlReady, setUrlReady] = useState(false);
-  const [heroRevealed, setHeroRevealed] = useState(false);
+  const [heroRevealed, setHeroRevealed] = useState(!HERO_MEDIA.videoReady);
   const [isMobileHero, setIsMobileHero] = useState(true);
   const [heroVideoUnavailable, setHeroVideoUnavailable] = useState(false);
   const [heroVideoActive, setHeroVideoActive] = useState(false);
@@ -954,8 +954,8 @@ export default function DonationExperienceV4() {
       <section className={`${styles.seasonalHero} ${styles.featuredTop}`} id="v4-featured" aria-labelledby="featured-title">
         <div className={styles.photoPanel}>
           <Image
-            src="/images/food-packing.png"
-            alt={t.volunteersAlt}
+            src={seasonalCampaign.image}
+            alt={seasonalCampaign.title[locale]}
             fill
             sizes="(max-width: 520px) 100vw, 58vw"
           />
@@ -1030,7 +1030,6 @@ export default function DonationExperienceV4() {
         <div className={styles.impactLead}>
           <span>{t.impactEyebrow}</span>
           <h2 id="impact-title">{t.impactTitle}<strong>{t.impactTitleAccent}</strong></h2>
-          <p className={styles.impactSourceNote}>{t.officialSource}</p>
         </div>
         <div className={styles.impactGrid}>
           <article><strong>136</strong><span>{t.titlesLabel}</span></article>
@@ -1212,6 +1211,10 @@ export default function DonationExperienceV4() {
           <small>{t.mailingAddress}</small>
           <small>{t.nonprofit}</small>
           <small>{t.taxStatus}</small>
+          <div className={styles.footerBankWire}>
+            <small>Bank wire details</small>
+            <small>American Friends of Hameir Laarets Inc. · Beacon Bank · Account number: 9010058209 · Routing number: 211371489</small>
+          </div>
           <small>{t.rights}</small>
         </div>
       </footer>
