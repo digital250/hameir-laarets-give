@@ -10,20 +10,20 @@ import "@fontsource/dm-sans/600.css";
 import "@fontsource/dm-sans/700.css";
 import "./globals.css";
 
-const title = "Pidyon Kapparot Before Yom Kippur | Hameir Laarets";
-const description = "Fulfill your family’s Pidyon Kapparot through tzedakah and chesed before Yom Kippur.";
+const title = "Give Where It Matters Most | Hameir Laarets";
+const description = "Support Torah, food assistance, therapeutic care, and Jewish families in Israel and around the world.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") || requestHeaders.get("host") || "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const image = `${protocol}://${host}/og-kapparot-2026.png`;
+  const image = `${protocol}://${host}/images/jerusalem-world-hero-v1.png`;
 
   return {
     title,
     description,
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
-    openGraph: { title, description, locale: "en_US", type: "website", images: [{ url: image, width: 1729, height: 910, alt: "Pidyon Kapparot before Yom Kippur" }] },
+    openGraph: { title, description, locale: "en_US", type: "website", images: [{ url: image, alt: "Jerusalem at sunrise" }] },
     twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }

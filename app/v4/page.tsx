@@ -374,6 +374,9 @@ const COPY = {
     onlineNav: "Hameir Laarets online",
     elulFormTitle: "Donation form",
     officialInfoLabel: "Official information",
+    bankWireDetails: "Bank wire details",
+    accountNumber: "Account number",
+    routingNumber: "Routing number",
   },
   es: {
     skip: "Saltar al contenido principal",
@@ -510,6 +513,9 @@ const COPY = {
     onlineNav: "Hameir Laarets en línea",
     elulFormTitle: "Formulario de donación",
     officialInfoLabel: "Información oficial",
+    bankWireDetails: "Datos para transferencia bancaria",
+    accountNumber: "Número de cuenta",
+    routingNumber: "Número de ruta (routing)",
   },
   fr: {
     skip: "Passer au contenu principal",
@@ -646,6 +652,9 @@ const COPY = {
     onlineNav: "Hameir Laarets en ligne",
     elulFormTitle: "Formulaire de don",
     officialInfoLabel: "Informations officielles",
+    bankWireDetails: "Coordonnées bancaires",
+    accountNumber: "Numéro de compte",
+    routingNumber: "Numéro de routage",
   },
 } as const;
 const SOCIAL_LINKS: { label: LocalizedText; href: string; icon: typeof GlobeHemisphereWest }[] = [
@@ -1212,8 +1221,8 @@ export default function DonationExperienceV4() {
           <small>{t.nonprofit}</small>
           <small>{t.taxStatus}</small>
           <div className={styles.footerBankWire}>
-            <small>Bank wire details</small>
-            <small>American Friends of Hameir Laarets Inc. · Beacon Bank · Account number: 9010058209 · Routing number: 211371489</small>
+            <small>{t.bankWireDetails}</small>
+            <small>American Friends of Hameir Laarets Inc. · Beacon Bank · {t.accountNumber}: 9010058209 · {t.routingNumber}: 211371489</small>
           </div>
           <small>{t.rights}</small>
         </div>

@@ -253,7 +253,7 @@
   z-index: 0;
   inset: 0;
   background-color: rgba(4, 20, 33, .76);
-  background-image: url("/media/hameir-global-hero-poster-clean.png");
+  background-image: url("/images/jerusalem-world-hero-v1.png");
   background-position: center 44%;
   background-size: cover;
   background-blend-mode: multiply;
@@ -3472,7 +3472,7 @@
     z-index: 0;
     inset: calc(56.25vw - 2px) 0 0;
     background-color: rgba(4, 20, 33, .82);
-    background-image: url("/media/hameir-global-hero-poster-clean.png");
+    background-image: url("/images/jerusalem-world-hero-v1.png");
     background-position: center 58%;
     background-size: cover;
     background-blend-mode: multiply;
